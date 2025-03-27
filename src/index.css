@@ -1,0 +1,134 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 20%;
+
+    --primary: 350 71% 70%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 341 90% 30%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 20 14% 45%;
+
+    --accent: 350 71% 90%;
+    --accent-foreground: 341 80% 35%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 20 5% 90%;
+    --input: 20 5% 90%;
+    --ring: 350 71% 70%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .nav-dropdown {
+    @apply opacity-0 invisible absolute transition-all duration-300 ease-in-out transform -translate-y-2 
+           group-hover:opacity-100 group-hover:visible group-hover:translate-y-0;
+  }
+  
+  .nav-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
+           after:bottom-0 after:left-0 after:bg-pink-500 after:origin-bottom-right after:transition-transform 
+           after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  
+  .feature-icon-wrapper {
+    @apply flex flex-col items-center justify-center space-y-3 p-4 transition-all duration-300
+           hover:transform hover:scale-105;
+  }
+  
+  .feature-icon {
+    @apply relative flex items-center justify-center w-14 h-14 rounded-full 
+           bg-white shadow-lg mb-2 transition-all duration-300;
+  }
+  
+  .slide-show-container {
+    @apply relative overflow-hidden rounded-lg;
+  }
+  
+  .reveal-on-scroll {
+    @apply opacity-0 translate-x-16 transition-all duration-700 ease-out;
+  }
+  
+  .reveal-on-scroll.is-revealed {
+    @apply opacity-100 translate-x-0;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/50 border border-white/20 shadow-lg;
+  }
+  
+  .product-card {
+    @apply rounded-2xl overflow-hidden transition-all duration-300 ease-out
+           hover:shadow-xl hover:transform hover:scale-[1.02];
+  }
+  
+  .btn-primary {
+    @apply bg-pink-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300
+           hover:bg-pink-600 hover:shadow-md active:transform active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-rose-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300
+           hover:bg-rose-700 hover:shadow-md active:transform active:scale-95;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s infinite ease-in-out;
+}
+
+#root {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 100%;
+  padding: 0;
+}
