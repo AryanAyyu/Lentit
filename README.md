@@ -1,5 +1,5 @@
 # Lentit
 
 # To Run 
-npm i
+npm i <br>
 npm run dev
