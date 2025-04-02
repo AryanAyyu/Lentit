@@ -4,17 +4,17 @@ import { Search, CreditCard, PackageOpen } from "lucide-react";
 
 const steps = [
   {
-    icon: <Search className="w-12 h-12 text-pink-500" />,
+    icon: <Search className="w-12 h-12 text-stone-500" />,
     title: "Browse & Reserve",
     description: "Browse our extensive collection and select the perfect items for your occasion"
   },
   {
-    icon: <CreditCard className="w-12 h-12 text-pink-500" />,
+    icon: <CreditCard className="w-12 h-12 text-stone-500" />,
     title: "Pay & Schedule Delivery",
     description: "Choose your rental period and delivery date that suits your needs"
   },
   {
-    icon: <PackageOpen className="w-12 h-12 text-pink-500" />,
+    icon: <PackageOpen className="w-12 h-12 text-stone-500" />,
     title: "Wear & Return",
     description: "Enjoy your premium items and return them using our prepaid packaging when you're done"
   }
@@ -51,7 +51,7 @@ const HowItWorks = () => {
     <section className="py-16 px-6 bg-gradient-to-b from-white to-pink-50">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-semibold text-rose-600 mb-4">How Lent-It Works</h2>
+          <h2 className="text-3xl font-semibold text-rose-900 mb-4">How Lent-It Works</h2>
           <p className="text-foreground/70 max-w-xl mx-auto">
             Renting premium fashion has never been easier. Our simple three-step process ensures a seamless experience.
           </p>
@@ -69,12 +69,12 @@ const HowItWorks = () => {
                 {step.icon}
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md flex-1 w-full">
-                <h3 className="text-xl font-semibold text-rose-600 mb-3">{step.title}</h3>
+                <h3 className="text-xl font-semibold text-slate-800 mb-3">{step.title}</h3>
                 <p className="text-foreground/70">{step.description}</p>
               </div>
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/3">
-                  <ArrowRight className="w-8 h-8 text-pink-500" />
+                  <ArrowRight className="w-8 h-8 text-rose-900" />
                 </div>
               )}
             </div>

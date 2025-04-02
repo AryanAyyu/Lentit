@@ -1,11 +1,15 @@
 
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import Special from "./Special";
+import Navbar from "@/components/Navbar";
+
+
+
 
 // Mock product data for categories
 const categoryProducts = {
@@ -296,7 +300,7 @@ const categoryProducts = {
       imageUrl: "https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
       hoverImageUrl: "https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
     }
-  ]
+  ],
 };
 
 // Helper function to capitalize category name
@@ -306,9 +310,8 @@ const capitalizeFirstLetter = (string: string) => {
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
-  const productsRef = useRef<HTMLDivElement>(null);
-  
-  const validCategory = category as keyof typeof categoryProducts;
+  const productsRef = useRef<HTMLDivElement>(null);  
+  const validCategory = category as keyof typeof categoryProducts;  
   const products = categoryProducts[validCategory] || [];
 
   useEffect(() => {
@@ -332,6 +335,7 @@ const CategoryPage = () => {
     );
 
     const productsElements = document.querySelectorAll(".reveal-on-scroll");
+
     productsElements.forEach((el) => observer.observe(el));
 
     return () => {
@@ -339,9 +343,11 @@ const CategoryPage = () => {
     };
   }, [category]);
 
+  
+
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar visible={false} />
       
       {/* Category Header */}
       <div className="pt-28 pb-8 px-6 bg-muted">
@@ -373,7 +379,16 @@ const CategoryPage = () => {
           </div>
         </div>
       </div>
-      
+
+     <Special />
+
+     <div className="py-6 text-center">
+  <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text uppercase tracking-wide drop-shadow-lg">
+    More Products
+  </h2>
+  <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-2 rounded-full"></div>
+</div>
+
       {/* Products Grid */}
       <section className="py-12 px-6">
         <div className="container mx-auto">

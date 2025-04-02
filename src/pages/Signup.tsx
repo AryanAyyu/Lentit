@@ -48,11 +48,11 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <div className="container mx-auto px-4 py-16 flex items-center justify-center">
+      <Navbar visible={false} />
+      <div className="container mx-auto px-4 py-16 flex items-center justify-center mt-9">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-coffee">Create an account</h1>
+            <h1 className="text-3xl font-bold text-rose-900">Create an account</h1>
             <p className="text-foreground/70 mt-2">
               Join LENT-IT to rent premium items for a fraction of the cost
             </p>
@@ -136,7 +136,7 @@ const Signup = () => {
             
             <Button 
               type="submit" 
-              className="w-full bg-coffee hover:bg-coffee/90"
+              className="w-full bg-rose-700 hover:bg-rose-400"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Creating account..." : "Create Account"}

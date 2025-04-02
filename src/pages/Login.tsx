@@ -30,11 +30,11 @@ const Login = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <div className="container mx-auto px-4 py-16 flex items-center justify-center">
+      <Navbar visible={false} />
+      <div className="container mx-auto px-4 py-16 flex items-center justify-center mt-9">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-coffee">Welcome back</h1>
+            <h1 className="text-3xl font-bold text-rose-900">Welcome back</h1>
             <p className="text-foreground/70 mt-2">
               Sign in to your LENT-IT account
             </p>
@@ -85,7 +85,7 @@ const Login = () => {
             
             <Button 
               type="submit" 
-              className="w-full bg-coffee hover:bg-coffee/90"
+              className="w-full bg-rose-900 hover:bg-rose-400"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Signing in..." : "Sign In"}

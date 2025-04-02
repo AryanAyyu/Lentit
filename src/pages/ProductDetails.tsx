@@ -6,11 +6,11 @@ import ProductDetails from "@/components/ProductDetails";
 const ProductDetailsPage = () => {
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar visible={false} />
       <ProductDetails />
       
       {/* Footer would go here, same as index page */}
-      <footer className="bg-coffee text-white py-12 px-6">
+      <footer className="bg-teal-900 text-white py-12 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>

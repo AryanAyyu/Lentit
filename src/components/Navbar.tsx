@@ -32,6 +32,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
+
 const productSuggestions = [
   "Elegant Silk Blouse",
   "Premium Denim Jeans",
@@ -43,7 +44,12 @@ const productSuggestions = [
   "Designer Sunglasses"
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  visible: boolean;
+}
+const Navbar: React.FC<NavbarProps> = ({ visible }) => {
+  
+
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [serviceType, setServiceType] = useState<"renting" | "thrifting">("renting");
@@ -122,6 +128,7 @@ const Navbar = () => {
     });
   };
 
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -170,13 +177,13 @@ const Navbar = () => {
             >
               <ToggleGroupItem 
                 value="renting" 
-                className="text-xs rounded-l-full px-3 data-[state=on]:bg-pink-500 data-[state=on]:text-white"
+                className="text-xs rounded-l-full px-3 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
               >
                 Renting
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="thrifting" 
-                className="text-xs rounded-r-full px-3 data-[state=on]:bg-rose-600 data-[state=on]:text-white"
+                className="text-xs rounded-r-full px-3 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
               >
                 Thrifting
               </ToggleGroupItem>
@@ -195,7 +202,7 @@ const Navbar = () => {
                 >
                   <Link 
                     to="#" 
-                    className="nav-link py-2 flex items-center text-foreground hover:text-pink-500 transition-colors duration-200"
+                    className="nav-link py-2 flex items-center text-foreground hover:text-rose-600 transition-colors duration-200"
                   >
                     {category.title}
                     <ChevronDown size={16} className="ml-1 transition-transform duration-200 group-hover:rotate-180" />
@@ -206,7 +213,7 @@ const Navbar = () => {
                         <li key={idx}>
                           <Link
                             to="#"
-                            className="block py-1.5 px-2 text-foreground/80 hover:text-pink-500 hover:bg-muted/50 rounded transition-colors duration-200"
+                            className="block py-1.5 px-2 text-foreground/80 hover:text-rose-600 hover:bg-muted/50 rounded transition-colors duration-200"
                           >
                             {item}
                           </Link>
@@ -220,11 +227,31 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Center: Logo */}
+        {/* <div className="w-1/3 flex justify-center items-center">
+          {isHomePage?
+          ( 
+            <div className="flex items-center">
+              <Link to="/" className="text-2xl font-bold text-rose-700">
+              <span className="mr-1 text-yellow-900">LENT</span>-IT
+              </Link>
+            </div>
+          )
+          :
+          (
+            <div></div>
+          )
+          }
+        </div>  */}
+        
+        {/* Center: Logo
         <div className="flex items-center">
           <Link to="/" className="text-2xl font-bold text-rose-700">
-            <span className="mr-1 text-pink-500">LENT</span>-IT
+            <span className="mr-1 text-yellow-900">LENT</span>-IT
           </Link>
+        </div> */}
+
+        <div className="w-1/3 flex justify-center items-center">
+          {/* Logo space - intentionally empty as the logo will be positioned absolutely via ScrollEffect */}
         </div>
 
         {/* Right side: Categories + Icons */}
@@ -241,7 +268,7 @@ const Navbar = () => {
                 >
                   <Link 
                     to="#" 
-                    className="nav-link py-2 flex items-center text-foreground hover:text-pink-500 transition-colors duration-200"
+                    className="nav-link py-2 flex items-center text-foreground hover:text-rose-600 transition-colors duration-200"
                   >
                     {category.title}
                     <ChevronDown size={16} className="ml-1 transition-transform duration-200 group-hover:rotate-180" />
@@ -252,7 +279,7 @@ const Navbar = () => {
                         <li key={idx}>
                           <Link
                             to="#"
-                            className="block py-1.5 px-2 text-foreground/80 hover:text-pink-500 hover:bg-muted/50 rounded transition-colors duration-200"
+                            className="block py-1.5 px-2 text-foreground/80 hover:text-rose-600 hover:bg-muted/50 rounded transition-colors duration-200"
                           >
                             {item}
                           </Link>
@@ -267,7 +294,7 @@ const Navbar = () => {
 
           {/* Search button */}
           <button 
-            className="text-foreground hover:text-pink-500 transition-colors duration-200 mr-6"
+            className="text-foreground hover:text-rose-600 transition-colors duration-200 mr-6"
             onClick={() => setIsSearchOpen(true)}
           >
             <Search size={20} />
@@ -299,10 +326,10 @@ const Navbar = () => {
           {/* Notifications */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" className="p-2 relative mr-4 hover:text-pink-500 transition-colors duration-200">
+              <Button variant="ghost" className="p-2 relative mr-4 hover:text-red-500 transition-colors duration-200">
                 <Bell size={20} />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {unreadCount}
                   </span>
                 )}
@@ -316,7 +343,7 @@ const Navbar = () => {
                     variant="ghost" 
                     size="sm"
                     onClick={markAllAsRead}
-                    className="text-xs text-pink-500 hover:text-pink-600"
+                    className="text-xs text-stone-600 hover:text-stone-900"
                   >
                     Mark all as read
                   </Button>
@@ -331,13 +358,13 @@ const Navbar = () => {
                   notifications.map((notification) => (
                     <div 
                       key={notification.id} 
-                      className={`p-4 border-b last:border-0 cursor-pointer hover:bg-muted/50 ${notification.read ? '' : 'bg-pink-50'}`}
+                      className={`p-4 border-b last:border-0 cursor-pointer hover:bg-muted/50 ${notification.read ? '' : 'bg-blue-200'}`}
                       onClick={() => markAsRead(notification.id)}
                     >
                       <div className="flex justify-between">
                         <p className="text-sm">{notification.text}</p>
                         {!notification.read && (
-                          <span className="h-2 w-2 bg-pink-500 rounded-full"></span>
+                          <span className="h-2 w-2 bg-red-400 rounded-full"></span>
                         )}
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">{notification.time}</p>
@@ -386,13 +413,13 @@ const Navbar = () => {
               >
                 <ToggleGroupItem 
                   value="renting" 
-                  className="text-sm rounded-l-full w-1/2 data-[state=on]:bg-pink-500 data-[state=on]:text-white"
+                  className="text-sm rounded-l-full w-1/2 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
                 >
                   Renting
                 </ToggleGroupItem>
                 <ToggleGroupItem 
                   value="thrifting" 
-                  className="text-sm rounded-r-full w-1/2 data-[state=on]:bg-rose-600 data-[state=on]:text-white"
+                  className="text-sm rounded-r-full w-1/2 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
                 >
                   Thrifting
                 </ToggleGroupItem>

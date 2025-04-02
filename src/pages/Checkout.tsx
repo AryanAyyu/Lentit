@@ -101,7 +101,7 @@ const Checkout = () => {
   if (items.length === 0) {
     return (
       <div className="min-h-screen pt-16">
-        <Navbar />
+        <Navbar visible={false} />
         <div className="container mx-auto px-6 py-16 text-center">
           <h1 className="text-3xl font-bold mb-6 text-coffee">Your Cart is Empty</h1>
           <p className="text-foreground/70 mb-8">Looks like you haven't added any items to your cart yet.</p>
@@ -118,7 +118,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen pt-16">
-      <Navbar />
+      <Navbar visible={false} />
       
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold mb-2 text-coffee">Checkout</h1>
@@ -332,7 +332,7 @@ const Checkout = () => {
                   className="w-full py-6 text-lg bg-coffee hover:bg-coffee/90"
                   disabled={isProcessing}
                 >
-                  {isProcessing ? "Processing Order..." : `Complete Order • $${Number(grandTotal).toFixed(2)}`}
+                  {isProcessing ? "Processing Order..." : `Complete Order • ₹${Number(grandTotal).toFixed(2)}`}
                 </Button>
               </form>
             </div>
@@ -364,7 +364,7 @@ const Checkout = () => {
                         </div>
                       </div>
                       <div className="text-right whitespace-nowrap">
-                        ${item.price.toFixed(2)}
+                        ₹{item.price.toFixed(2)}
                       </div>
                     </div>
                   ))}
@@ -375,25 +375,25 @@ const Checkout = () => {
               <div className="space-y-2 text-sm border-t pt-4">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>₹{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
+                  <span>₹{shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Tax</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>₹{tax.toFixed(2)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Discount</span>
-                    <span>-${discount.toFixed(2)}</span>
+                    <span>-₹{discount.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between font-semibold text-lg pt-2 border-t mt-2">
                   <span>Total</span>
-                  <span className="text-coffee">${Number(grandTotal).toFixed(2)}</span>
+                  <span className="text-coffee">₹{Number(grandTotal).toFixed(2)}</span>
                 </div>
               </div>
             </div>

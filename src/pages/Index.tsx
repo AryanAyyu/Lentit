@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
@@ -11,6 +12,8 @@ import HotDeals from "@/components/HotDeals";
 import CustomerReviews from "@/components/CustomerReviews";
 import AppDownload from "@/components/AppDownload";
 import ProductCard from "@/components/ProductCard";
+import ScrollEffect from "@/components/ScrollEffect";
+import TopImage from "@/components/TopImage";
 
 // Mock products data
 const products = [
@@ -72,11 +75,21 @@ const products = [
   }
 ];
 
+
+  
+  
 const Index = () => {
-  const itemsRef = useRef<HTMLDivElement>(null);
+
+  
+  const itemsRef = useRef(null);
+  const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
-    // Intersection Observer for scroll animations
+    
+    const handleScroll = () => {
+      setShowNavbar(window.scrollY > 150);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -85,24 +98,30 @@ const Index = () => {
           }
         });
       },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      }
+      { root: null, rootMargin: "0px", threshold: 0.1 }
     );
 
     const hiddenElements = document.querySelectorAll(".reveal-on-scroll");
     hiddenElements.forEach((el) => observer.observe(el));
 
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       hiddenElements.forEach((el) => observer.unobserve(el));
+      window.removeEventListener("scroll", handleScroll);
+      
     };
   }, []);
 
+  
+
+  
+
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar visible={showNavbar} />
+      <TopImage/>
+      <ScrollEffect />
       <Hero />
       <Features />
       <Categories />
@@ -118,7 +137,7 @@ const Index = () => {
       {/* Featured Products */}
       <section className="py-16 px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-semibold text-center mb-4 text-rose-600">Featured Products</h2>
+          <h2 className="text-3xl font-semibold text-center mb-4 text-rose-900">Featured Products</h2>
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
             Discover our curated selection of premium products, crafted with exceptional quality and timeless design.
           </p>
@@ -130,7 +149,7 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-12">
-            <button className="bg-pink-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-pink-600 hover:shadow-md active:transform active:scale-95">
+            <button className="bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-rose-500 hover:shadow-md active:transform active:scale-95">
               View All Products
             </button>
           </div>
@@ -138,7 +157,7 @@ const Index = () => {
       </section>
 
       {/* Footer - No Newsletter section */}
-      <footer className="bg-rose-700 text-white py-12 px-6">
+      <footer className="bg-teal-900 text-white py-12 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>

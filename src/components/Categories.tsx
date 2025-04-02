@@ -64,7 +64,7 @@ const Categories = () => {
   return (
     <section className="py-16 px-6">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-4 text-coffee">Shop By Category</h2>
+        <h2 className="text-3xl font-semibold text-center mb-4 text-stone-900">Shop By Category</h2>
         <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
           Discover our premium collection of items available for rent in various categories
         </p>

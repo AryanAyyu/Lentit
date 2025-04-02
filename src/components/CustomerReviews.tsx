@@ -92,7 +92,7 @@ const CustomerReviews = () => {
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-between items-center mb-12">
           <div>
-            <h2 className="text-3xl font-semibold text-coffee mb-2">Customer Reviews</h2>
+            <h2 className="text-3xl font-semibold text-rose-900 mb-2">Customer Reviews</h2>
             <p className="text-foreground/70 max-w-md">
               See what our customers have to say about their rental experience
             </p>
@@ -134,7 +134,7 @@ const CustomerReviews = () => {
                   className="w-12 h-12 rounded-full object-cover mr-4"
                 />
                 <div>
-                  <h3 className="font-medium text-coffee">{review.name}</h3>
+                  <h3 className="font-medium text-stone-900">{review.name}</h3>
                   <p className="text-sm text-foreground/60">{review.date}</p>
                 </div>
               </div>

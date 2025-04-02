@@ -36,8 +36,8 @@ const WhyRent = () => {
         <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="why-rent-item reveal-on-scroll">
             <h2 className="text-4xl md:text-5xl font-bold text-rose-700 leading-tight mb-6">
-              Why buy <br/>
-              <span className="text-pink-500">when you can rent</span> <br/>
+              Why buy when you can<br/>
+              <span className="text-yellow-600"> rent and thrift</span> <br/>
               for a fraction of the price?
             </h2>
             <p className="text-foreground/70 text-lg mb-8">
@@ -45,13 +45,13 @@ const WhyRent = () => {
               Rent premium, wear luxury, save money.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-rose-600 hover:bg-rose-700 text-white gap-2">
+              <Button className="bg-teal-900 hover:bg-teal-700 text-white gap-2">
                 <ShoppingBag size={18} />
-                Start Renting
+                Rent your Own
               </Button>
-              <Button variant="outline" className="border-pink-500 text-pink-500 hover:bg-pink-50 gap-2">
+              <Button variant="outline" className="border-rose-500 text-rose-900 hover:bg-rose-300 gap-2">
                 <Package size={18} />
-                Start Thrifting
+                Thrift your Own
               </Button>
             </div>
           </div>

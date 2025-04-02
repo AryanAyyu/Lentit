@@ -31,12 +31,12 @@ const AppDownload = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-r from-rose-600 to-pink-500 text-white">
+    <section className="py-16 px-6 bg-gradient-to-r from-stone-900 to-stone-600 text-white">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div ref={appRef} className="app-item reveal-on-scroll">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Download Our App For <span className="text-pink-200">Enhanced Experience</span>
+              Download Our App For <span className="text-amber-700">Enhanced Experience</span>
             </h2>
             <p className="text-white/80 text-lg mb-8">
               Enjoy a seamless rental experience with our mobile app. Browse, book, and manage your rentals on the go.
@@ -45,7 +45,7 @@ const AppDownload = () => {
             <div className="space-y-6 mb-8">
               <div className="flex items-start gap-4">
                 <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <SmartphoneNfc className="w-6 h-6 text-pink-200" />
+                  <SmartphoneNfc className="w-6 h-6 text-white  " />
                 </div>
                 <div>
                   <h3 className="text-xl font-medium mb-2">Virtual Try-On</h3>
@@ -57,7 +57,7 @@ const AppDownload = () => {
               
               <div className="flex items-start gap-4">
                 <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <ShoppingBag className="w-6 h-6 text-pink-200" />
+                  <ShoppingBag className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-medium mb-2">Easy Booking</h3>
@@ -69,7 +69,7 @@ const AppDownload = () => {
               
               <div className="flex items-start gap-4">
                 <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <Clock className="w-6 h-6 text-pink-200" />
+                  <Clock className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-xl font-medium mb-2">Rental Reminders</h3>

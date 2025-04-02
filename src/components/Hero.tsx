@@ -94,7 +94,7 @@ const Hero = () => {
                 <p className="text-lg md:text-xl mb-8 max-w-lg mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
                   {slide.subtitle}
                 </p>
-                <button className="bg-vanilla hover:bg-vanilla/90 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 animate-fade-in hover:shadow-lg" style={{ animationDelay: "0.4s" }}>
+                <button className="bg-teal-900 hover:bg-teal-500 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 animate-fade-in hover:shadow-lg" style={{ animationDelay: "0.4s" }}>
                   Shop Now
                 </button>
               </div>

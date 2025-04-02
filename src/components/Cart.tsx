@@ -94,9 +94,9 @@ const Cart = () => {
                           </div>
                           
                           <div className="text-right">
-                            <p className="font-medium">${itemTotal.toFixed(2)}</p>
+                            <p className="font-medium">₹{itemTotal.toFixed(2)}</p>
                             <p className="text-xs text-muted-foreground">
-                              Rental: ${rentalFee.toFixed(2)} + Deposit: ${securityFee.toFixed(2)}
+                              Rental: ₹{rentalFee.toFixed(2)} + Deposit: ₹{securityFee.toFixed(2)}
                             </p>
                           </div>
                         </div>
@@ -110,7 +110,7 @@ const Cart = () => {
             <div className="border-t mt-auto pt-4">
               <div className="flex justify-between py-2">
                 <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₹{total.toFixed(2)}</span>
               </div>
               <p className="text-xs text-muted-foreground mb-4">Shipping and taxes calculated at checkout</p>
               

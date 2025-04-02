@@ -69,13 +69,13 @@ const NewArrivals = () => {
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-between items-center mb-12">
           <div>
-            <h2 className="text-3xl font-semibold text-coffee mb-2">New Arrivals</h2>
+            <h2 className="text-3xl font-semibold text-rose-900 mb-2">New Arrivals</h2>
             <p className="text-foreground/70 max-w-md">
               The latest premium fashion items now available for rent
             </p>
           </div>
           <Link to="/category/all">
-            <Button variant="outline" className="border-coffee text-coffee hover:bg-coffee/10 flex items-center gap-2 mt-4 md:mt-0">
+            <Button variant="outline" className="border-rose-600 text-rose-900 hover:bg-teal-600 flex items-center gap-2 mt-4 md:mt-0">
               View All
               <ArrowRight size={16} />
             </Button>

@@ -63,13 +63,13 @@ const HotDeals = () => {
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-between items-center mb-12">
           <div>
-            <h2 className="text-3xl font-semibold text-coffee mb-2">Hot Deals of the Week</h2>
+            <h2 className="text-3xl font-semibold text-rose-900 mb-2">Hot Deals of the Week</h2>
             <p className="text-foreground/70 max-w-md">
               Limited-time offers on premium fashion rentals
             </p>
           </div>
           <Link to="/deals">
-            <Button variant="outline" className="border-coffee text-coffee hover:bg-coffee/10 flex items-center gap-2 mt-4 md:mt-0">
+            <Button variant="outline" className="border-stone-700 text-stone-900 hover:bg-rose-100 flex items-center gap-2 mt-4 md:mt-0">
               All Deals
               <ArrowRight size={16} />
             </Button>
@@ -89,15 +89,15 @@ const HotDeals = () => {
                   alt={deal.title} 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute top-4 right-4 bg-vanilla text-white px-3 py-1 rounded-full font-medium">
+                <div className="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full font-medium">
                   {deal.discount}
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-coffee mb-2">{deal.title}</h3>
+                <h3 className="text-xl font-semibold text-rose-900 mb-2">{deal.title}</h3>
                 <p className="text-foreground/70 mb-4">{deal.description}</p>
                 <Link to={deal.link}>
-                  <Button className="w-full bg-coffee hover:bg-coffee/90 text-white">
+                  <Button className="w-full bg-stone-900 hover:bg-stone-600 text-white">
                     View Deal
                   </Button>
                 </Link>

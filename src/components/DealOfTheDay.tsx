@@ -78,10 +78,10 @@ const DealOfTheDay = () => {
               <span className="bg-vanilla text-white text-sm font-medium px-3 py-1 rounded-full">Limited Time</span>
               <span className="text-foreground/70">Deal ends soon</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-coffee mb-4">Deal of the Day</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-rose-900 mb-4">Deal of the Day</h2>
             <h3 className="text-2xl font-semibold mb-2">Designer Evening Gown</h3>
-            <p className="text-xl text-vanilla font-medium mb-1">
-              $59.99 <span className="text-foreground/70 text-base line-through ml-2">$149.99</span>
+            <p className="text-xl text-rose-800 font-medium mb-1">
+            ₹2000 <span className="text-foreground/70 text-base line-through ml-2">₹2500</span>
             </p>
             <p className="text-foreground/70 mb-8 max-w-md">
               This stunning designer evening gown is perfect for special occasions. Rent it now for a fraction of the retail price!
@@ -89,19 +89,19 @@ const DealOfTheDay = () => {
             
             <div className="flex gap-6 mb-8">
               <div className="flex flex-col items-center">
-                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-coffee text-2xl font-bold">
+                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-stone-900 text-2xl font-bold">
                   {formatTime(timeLeft.hours)}
                 </div>
                 <span className="text-sm text-foreground/70 mt-1">Hours</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-coffee text-2xl font-bold">
+                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-stone-900 text-2xl font-bold">
                   {formatTime(timeLeft.minutes)}
                 </div>
                 <span className="text-sm text-foreground/70 mt-1">Minutes</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-coffee text-2xl font-bold">
+                <div className="bg-muted w-16 h-16 rounded-lg flex items-center justify-center text-stone-900 text-2xl font-bold">
                   {formatTime(timeLeft.seconds)}
                 </div>
                 <span className="text-sm text-foreground/70 mt-1">Seconds</span>
@@ -109,8 +109,8 @@ const DealOfTheDay = () => {
             </div>
             
             <div className="flex gap-4">
-              <Button className="bg-coffee hover:bg-coffee/90">Rent Now</Button>
-              <Button variant="outline" className="border-coffee text-coffee hover:bg-coffee/10">
+              <Button className="bg-teal-900 hover:bg-teal-600">Rent Now</Button>
+              <Button variant="outline" className="border-stone-600 text-stone-900 hover:bg-yellow-200">
                 View Details
               </Button>
             </div>

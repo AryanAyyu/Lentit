@@ -106,6 +106,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     // Simulate loading of data
+    window.scrollTo(0, 0);
     const timeout = setTimeout(() => {
       setIsInView(true);
     }, 300);
@@ -253,7 +254,7 @@ const ProductDetails = () => {
           {/* Product Info */}
           <div className={`transition-all duration-700 delay-200 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[20px]'}`}>
             <h1 className="text-3xl font-semibold text-coffee mb-2">{productData.name}</h1>
-            <p className="text-xl text-vanilla mb-1">${productData.price} <span className="text-sm text-foreground/70">per day</span></p>
+            <p className="text-xl text-vanilla mb-1">₹{productData.price} <span className="text-sm text-foreground/70">per day</span></p>
             
             {/* Rental Duration Section */}
             <div className="mb-6 mt-4 bg-muted/30 p-4 rounded-lg">
@@ -315,15 +316,15 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Rental Fee:</span>
-                  <span className="font-medium">${rentalFee.toFixed(2)}</span>
+                  <span className="font-medium">₹{rentalFee.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Security Deposit (Refundable):</span>
-                  <span className="font-medium">${securityDeposit.toFixed(2)}</span>
+                  <span className="font-medium">₹{securityDeposit.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold border-t pt-2 mt-2">
                   <span>Total:</span>
-                  <span className="text-vanilla">${totalCost.toFixed(2)}</span>
+                  <span className="text-vanilla">₹{totalCost.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -567,7 +568,7 @@ const ProductDetails = () => {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-medium">{product.name}</h3>
-                    <p className="text-vanilla mt-1">${product.price}/day</p>
+                    <p className="text-vanilla mt-1">₹{product.price}/day</p>
                   </div>
                 </div>
               </Link>

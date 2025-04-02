@@ -39,7 +39,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar visible={false} />
       
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
@@ -202,7 +202,7 @@ const Contact = () => {
       </div>
       
       {/* Footer would go here */}
-      <footer className="bg-coffee text-white py-12 px-6">
+      <footer className="bg-teal-900 text-white py-12 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
