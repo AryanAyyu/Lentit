@@ -32,6 +32,9 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
+import {  useLocation } from "react-router-dom";
+
+
 
 const productSuggestions = [
   "Elegant Silk Blouse",
@@ -48,7 +51,9 @@ interface NavbarProps {
   visible: boolean;
 }
 const Navbar: React.FC<NavbarProps> = ({ visible }) => {
-  
+
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -251,7 +256,15 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
         </div> */}
 
         <div className="w-1/3 flex justify-center items-center">
-          {/* Logo space - intentionally empty as the logo will be positioned absolutely via ScrollEffect */}
+          {isHomePage || (
+            <Link to="/" onClick={() => {
+              if (isHomePage) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }} className="text-2xl font-bold text-rose-700">
+              <span className="mr-1 text-yellow-900">LENT</span>-IT
+            </Link>
+          )}
         </div>
 
         {/* Right side: Categories + Icons */}

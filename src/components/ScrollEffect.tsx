@@ -25,7 +25,7 @@ const ScrollEffect: React.FC = () => {
         "fixed z-50 transition-all duration-500 ease-in-out ml-10 mt-2 ",
         isScrolled 
           ? "top-0 left-1/2 -translate-x-1/2 w-auto h-14 flex items-center justify-center opacity-100 scale-90 backdrop-blur-md"
-          : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75 scale-110 text-rose-900"
+          : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75 scale-110 "
       )}
       style={{
         transition: 'all 0.5s ease-in-out',

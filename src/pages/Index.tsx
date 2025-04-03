@@ -118,8 +118,10 @@ const Index = () => {
   
 
   return (
-    <div className="min-h-screen">
-      <Navbar visible={showNavbar} />
+    <>
+    <Navbar visible={showNavbar} />
+    <div className="min-h-screen ml-6 mr-6">
+      
       <TopImage/>
       <ScrollEffect />
       <Hero />
@@ -204,6 +206,7 @@ const Index = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 
