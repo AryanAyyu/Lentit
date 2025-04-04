@@ -80,6 +80,13 @@ const products = [
   
 const Index = () => {
 
+  const [visibleCount, setVisibleCount] = useState(4);
+  const isExpanded = visibleCount >= products.length;
+
+  const toggleProducts = () => {
+    setVisibleCount(isExpanded ? 4 : products.length);
+  };
+
   
   const itemsRef = useRef(null);
   const [showNavbar, setShowNavbar] = useState(false);
@@ -144,17 +151,22 @@ const Index = () => {
             Discover our curated selection of premium products, crafted with exceptional quality and timeless design.
           </p>
           
-          <div ref={itemsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.slice(0, visibleCount).map((product, index) => (
               <ProductCard key={product.id} {...product} index={index} />
             ))}
           </div>
           
-          <div className="text-center mt-12">
-            <button className="bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-rose-500 hover:shadow-md active:transform active:scale-95">
-              View All Products
-            </button>
-          </div>
+          {products.length > 4 && (
+            <div className="text-center mt-12">
+              <button
+                onClick={toggleProducts}
+                className="bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-rose-500 hover:shadow-md active:transform active:scale-95"
+              >
+                {isExpanded ? "View Less" : "View All Products"}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
