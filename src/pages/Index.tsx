@@ -126,9 +126,9 @@ const Index = () => {
 
   return (
     <>
-    <Navbar visible={showNavbar} />
-    <div className="min-h-screen ml-6 mr-6">
-      
+    
+    <div className="min-h-screen">
+      <Navbar visible={showNavbar} />  
       <TopImage/>
       <ScrollEffect />
       <Hero />
