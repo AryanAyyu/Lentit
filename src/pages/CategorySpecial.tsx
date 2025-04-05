@@ -282,39 +282,39 @@ const CategorySpecial = () => {
       
       {/* Products Grid */}
       <section className="py-12 px-6 bg-gray-50">
-        <div className="container mx-auto">
-            {products.length > 0 ? (
-                <div
-                ref={productsRef}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-8"
-                >
-                {products.map((product, index) => (
-                    <div key={product.id} className="group">
-                    <ProductCard
-                        {...product}
-                        index={index}
-                        className="transform transition duration-300 group-hover:scale-105"
-                    />
-                </div>
-                ))}
+          <div className="container mx-auto">
+              {products.length > 0 ? (
+                  <div
+                  ref={productsRef}
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-8"
+                  >
+                  {products.map((product, index) => (
+                      <div key={product.id} className="group">
+                      <ProductCard
+                          {...product}
+                          index={index}
+                          className="transform transition duration-300 group-hover:scale-105"
+                      />
+                  </div>
+                  ))}
+          </div>
+          ) : (
+            <div className="text-center py-16">
+              <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+                No products found
+              </h3>
+              <p className="text-gray-600 mb-8">
+                We couldn't find any products in this category. Please check back later.
+              </p>
+              <Link to="/">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300">
+                  Return to Home
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
-    ) : (
-      <div className="text-center py-16">
-        <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-          No products found
-        </h3>
-        <p className="text-gray-600 mb-8">
-          We couldn't find any products in this category. Please check back later.
-        </p>
-        <Link to="/">
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300">
-            Return to Home
-          </Button>
-        </Link>
-      </div>
-    )}
-  </div>
-</section>
+      </section>
 
     </div>
   );

@@ -127,11 +127,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar visible={showNavbar} />
-    {/* <> */}
+      <Navbar />
+      
     
-    <div className="min-h-screen">
-      <Navbar visible={showNavbar} />  
+    <div className="min-h-screen overflow-x-hidden">
+      <Navbar  />  
       <TopImage/>
       <ScrollEffect />
       <Hero />

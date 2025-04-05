@@ -1,10 +1,13 @@
+// Logo.tsx
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
 
+// Define the props interface explicitly
 interface LogoProps {
   className?: string;
   isSmall?: boolean;
+  children?: React.ReactNode; // Optional children prop
 }
 
 const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
@@ -22,8 +25,8 @@ const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
 
   return (
     <div className={cn(
-      "relative flex items-center justify-center text-white font-bold transition-all duration-500 cursor-pointer",
-      isSmall ? "text-4xl text-rose-900 " : "text-6xl md:text-7xl lg:text-8xl mr-2",
+      "relative flex items-center whitespace-nowrap text-white font-bold transition-all duration-500 cursor-pointer  sm:ml-20 mr-6 mt-2",
+      isSmall ? "text-4xl text-rose-900" : "text-6xl md:text-7xl lg:text-8xl mr-2",
       className
     )}>
       <Link 
