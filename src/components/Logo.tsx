@@ -23,7 +23,7 @@ const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
   return (
     <div className={cn(
       "relative flex items-center justify-center text-white font-bold transition-all duration-500 cursor-pointer",
-      isSmall ? "text-2xl text-rose-900" : "text-6xl md:text-7xl lg:text-8xl mr-2",
+      isSmall ? "text-4xl text-rose-900 " : "text-6xl md:text-7xl lg:text-8xl mr-2",
       className
     )}>
       <Link 
