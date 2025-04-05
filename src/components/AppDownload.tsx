@@ -1,121 +1,117 @@
-
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { SmartphoneNfc, Download, Star, ShoppingBag, Clock } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const AppDownload = () => {
   const appRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
+            entry.target.classList.add("animate-fadeIn");
           }
         });
       },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      }
+      { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll(".app-item");
-    elements.forEach((el) => observer.observe(el));
+    document.querySelectorAll(".app-section").forEach(el => observer.observe(el));
 
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-r from-stone-900 to-stone-600 text-white">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div ref={appRef} className="app-item reveal-on-scroll">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Download Our App For <span className="text-[#74070E] shadow-sm shadow-[#F4E3B2]">Enhanced Experience</span>
+    <section className="app-section py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-stone-900 to-stone-700 text-white">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+          {/* Content Section */}
+          <div ref={appRef} className="order-2 lg:order-1">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+              Download Our App For <span className="text-[#F4E3B2]">Enhanced Experience</span>
             </h2>
-            <p className="text-white/80 text-lg mb-8">
+            <p className="text-white/80 text-sm sm:text-base mb-6 sm:mb-8">
               Enjoy a seamless rental experience with our mobile app. Browse, book, and manage your rentals on the go.
             </p>
             
-            <div className="space-y-6 mb-8">
-              <div className="flex items-start gap-4">
-                <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <SmartphoneNfc className="w-6 h-6 text-white  " />
+            {/* Features List */}
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+              {[
+                {
+                  icon: <SmartphoneNfc className="w-5 h-5 sm:w-6 sm:h-6 text-white" />,
+                  title: "Virtual Try-On",
+                  description: "Our app features advanced AR technology that lets you virtually try on outfits before renting."
+                },
+                {
+                  icon: <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 text-white" />,
+                  title: "Easy Booking",
+                  description: "Book your favorite fashion items with just a few taps and have them delivered to your doorstep."
+                },
+                {
+                  icon: <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />,
+                  title: "Rental Reminders",
+                  description: "Get timely notifications about your rental period and upcoming return dates."
+                }
+              ].map((feature, index) => (
+                <div key={index} className="flex items-start gap-3 sm:gap-4">
+                  <div className="bg-white/10 p-2 sm:p-3 rounded-full flex-shrink-0 mt-0.5 sm:mt-1">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-medium mb-1 sm:mb-2">{feature.title}</h3>
+                    <p className="text-white/80 text-xs sm:text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-medium mb-2">Virtual Try-On</h3>
-                  <p className="text-white/80">
-                    Our app features advanced AR technology that lets you virtually try on outfits before renting.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <ShoppingBag className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-medium mb-2">Easy Booking</h3>
-                  <p className="text-white/80">
-                    Book your favorite fashion items with just a few taps and have them delivered to your doorstep.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="bg-white/10 p-3 rounded-full mt-1">
-                  <Clock className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-medium mb-2">Rental Reminders</h3>
-                  <p className="text-white/80">
-                    Get timely notifications about your rental period and upcoming return dates.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
             
-            <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#F4E3B2] text-[#74070E] hover:bg-white/90 gap-2">
-                <Download size={18} />
-                App Store
+            {/* Download Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button className="bg-[#F4E3B2] hover:bg-[#E8D49E] text-[#74070E] gap-2 py-2 sm:py-2">
+                <Download size={16} className="shrink-0" />
+                <span>App Store</span>
               </Button>
-              <Button className="bg-[#F4E3B2] text-[#74070E] hover:bg-white/90 gap-2">
-                <Download size={18} />
-                Google Play
+              <Button className="bg-[#F4E3B2] hover:bg-[#E8D49E] text-[#74070E] gap-2 py-2 sm:py-2">
+                <Download size={16} className="shrink-0" />
+                <span>Google Play</span>
               </Button>
             </div>
           </div>
-          
-          <div className="app-item reveal-on-scroll" style={{ transitionDelay: "200ms" }}>
-            <div className="relative">
-              <div className="bg-pink-300/40 w-64 h-64 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+
+          {/* Image Section */}
+          <div className="order-1 lg:order-2 relative lg:pl-8">
+            <div className="bg-pink-300/40 w-48 h-48 sm:w-64 sm:h-64 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+            <div className="relative z-10 max-w-xs mx-auto">
               <img 
-                src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80" 
+                src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                 alt="Mobile App" 
-                className="relative z-10 max-w-xs mx-auto shadow-2xl rounded-3xl border-8 border-white/10"
+                className="w-full shadow-2xl rounded-2xl sm:rounded-3xl border-4 sm:border-8 border-white/10"
+                loading="lazy"
               />
               
-              {/* Floating elements to enhance the visual appeal */}
-              <div className="absolute -top-10 -right-10 bg-white/20 p-4 backdrop-blur-md rounded-2xl shadow-xl z-20 animate-float">
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-yellow-300" />
-                  <Star className="w-5 h-5 text-yellow-300" />
-                  <Star className="w-5 h-5 text-yellow-300" />
-                  <Star className="w-5 h-5 text-yellow-300" />
-                  <Star className="w-5 h-5 text-yellow-300" />
+              {/* Rating Badge */}
+              {!isMobile && (
+                <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 bg-white/20 p-2 sm:p-3 backdrop-blur-md rounded-xl shadow-lg z-20 animate-float">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
+                    ))}
+                  </div>
+                  <p className="text-[10px] sm:text-xs mt-0.5">4.9 Rating</p>
                 </div>
-                <p className="text-xs mt-1">4.9 App Rating</p>
-              </div>
+              )}
               
-              <div className="absolute -bottom-8 -left-8 bg-white/20 p-3 backdrop-blur-md rounded-2xl shadow-xl z-20 animate-float" style={{ animationDelay: "1s" }}>
-                <p className="text-xs font-bold">10K+ Downloads</p>
-              </div>
+              {/* Downloads Badge */}
+              {!isMobile && (
+                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white/20 p-2 sm:p-3 backdrop-blur-md rounded-xl shadow-lg z-20 animate-float" style={{ animationDelay: "1s" }}>
+                  <p className="text-[10px] sm:text-xs font-bold">10K+ Downloads</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

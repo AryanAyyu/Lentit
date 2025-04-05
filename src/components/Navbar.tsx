@@ -295,16 +295,10 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="container mx-auto px-4 flex items-center justify-between align-items-center">
-          {/* Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2"
-          >
-            <Menu size={24} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
-          </button>
+          
 
           {/* Centered Toggle */}
-          <div className="flex-1 flex justify-center px-2">
+          <div className="flex-1 flex justify-center px-2 ml-5">
           <ToggleGroup 
                 type="single" 
                 value={serviceType}
@@ -340,8 +334,8 @@ const Navbar = () => {
           )}
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-2">
-            <Link to="/login" className="p-2">
+          <div className="flex items-center space-x-0 ml-4">
+            <Link to="/login" className="p-2 ml-3">
               <User size={20} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
             </Link>
             <Cart />

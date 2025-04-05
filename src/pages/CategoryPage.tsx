@@ -393,7 +393,7 @@ const CategoryPage = () => {
       <section className="py-12 px-6">
         <div className="container mx-auto">
           {products.length > 0 ? (
-            <div ref={productsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product, index) => (
                 <ProductCard key={product.id} {...product} index={index} />
               ))}

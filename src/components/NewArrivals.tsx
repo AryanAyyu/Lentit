@@ -1,11 +1,9 @@
-
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import { ArrowRight } from "lucide-react";
 
-// Mock new arrivals data
 const newArrivals = [
   {
     id: 501,
@@ -65,29 +63,62 @@ const NewArrivals = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-muted">
+    <section className="py-8 px-4 bg-muted"> {/* Reduced from py-16/px-6 */}
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-between items-center mb-12">
+        {/* Header Section - spacing reduced from mb-8/mb-12 */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
-            <h2 className="text-3xl font-semibold text-rose-900 mb-2">New Arrivals</h2>
-            <p className="text-foreground/70 max-w-md">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900 mb-1 sm:mb-2">
+              New Arrivals
+            </h2>
+            <p className="text-foreground/70 text-sm sm:text-base max-w-md">
               The latest premium fashion items now available for rent
             </p>
           </div>
-          <Link to="/category/all">
-            <Button variant="outline" className="border-rose-600 text-rose-900 hover:bg-teal-600 flex items-center gap-2 mt-4 md:mt-0">
+          <Link to="/category/all" className="w-full sm:w-auto">
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2"
+              size="sm"
+            >
               View All
               <ArrowRight size={16} />
             </Button>
           </Link>
         </div>
         
-        <div ref={arrivalsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Product Grid - gap reduced from gap-6 */}
+        <div
+          ref={arrivalsRef}
+          className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+        >
           {newArrivals.map((product, index) => (
-            <div key={product.id} className="new-arrival-item">
-              <ProductCard {...product} index={index} />
+            <div
+              key={product.id}
+              className="new-arrival-item"
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <ProductCard
+                {...product}
+                index={index}
+                className="hover:shadow-md transition-shadow duration-300"
+              />
             </div>
           ))}
+        </div>
+
+        {/* Mobile View All Button - spacing reduced from mt-8 */}
+        <div className="mt-6 sm:hidden text-center">
+          <Link to="/category/all">
+            <Button
+              variant="outline"
+              className="border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2 mx-auto"
+              size="sm"
+            >
+              View All Arrivals
+              <ArrowRight size={16} />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

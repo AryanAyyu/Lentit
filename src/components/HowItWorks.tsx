@@ -57,7 +57,7 @@ const HowItWorks = () => {
           </p>
         </div>
         
-        <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={stepsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-8 flex-wrap justify-center ">
           {steps.map((step, index) => (
             <div 
               key={index} 

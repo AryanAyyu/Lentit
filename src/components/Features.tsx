@@ -2,27 +2,22 @@ import { Truck, Eye, IndianRupee, Ship, ShieldCheck } from "lucide-react";
 
 const features = [
   {
-    icon: <Eye className="w-8 h-8 text-stone-900 relative z-10" />,
+    icon: <Eye className="w-5 h-5 text-stone-900" />,
     title: "Virtual Try On",
     description: "Try before you buy"
   },
   {
-    icon: <Truck className="w-8 h-8 text-stone-900 relative z-10" />,
+    icon: <Truck className="w-5 h-5 text-stone-900" />,
     title: "Pan India Delivery",
     description: "Fast shipping across India"
   },
   {
-    icon: <IndianRupee className="w-10 h-10 text-stone-900 relative z-10" />,
+    icon: <IndianRupee className="w-6 h-6 text-stone-900" />,
     title: "COD",
     description: "Cash on delivery available"
   },
   {
-    icon: <Ship className="w-8 h-8 text-stone-900 relative z-10" />,
-    title: "We Ship Both Ways",
-    description: "Free shipping on returns"
-  },
-  {
-    icon: <ShieldCheck className="w-8 h-8 text-stone-900 relative z-10" />,
+    icon: <ShieldCheck className="w-5 h-5 text-stone-900" />,
     title: "Quality & Hygiene Check",
     description: "100% quality assurance"
   }
@@ -30,24 +25,35 @@ const features = [
 
 const Features = () => {
   return (
-    <div className="py-16 px-6 bg-gradient-to-r from-zinc-900 to-zinc-600">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-12 text-white">Our Services</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 ml-30">
+    <div className="py-8 px-4 bg-gradient-to-r from-zinc-900 to-zinc-600">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-2xl font-semibold text-center mb-6 text-white">
+          Our Services
+        </h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`feature-icon-wrapper flex flex-col items-center text-center 
-                         transition-transform duration-300 hover:-translate-y-2 hover:scale-105
-                         ${index % 2 === 0 ? 'transform translate-y-4' : 'transform -translate-y-4'}`}
+              className="flex flex-col items-center text-center p-3"
             >
-              <div className="feature-icon relative flex items-center justify-center w-16 h-16 bg-white rounded-full">
+              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-2">
                 {feature.icon}
               </div>
-              <h3 className="font-medium text-white mt-3">{feature.title}</h3>
-              <p className="text-sm text-white">{feature.description}</p>
+              <h3 className="font-medium text-white text-sm">
+                {feature.title}
+              </h3>
+              <p className="text-xs text-white mt-1">
+                {feature.description}
+              </p>
             </div>
           ))}
+          {/* Add empty div if odd number of features to maintain grid */}
+          {features.length % 2 !== 0 && (
+            <div className="flex flex-col items-center text-center p-3 opacity-0">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-2">
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

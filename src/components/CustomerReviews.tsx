@@ -1,6 +1,6 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const reviews = [
   {
@@ -47,107 +47,103 @@ const reviews = [
 
 const CustomerReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const reviewsRef = useRef<HTMLDivElement>(null);
-  const maxIndex = Math.ceil(reviews.length / 3) - 1;
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const itemsPerView = isMobile ? 1 : 3;
+  const totalSlides = Math.ceil(reviews.length / itemsPerView);
 
   const goToNext = () => {
-    setCurrentIndex(prev => (prev < maxIndex ? prev + 1 : prev));
+    setCurrentIndex((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
   };
-  
+
   const goToPrev = () => {
-    setCurrentIndex(prev => (prev > 0 ? prev - 1 : prev));
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : totalSlides - 1));
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      }
-    );
+    const interval = setInterval(goToNext, 5000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
-    if (reviewsRef.current) {
-      observer.observe(reviewsRef.current);
-    }
-
-    return () => {
-      if (reviewsRef.current) {
-        observer.unobserve(reviewsRef.current);
-      }
-    };
-  }, []);
-
-  const visibleReviews = reviews.slice(currentIndex * 3, currentIndex * 3 + 3);
+  // Calculate transform for carousel effect
+  const transformValue = `translateX(-${currentIndex * 100}%)`;
 
   return (
-    <section className="py-16 px-6">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center items-center mb-12">
-          <div>
-            <h2 className="text-3xl font-semibold text-rose-900 mb-2">Customer Reviews</h2>
-            <p className="text-foreground/70 max-w-md">
-              See what our customers have to say about their rental experience
-            </p>
-          </div>
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-rose-900 mb-2">
+            Customer Reviews
+          </h2>
+          <p className="text-gray-600 max-w-md mx-auto">
+            See what our customers have to say about their rental experience
+          </p>
         </div>
-          <div className="flex space-x-2 mt-4 md:mt-0 justify-center">
-            <button 
-              onClick={goToPrev}
-              disabled={currentIndex === 0}
-              className="p-2 rounded-full border border-border hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Previous reviews"
+
+        <div className="relative overflow-hidden">
+          <div className="relative h-full">
+            <div
+              ref={carouselRef}
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: transformValue }}
             >
-              <ChevronLeft size={20} />
-            </button>
-            <button 
-              onClick={goToNext}
-              disabled={currentIndex >= maxIndex}
-              className="p-2 rounded-full border border-border hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Next reviews"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        
-        <div 
-          ref={reviewsRef} 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-on-scroll"
-        >
-          {visibleReviews.map((review, index) => (
-            <div 
-              key={review.id} 
-              className="bg-white p-6 rounded-xl shadow-md"
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="flex items-center mb-4">
-                <img 
-                  src={review.image} 
-                  alt={review.name} 
-                  className="w-12 h-12 rounded-full object-cover mr-4"
-                />
-                <div>
-                  <h3 className="font-medium text-stone-900">{review.name}</h3>
-                  <p className="text-sm text-foreground/60">{review.date}</p>
+              {Array(totalSlides).fill(0).map((_, slideIndex) => (
+                <div 
+                  key={slideIndex} 
+                  className="w-full flex-shrink-0"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 px-2">
+                    {reviews
+                      .slice(slideIndex * itemsPerView, slideIndex * itemsPerView + itemsPerView)
+                      .map((review) => (
+                        <div
+                          key={review.id}
+                          className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow h-full"
+                        >
+                          <div className="flex items-center mb-4">
+                            <img
+                              src={review.image}
+                              alt={review.name}
+                              className="w-12 h-12 rounded-full object-cover mr-4"
+                            />
+                            <div>
+                              <h3 className="font-medium text-gray-900">{review.name}</h3>
+                              <p className="text-sm text-gray-500">{review.date}</p>
+                            </div>
+                          </div>
+                          <div className="flex mb-3">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                              />
+                            ))}
+                          </div>
+                          <p className="text-gray-700">{review.text}</p>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              </div>
-              <div className="flex mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
-                  />
-                ))}
-              </div>
-              <p className="text-foreground/80">{review.text}</p>
+              ))}
             </div>
+          </div>
+
+          
+        </div>
+
+        {/* Dots Indicator */}
+        <div className="flex justify-center mt-8 space-x-2">
+          {Array(totalSlides).fill(0).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-rose-900' : 'bg-gray-300'}`}
+              aria-label={`Go to review set ${index + 1}`}
+            />
           ))}
         </div>
       </div>
