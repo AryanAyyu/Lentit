@@ -36,7 +36,7 @@ const AppDownload = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div ref={appRef} className="app-item reveal-on-scroll">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Download Our App For <span className="text-amber-700">Enhanced Experience</span>
+              Download Our App For <span className="text-[#74070E] shadow-sm shadow-[#F4E3B2]">Enhanced Experience</span>
             </h2>
             <p className="text-white/80 text-lg mb-8">
               Enjoy a seamless rental experience with our mobile app. Browse, book, and manage your rentals on the go.
@@ -81,11 +81,11 @@ const AppDownload = () => {
             </div>
             
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-white text-rose-600 hover:bg-white/90 gap-2">
+              <Button className="bg-[#F4E3B2] text-[#74070E] hover:bg-white/90 gap-2">
                 <Download size={18} />
                 App Store
               </Button>
-              <Button className="bg-white text-rose-600 hover:bg-white/90 gap-2">
+              <Button className="bg-[#F4E3B2] text-[#74070E] hover:bg-white/90 gap-2">
                 <Download size={18} />
                 Google Play
               </Button>

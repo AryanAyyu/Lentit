@@ -89,7 +89,7 @@ const HotDeals = () => {
                   alt={deal.title} 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full font-medium">
+                <div className="absolute top-4 right-4 bg-[#74070E] text-white px-3 py-1 rounded-full font-medium">
                   {deal.discount}
                 </div>
               </div>

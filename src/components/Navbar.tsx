@@ -32,9 +32,6 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-import {  useLocation } from "react-router-dom";
-
-
 
 const productSuggestions = [
   "Elegant Silk Blouse",
@@ -51,9 +48,7 @@ interface NavbarProps {
   visible: boolean;
 }
 const Navbar: React.FC<NavbarProps> = ({ visible }) => {
-
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  
 
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -136,10 +131,13 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"
-      }`}
-    >
+  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    isScrolled 
+      ? "bg-white/90 backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
+      : "bg-transparent py-5 text-[#F4E3B2]"
+  }`}
+>
+
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Left side: Location, service toggle, and categories */}
         <div className="flex items-center">
@@ -147,9 +145,18 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" className="flex items-center text-foreground mr-4 py-2">
-                <MapPin size={16} className="mr-1" />
-                <span className="text-sm">{selectedLocation}</span>
-                <ChevronDown size={14} className="ml-1 opacity-70" />
+                <MapPin size={16} className={`mr-1 ${
+                  isScrolled ? "text-[#74070E]" : "text-[#F4E3B2] "
+                }`} />
+                <span className={`text-sm ${
+                  isScrolled
+                  ? "text-[#74070E]"
+                  : "text-[#F4E3B2]"
+                }`}>{selectedLocation}</span>
+                <ChevronDown size={14} className={`ml-1 opacity-70 ${
+                  isScrolled ? "text-[#74070E]" 
+                  : "text-[#F4E3B2]"
+                }`} />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-56 p-2">
@@ -182,13 +189,13 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
             >
               <ToggleGroupItem 
                 value="renting" 
-                className="text-xs rounded-l-full px-3 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
+                className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
                 Renting
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="thrifting" 
-                className="text-xs rounded-r-full px-3 data-[state=on]:bg-amber-600 data-[state=on]:text-white"
+                className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
                 Thrifting
               </ToggleGroupItem>
@@ -207,7 +214,13 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
                 >
                   <Link 
                     to="#" 
-                    className="nav-link py-2 flex items-center text-foreground hover:text-rose-600 transition-colors duration-200"
+                    className={`nav-link py-2 flex items-center transition-colors duration-200 ${
+                      isScrolled
+                      ? 'text-[#74070E]'
+                      // ? console.log(true)
+                      : 'text-[#F4E3B2]'
+                      // : console.log(false)
+                    }`}
                   >
                     {category.title}
                     <ChevronDown size={16} className="ml-1 transition-transform duration-200 group-hover:rotate-180" />
@@ -218,7 +231,7 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
                         <li key={idx}>
                           <Link
                             to="#"
-                            className="block py-1.5 px-2 text-foreground/80 hover:text-rose-600 hover:bg-muted/50 rounded transition-colors duration-200"
+                            className="block py-1.5 px-2 text-foreground/80 hover:text-[#74070E] hover:bg-muted/50 rounded transition-colors duration-200"
                           >
                             {item}
                           </Link>
@@ -256,15 +269,7 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
         </div> */}
 
         <div className="w-1/3 flex justify-center items-center">
-          {isHomePage || (
-            <Link to="/" onClick={() => {
-              if (isHomePage) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }} className="text-2xl font-bold text-rose-700">
-              <span className="mr-1 text-yellow-900">LENT</span>-IT
-            </Link>
-          )}
+          {/* Logo space - intentionally empty as the logo will be positioned absolutely via ScrollEffect */}
         </div>
 
         {/* Right side: Categories + Icons */}
@@ -281,7 +286,11 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
                 >
                   <Link 
                     to="#" 
-                    className="nav-link py-2 flex items-center text-foreground hover:text-rose-600 transition-colors duration-200"
+                    className={`nav-link py-2 flex items-center transition-colors duration-200 ${
+                      isScrolled
+                      ? "text-[#74070E]"
+                      : "text-[#F4E3B2]"
+                    }`}
                   >
                     {category.title}
                     <ChevronDown size={16} className="ml-1 transition-transform duration-200 group-hover:rotate-180" />
@@ -292,7 +301,7 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
                         <li key={idx}>
                           <Link
                             to="#"
-                            className="block py-1.5 px-2 text-foreground/80 hover:text-rose-600 hover:bg-muted/50 rounded transition-colors duration-200"
+                            className="block py-1.5 px-2 text-foreground/80 hover:text-[#74070E] hover:bg-muted/50 rounded transition-colors duration-200"
                           >
                             {item}
                           </Link>
@@ -307,7 +316,13 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
 
           {/* Search button */}
           <button 
-            className="text-foreground hover:text-rose-600 transition-colors duration-200 mr-6"
+            className={`hover:text-[#74070E] transition-colors duration-200 mr-6 ${
+              isScrolled
+                      ? "text-[#74070E]"
+                      // ? console.log(true)
+                      : "text-[#F4E3B2]"
+                      // : console.log(false)
+            }`}
             onClick={() => setIsSearchOpen(true)}
           >
             <Search size={20} />
@@ -339,10 +354,10 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
           {/* Notifications */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" className="p-2 relative mr-4 hover:text-red-500 transition-colors duration-200">
+              <Button variant="ghost" className="p-2 relative mr-4 hover:text-[#74070E] transition-colors duration-200">
                 <Bell size={20} />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-[#74070E] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {unreadCount}
                   </span>
                 )}
@@ -390,8 +405,16 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
 
           {/* Other icons */}
           <Wishlist />
-          <Link to="/login" className="text-foreground hover:text-pink-500 transition-colors duration-200 mx-4">
-            <User size={20} />
+          <Link to="/login" className={`text-foreground hover:text-pink-500 transition-colors duration-200 mx-4 ${
+            isScrolled
+            ? "text-[#74070E]"
+            : "text-[#F4E3B2]"
+          }`}>
+            <User size={20} className={`${
+              isScrolled
+              ? "text-[#74070E]"
+              : "text-[#F4E3B2]"
+            }`} />
           </Link>
           <Cart />
           

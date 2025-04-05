@@ -14,6 +14,7 @@ import AppDownload from "@/components/AppDownload";
 import ProductCard from "@/components/ProductCard";
 import ScrollEffect from "@/components/ScrollEffect";
 import TopImage from "@/components/TopImage";
+import HomePage from "@/components/DownloadModal";
 
 // Mock products data
 const products = [
@@ -125,7 +126,9 @@ const Index = () => {
   
 
   return (
-    <>
+    <div className="min-h-screen">
+      <Navbar visible={showNavbar} />
+    {/* <> */}
     
     <div className="min-h-screen">
       <Navbar visible={showNavbar} />  
@@ -133,6 +136,7 @@ const Index = () => {
       <ScrollEffect />
       <Hero />
       <Features />
+      <HomePage/>
       <Categories />
       <AppDownload />
       <DealOfTheDay />
@@ -157,11 +161,13 @@ const Index = () => {
             ))}
           </div>
           
+          <div className="text-center mt-12">
+          </div>
           {products.length > 4 && (
             <div className="text-center mt-12">
               <button
                 onClick={toggleProducts}
-                className="bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-rose-500 hover:shadow-md active:transform active:scale-95"
+                className="bg-[#F4E3B2] text-[#74070E] px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md active:transform active:scale-95"
               >
                 {isExpanded ? "View Less" : "View All Products"}
               </button>
@@ -171,7 +177,7 @@ const Index = () => {
       </section>
 
       {/* Footer - No Newsletter section */}
-      <footer className="bg-teal-900 text-white py-12 px-6">
+      <footer className="bg-[#74070E] text-[#F4E3B2] py-12 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -218,7 +224,7 @@ const Index = () => {
         </div>
       </footer>
     </div>
-    </>
+    </div>
   );
 };
 

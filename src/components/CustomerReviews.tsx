@@ -90,14 +90,15 @@ const CustomerReviews = () => {
   return (
     <section className="py-16 px-6">
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-between items-center mb-12">
+        <div className="flex flex-wrap justify-center items-center mb-12">
           <div>
             <h2 className="text-3xl font-semibold text-rose-900 mb-2">Customer Reviews</h2>
             <p className="text-foreground/70 max-w-md">
               See what our customers have to say about their rental experience
             </p>
           </div>
-          <div className="flex space-x-2 mt-4 md:mt-0">
+        </div>
+          <div className="flex space-x-2 mt-4 md:mt-0 justify-center">
             <button 
               onClick={goToPrev}
               disabled={currentIndex === 0}
@@ -115,7 +116,6 @@ const CustomerReviews = () => {
               <ChevronRight size={20} />
             </button>
           </div>
-        </div>
         
         <div 
           ref={reviewsRef} 
