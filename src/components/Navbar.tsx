@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [serviceType, setServiceType] = useState<"renting" | "thrifting">("renting");
-  const [selectedLocation, setSelectedLocation] = useState("New Delhi");
+  const [selectedLocation, setSelectedLocation] = useState("Delhi");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [notifications, setNotifications] = useState([
     { id: 1, text: "Your item has been shipped!", read: false, time: "2 hours ago" },
@@ -62,13 +62,14 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
   ]);
   const [unreadCount, setUnreadCount] = useState(0);
   
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(); 
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
 
   useEffect(() => {
     const count = notifications.filter(n => !n.read).length;
+    console.log("NOTIFICATION UNREAD COUNT: ",count);
     setUnreadCount(count);
   }, [notifications]);
 
@@ -127,6 +128,8 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
       }
     });
   };
+
+  
 
 
   return (
@@ -244,29 +247,6 @@ const Navbar: React.FC<NavbarProps> = ({ visible }) => {
             </ul>
           )}
         </div>
-
-        {/* <div className="w-1/3 flex justify-center items-center">
-          {isHomePage?
-          ( 
-            <div className="flex items-center">
-              <Link to="/" className="text-2xl font-bold text-rose-700">
-              <span className="mr-1 text-yellow-900">LENT</span>-IT
-              </Link>
-            </div>
-          )
-          :
-          (
-            <div></div>
-          )
-          }
-        </div>  */}
-        
-        {/* Center: Logo
-        <div className="flex items-center">
-          <Link to="/" className="text-2xl font-bold text-rose-700">
-            <span className="mr-1 text-yellow-900">LENT</span>-IT
-          </Link>
-        </div> */}
 
         <div className="w-1/3 flex justify-center items-center">
           {/* Logo space - intentionally empty as the logo will be positioned absolutely via ScrollEffect */}
