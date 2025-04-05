@@ -162,7 +162,7 @@ const categoryProducts = {
   accessories: [
     {
       id: 401,
-      name: "Jewelry",
+      name: "Jewellery",
       categorySlug :"jewelry",
       price: 89.99,
       imageUrl: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=80",

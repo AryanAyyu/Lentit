@@ -90,11 +90,14 @@ const Navbar = () => {
   };
 
   const leftCategories = [
-    { title: "Clothing", submenu: ["Dresses", "Tops", "Bottoms"] }
+    { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
+    { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
+
   ];
 
   const rightCategories = [
-    { title: "Costumes", submenu: ["Police Uniform", "Lawyer's Gown"] }
+    { title: "Costumes", submenu: ["Indian Ethnic Costumes", "Japanese Kimono & Yukata","Superhero Costumes","Doctor, Nurse & Lab Coat Costumes","Police, Army & Firefighter Costumes","Halloween Costumes"] },
+    { title: "Accessories", submenu: ["Jewellery", "Watches","Sunglasses","Belts & Scarves","Bags","Bridal & Ethnic Accessories"] }
   ];
 
   const locations = ["Delhi", "Mumbai", "Bangalore"];
