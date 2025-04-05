@@ -45,7 +45,7 @@ const WhyRent = () => {
               Rent premium, wear luxury, save money.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-teal-900 hover:bg-teal-700 text-white gap-2">
+              <Button className="bg-[#74070E] hover:text-[#F4E3B2] text-white gap-2">
                 <ShoppingBag size={18} />
                 Rent your Own
               </Button>

@@ -75,7 +75,7 @@ const DealOfTheDay = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div ref={dealRef} className="reveal-on-scroll order-2 lg:order-1">
             <div className="flex items-center gap-2 mb-4">
-              <span className="bg-vanilla text-white text-sm font-medium px-3 py-1 rounded-full">Limited Time</span>
+              <span className="bg-[#F4E3B2] text-rose-900 text-sm font-medium px-3 py-1 rounded-full">Limited Time</span>
               <span className="text-foreground/70">Deal ends soon</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-rose-900 mb-4">Deal of the Day</h2>
@@ -109,7 +109,7 @@ const DealOfTheDay = () => {
             </div>
             
             <div className="flex gap-4">
-              <Button className="bg-teal-900 hover:bg-teal-600">Rent Now</Button>
+              <Button className="bg-[#74070E] hover:text-[#F4E3B2]">Rent Now</Button>
               <Button variant="outline" className="border-stone-600 text-stone-900 hover:bg-yellow-200">
                 View Details
               </Button>
@@ -123,7 +123,7 @@ const DealOfTheDay = () => {
                 alt="Deal of the Day" 
                 className="w-full h-auto object-cover aspect-[4/5]"
               />
-              <div className="absolute top-4 right-4 bg-vanilla text-white font-bold text-lg rounded-full h-16 w-16 flex items-center justify-center">
+              <div className="absolute top-4 right-4 bg-rose-800 text-white font-bold text-lg rounded-full h-16 w-16 flex items-center justify-center">
                 60% OFF
               </div>
             </div>
