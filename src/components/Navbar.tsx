@@ -337,7 +337,7 @@ const Navbar = () => {
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ml-10  ${
+            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300  ml-10 ${
               showLogo ? 'opacity-100' : 'opacity-0'
             }`}>
               <Logo isSmall={true} />

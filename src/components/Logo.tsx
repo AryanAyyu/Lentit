@@ -24,7 +24,7 @@ const Logo: React.FC<LogoProps> = ({ className, isSmall = false, forceShow = fal
   return (
     <div className={cn(
       "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer",
-      isSmall ? "text-3xl text-[#74070E] ml-5" : "text-6xl md:text-7xl lg:text-8xl text-white",
+      isSmall ? "text-3xl text-[#74070E] ml-10" : "text-6xl md:text-7xl lg:text-8xl text-white",
       className
     )}>
       <Link 
