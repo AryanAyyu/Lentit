@@ -75,16 +75,7 @@ const NewArrivals = () => {
               The latest premium fashion items now available for rent
             </p>
           </div>
-          <Link to="/category/all" className="w-full sm:w-auto">
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2"
-              size="sm"
-            >
-              View All
-              <ArrowRight size={16} />
-            </Button>
-          </Link>
+          
         </div>
         
         {/* Product Grid - gap reduced from gap-6 */}
