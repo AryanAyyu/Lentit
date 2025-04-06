@@ -1,16 +1,14 @@
-// Logo.tsx
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
 
-// Define the props interface explicitly
 interface LogoProps {
   className?: string;
   isSmall?: boolean;
-  children?: React.ReactNode; // Optional children prop
+  forceShow?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
+const Logo: React.FC<LogoProps> = ({ className, isSmall = false, forceShow = false }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -25,8 +23,8 @@ const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
 
   return (
     <div className={cn(
-      "relative flex items-center whitespace-nowrap text-white font-bold transition-all duration-500 cursor-pointer  sm:ml-20 mr-10 mt-2",
-      isSmall ? "text-4xl text-rose-900" : "text-6xl md:text-7xl lg:text-8xl mr-2",
+      "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer",
+      isSmall ? "text-3xl text-[#74070E] ml-5" : "text-6xl md:text-7xl lg:text-8xl text-white",
       className
     )}>
       <Link 
@@ -34,7 +32,7 @@ const Logo: React.FC<LogoProps> = ({ className, isSmall = false }) => {
         onClick={handleClick}
         className="hover:opacity-90 transition-opacity"
       >
-        <span className=''>Lent-It</span>
+        <span>Lent-It</span>
       </Link>
     </div>
   );

@@ -25,6 +25,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Disclosure } from "@headlessui/react";
+import Logo from "./Logo";
 
 const productSuggestions = [
   "Elegant Silk Blouse",
@@ -44,12 +45,13 @@ const Navbar = () => {
     { id: 1, text: "Your item has been shipped!", read: false, time: "2 hours ago" }
   ]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [showLogo, setShowLogo] = useState(false);
   
   const isMobile = useIsMobile();
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
+  const isHomePage = location.pathname === '/';
+  const [showLogo, setShowLogo] = useState(!isHomePage);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -61,11 +63,18 @@ const Navbar = () => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 20;
       setIsScrolled(scrolled);
-      setShowLogo(scrolled);
+      if (isHomePage) {
+        setShowLogo(scrolled);
+      }
     };
+
+    if (!isHomePage) {
+      setShowLogo(true);
+    }
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -92,7 +101,6 @@ const Navbar = () => {
   const leftCategories = [
     { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
     { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
-
   ];
 
   const rightCategories = [
@@ -201,11 +209,7 @@ const Navbar = () => {
 
           {/* Center Logo */}
           <div className="w-1/3 flex justify-center items-center">
-            {showLogo && (
-              <Link to="/" className="text-2xl font-bold">
-                <span className="text-[#74070E]"></span>
-              </Link>
-            )}
+            {showLogo && <Logo isSmall={isScrolled} className={isScrolled ? "ml-10" : ""} />}
           </div>
 
           {/* Right side */}
@@ -298,54 +302,56 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="container mx-auto px-4 flex items-center justify-between align-items-center">
-          
+          {/* Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(true)}
+            className=""
+          >
+            <Menu size={24} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
+          </button>
 
           {/* Centered Toggle */}
-          <div className="flex-1 flex justify-center px-2 ml-5">
-          <ToggleGroup 
-                type="single" 
-                value={serviceType}
-                onValueChange={(value) => {
-                  if (value) setServiceType(value as "renting" | "thrifting");
-                }}
-                className="border rounded-full mr-20"
+          <div className="flex-1 flex justify-center px-2 ">
+            <ToggleGroup 
+              type="single" 
+              value={serviceType}
+              onValueChange={(value) => {
+                if (value) setServiceType(value as "renting" | "thrifting");
+              }}
+              className="border rounded-full mr-20 "
+            >
+              <ToggleGroupItem 
+                value="renting" 
+                className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
-                <ToggleGroupItem 
-                  value="renting" 
-                  className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
-                >
-                  Renting
-                </ToggleGroupItem>
-                <ToggleGroupItem 
-                  value="thrifting" 
-                  className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
-                >
-                  Thrifting
-                </ToggleGroupItem>
-              </ToggleGroup>
+                Renting
+              </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="thrifting" 
+                className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
+              >
+                Thrifting
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
+            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ml-10  ${
               showLogo ? 'opacity-100' : 'opacity-0'
             }`}>
-              <Link to="/" className="text-xl font-bold">
-                <span className="text-[#74070E]"></span>
-              </Link>
+              <Logo isSmall={true} />
             </div>
           )}
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-0 ml-4">
+          <div className="flex items-center space-x-0 ">
             <Link to="/login" className="p-2 ml-3">
               <User size={20} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
             </Link>
             <Cart />
           </div>
         </div>
-
-        
 
         {/* Mobile Menu - Full Screen Overlay */}
         {mobileMenuOpen && (
