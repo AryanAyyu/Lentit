@@ -30,9 +30,6 @@ export default function HomePage() {
 
   return (
     <div className="relative flex flex-col items-center justify-center bg-white">
-      {/* <h1 className="text-4xl font-bold text-[#74070E] mb-4">
-        Welcome to Our Website
-      </h1> */}
       {/* Other homepage content goes here */}
 
       {showModal && (
@@ -47,7 +44,7 @@ export default function HomePage() {
             >
               &times;
             </button>
-            <h2 className="text-3xl font-bold text-[#74070E] text-center">
+            <h2 className="text-3xl font-bold text-[#74070E] text-center mt-8 md:mt-0">
               Get the App
             </h2>
             <p className="text-[#74070E] mt-4 text-center">
@@ -77,7 +74,7 @@ export default function HomePage() {
             <div className="mt-8 flex justify-center">
               <button
                 onClick={handleDownload}
-                className="py-3 px-6 bg-[#74070E] text-[#F4E3B2] rounded-lg hover:bg-[#64060E] transition duration-300"
+                className="py-3 px-6 bg-[#74070E] text-[#F4E3B2] rounded-lg hover:bg-[#64060E] transition duration-300 mb-8 md:mb-0"
               >
                 Download App
               </button>
