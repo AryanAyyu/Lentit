@@ -48,7 +48,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar visible={false} />
+      <Navbar />
       <div className="container mx-auto px-4 py-16 flex items-center justify-center mt-9">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">

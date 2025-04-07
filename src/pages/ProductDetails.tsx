@@ -6,7 +6,7 @@ import ProductDetails from "@/components/ProductDetails";
 const ProductDetailsPage = () => {
   return (
     <div className="min-h-screen">
-      <Navbar visible={false} />
+      <Navbar />
       <ProductDetails />
       
       {/* Footer would go here, same as index page */}

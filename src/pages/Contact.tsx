@@ -39,7 +39,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar visible={false} />
+      <Navbar />
       
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
