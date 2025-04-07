@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -153,6 +154,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

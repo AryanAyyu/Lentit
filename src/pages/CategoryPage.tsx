@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Special from "./Special";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 
@@ -347,7 +348,7 @@ const CategoryPage = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar visible={false} />
+      <Navbar  />
       
       {/* Category Header */}
       <div className="pt-28 pb-8 px-6 bg-muted">
@@ -411,6 +412,7 @@ const CategoryPage = () => {
           )}
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-I want to display this page 
 
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
