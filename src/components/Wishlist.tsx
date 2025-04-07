@@ -22,7 +22,7 @@ const Wishlist = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" className="relative p-2">
-          <Heart size={20} className="text-rose-900" />
+          <Heart size={20} />
           {itemCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-[#74070E] text-[#F4E3B2] text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
               {itemCount}

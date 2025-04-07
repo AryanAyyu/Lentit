@@ -104,7 +104,7 @@ const HotDeals = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-rose-900 mb-1 sm:mb-2">{deal.title}</h3>
                 <p className="text-stone-600 text-sm sm:text-base mb-3 sm:mb-4">{deal.description}</p>
                 <Link to={deal.link} className="block">
-                  <Button className="w-full bg-stone-900 hover:bg-stone-700 text-white text-sm sm:text-base py-2 sm:py-2">
+                  <Button className="w-full bg-[#F4E3B2] text-rose-900 text-sm sm:text-base py-2 sm:py-2">
                     View Deal
                   </Button>
                 </Link>
