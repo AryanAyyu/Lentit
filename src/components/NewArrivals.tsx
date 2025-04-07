@@ -63,11 +63,11 @@ const NewArrivals = () => {
   }, []);
 
   return (
-    <section className="py-8 px-4 bg-muted"> {/* Reduced from py-16/px-6 */}
+    <section className="py-8 px-4 bg-[#F4E3B2]"> {/* Reduced from py-16/px-6 */}
       <div className="container mx-auto">
         {/* Header Section - spacing reduced from mb-8/mb-12 */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <div>
+          <div className="flex justify-center flex-col">
             <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900 mb-1 sm:mb-2">
               New Arrivals
             </h2>
@@ -75,16 +75,7 @@ const NewArrivals = () => {
               The latest premium fashion items now available for rent
             </p>
           </div>
-          <Link to="/category/all" className="w-full sm:w-auto">
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2"
-              size="sm"
-            >
-              View All
-              <ArrowRight size={16} />
-            </Button>
-          </Link>
+          
         </div>
         
         {/* Product Grid - gap reduced from gap-6 */}

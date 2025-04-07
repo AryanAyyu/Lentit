@@ -32,7 +32,7 @@ const WhyRent = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-pink-100 to-rose-100">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r bg-[#F4E3B2]">
       <div className="container mx-auto">
         <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div className="why-rent-item reveal-on-scroll">

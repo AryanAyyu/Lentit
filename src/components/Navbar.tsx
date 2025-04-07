@@ -25,6 +25,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Disclosure } from "@headlessui/react";
+import Logo from "./Logo";
 
 const productSuggestions = [
   "Elegant Silk Blouse",
@@ -44,12 +45,13 @@ const Navbar = () => {
     { id: 1, text: "Your item has been shipped!", read: false, time: "2 hours ago" }
   ]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [showLogo, setShowLogo] = useState(false);
   
   const isMobile = useIsMobile();
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
+  const isHomePage = location.pathname === '/';
+  const [showLogo, setShowLogo] = useState(!isHomePage);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -61,11 +63,18 @@ const Navbar = () => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 20;
       setIsScrolled(scrolled);
-      setShowLogo(scrolled);
+      if (isHomePage) {
+        setShowLogo(scrolled);
+      }
     };
+
+    if (!isHomePage) {
+      setShowLogo(true);
+    }
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -92,7 +101,6 @@ const Navbar = () => {
   const leftCategories = [
     { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
     { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
-
   ];
 
   const rightCategories = [
@@ -113,7 +121,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-white/90 backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
+        ? "bg-[#F4E3B2] backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
         : "bg-transparent py-5 text-[#F4E3B2]"
     }`}>
       {/* Desktop Navbar */}
@@ -123,7 +131,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost" className="flex items-center text-foreground mr-4 py-2">
+                <Button variant="ghost" className={`flex items-center text-foreground mr-4 py-2 ${
+                  isScrolled
+                  ? "bg-[#F4E3B2] text-[#74070E]"
+                  : "bg-transparent text-[#F4E3B2]"
+                }`}>
                   <MapPin size={16} className="mr-1" />
                   <span className="text-sm">{selectedLocation}</span>
                   <ChevronDown size={14} className="ml-1 opacity-70" />
@@ -133,7 +145,7 @@ const Navbar = () => {
                 <div className="space-y-1">
                   <h3 className="font-medium text-sm px-2 py-1.5">Select Location</h3>
                   <div className="border-t my-1" />
-                  {locations.map((location) => (
+                  {locations. map((location) => (
                     <Button
                       key={location}
                       variant="ghost"
@@ -201,11 +213,7 @@ const Navbar = () => {
 
           {/* Center Logo */}
           <div className="w-1/3 flex justify-center items-center">
-            {showLogo && (
-              <Link to="/" className="text-2xl font-bold">
-                <span className="text-[#74070E]"></span>
-              </Link>
-            )}
+            {showLogo && <Logo isSmall={isScrolled} className={isScrolled ? "ml-10" : ""} />}
           </div>
 
           {/* Right side */}
@@ -298,46 +306,50 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="container mx-auto px-4 flex items-center justify-between align-items-center">
-          
+          {/* Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(true)}
+            className=""
+          >
+            <Menu size={24} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
+          </button>
 
           {/* Centered Toggle */}
-          <div className="flex-1 flex justify-center px-2 ml-5">
-          <ToggleGroup 
-                type="single" 
-                value={serviceType}
-                onValueChange={(value) => {
-                  if (value) setServiceType(value as "renting" | "thrifting");
-                }}
-                className="border rounded-full mr-20"
+          <div className="flex-1 flex justify-center px-2 ">
+            <ToggleGroup 
+              type="single" 
+              value={serviceType}
+              onValueChange={(value) => {
+                if (value) setServiceType(value as "renting" | "thrifting");
+              }}
+              className="border rounded-full mr-20 "
+            >
+              <ToggleGroupItem 
+                value="renting" 
+                className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
-                <ToggleGroupItem 
-                  value="renting" 
-                  className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
-                >
-                  Renting
-                </ToggleGroupItem>
-                <ToggleGroupItem 
-                  value="thrifting" 
-                  className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
-                >
-                  Thrifting
-                </ToggleGroupItem>
-              </ToggleGroup>
+                Renting
+              </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="thrifting" 
+                className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
+              >
+                Thrifting
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
+            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300  ml-10 ${
               showLogo ? 'opacity-100' : 'opacity-0'
             }`}>
-              <Link to="/" className="text-xl font-bold">
-                <span className="text-[#74070E]"></span>
-              </Link>
+              <Logo isSmall={true} />
             </div>
           )}
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-0 ml-4">
+          <div className="flex items-center space-x-0 ">
             <Link to="/login" className="p-2 ml-3">
               <User size={20} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
             </Link>
@@ -345,28 +357,25 @@ const Navbar = () => {
           </div>
         </div>
 
-        
-
         {/* Mobile Menu - Full Screen Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[1000] bg-white">
+          <div className="fixed inset-0 z-[1000]">
             {/* Close Button - Fixed at top right */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed top-4 right-4 p-2 text-[#74070E] z-[1001]"
+              className="fixed top-5 left-3 p-2 text-[#74070E] z-[1001]"
             >
               <X size={24} />
             </button>
 
             {/* Menu Content - Scrollable container */}
-            <div className="h-full pt-16 pb-8 overflow-y-auto">
-              <div className="container mx-auto px-4">
-                {/* Location Selector */}
+            <div className="h-[100vh] w-[70vw] fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2] ">
+              <div className="container mx-auto px-4 mt-1 text-[#74070E]">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button variant="ghost" className="w-full justify-between mb-6">
-                      <div className="flex items-center">
-                        <MapPin size={16} className="mr-2" />
+                      <div className="flex items-center font-bold">
+                        <MapPin size={16} className="mr-2 font-bold" />
                         <span>{selectedLocation}</span>
                       </div>
                       <ChevronDown size={16} />
@@ -385,6 +394,7 @@ const Navbar = () => {
                     ))}
                   </PopoverContent>
                 </Popover>
+                {/* Location Selector */}
 
                 {/* Search */}
                 <button
@@ -403,9 +413,9 @@ const Navbar = () => {
                   {[...leftCategories, ...rightCategories].map((category, index) => (
                     <Disclosure key={index}>
                       {({ open }) => (
-                        <div className="border-b border-gray-100">
+                        <div className="border-b border-gray-700">
                           <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
-                            <span className="font-medium">{category.title}</span>
+                            <span className="font-bold">{category.title}</span>
                             <ChevronDown className={`transition-transform ${open ? 'rotate-180' : ''}`} />
                           </Disclosure.Button>
                           <Disclosure.Panel className="pl-4">
@@ -413,7 +423,7 @@ const Navbar = () => {
                               <Link
                                 key={idx}
                                 to="#"
-                                className="block py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                                className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 {item}
@@ -433,7 +443,11 @@ const Navbar = () => {
                     className="flex items-center py-3 px-4 rounded-lg hover:bg-gray-50"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Heart size={20} className="mr-3 text-[#74070E]" />
+                    <Heart size={20} className={`mr-3 text-[#74070E] ${
+                      isScrolled
+                      ? "bg-[#F4E3B2] text-[#74070E]"
+                  : "bg-transparent text-[#F4E3B2]"
+                    }`} />
                     <span>Wishlist ({wishlistItemCount})</span>
                   </Link>
                   <button className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50">

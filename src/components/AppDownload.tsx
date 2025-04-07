@@ -25,20 +25,20 @@ const AppDownload = () => {
   }, []);
 
   return (
-    <section className="app-section py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-stone-900 to-stone-700 text-white">
+    <section className="h-[100vh] app-section py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-stone-900 to-stone-700 text-white">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Content Section */}
           <div ref={appRef} className="order-2 lg:order-1">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight ">
               Download Our App For <span className="text-[#F4E3B2]">Enhanced Experience</span>
             </h2>
-            <p className="text-white/80 text-sm sm:text-base mb-6 sm:mb-8">
+            {/* <p className="text-white/80 text-sm sm:text-base mb-6 sm:mb-8">
               Enjoy a seamless rental experience with our mobile app. Browse, book, and manage your rentals on the go.
-            </p>
+            </p> */}
             
             {/* Features List */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 mt-10 leading-8">
               {[
                 {
                   icon: <SmartphoneNfc className="w-5 h-5 sm:w-6 sm:h-6 text-white" />,
@@ -62,7 +62,7 @@ const AppDownload = () => {
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-medium mb-1 sm:mb-2">{feature.title}</h3>
-                    <p className="text-white/80 text-xs sm:text-sm">
+                    <p className="text-white/80 text-md sm:text-sm">
                       {feature.description}
                     </p>
                   </div>
@@ -71,7 +71,7 @@ const AppDownload = () => {
             </div>
             
             {/* Download Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-row justify-between md:justify-evenly sm:flex-row gap-3">
               <Button className="bg-[#F4E3B2] hover:bg-[#E8D49E] text-[#74070E] gap-2 py-2 sm:py-2">
                 <Download size={16} className="shrink-0" />
                 <span>App Store</span>
@@ -86,11 +86,11 @@ const AppDownload = () => {
           {/* Image Section */}
           <div className="order-1 lg:order-2 relative lg:pl-8">
             <div className="bg-pink-300/40 w-48 h-48 sm:w-64 sm:h-64 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-            <div className="relative z-10 max-w-xs mx-auto">
+            <div className="relative md:flex md:justify-center z-10 max-w-xs mx-auto">
               <img 
                 src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                 alt="Mobile App" 
-                className="w-full shadow-2xl rounded-2xl sm:rounded-3xl border-4 sm:border-8 border-white/10"
+                className="hidden md:block shadow-2xl rounded-2xl sm:rounded-3xl border-4 sm:border-8 border-white/10"
                 loading="lazy"
               />
               

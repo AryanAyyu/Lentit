@@ -65,7 +65,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="py-10 sm:py-16 px-4 sm:px-6">
+    <section className="py-10 sm:py-16 px-4 sm:px-6 bg-[#F4E3B2]">
       <div className="container mx-auto">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-3 sm:mb-4 text-stone-900">Shop By Category</h2>
         <p className="text-center text-stone-600 text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl mx-auto">

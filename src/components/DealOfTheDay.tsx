@@ -69,7 +69,7 @@ const DealOfTheDay = () => {
   };
 
   return (
-    <section className="py-1 md:py-1 px-2 sm:px-2">
+    <section className="py-1 pb-10 px-2 sm:px-2 bg-[#F4E3B2]">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center  justify-evenly">
           <div ref={dealRef} className="reveal-on-scroll order-2 lg:order-1 sm:ml-20 ">
@@ -86,7 +86,7 @@ const DealOfTheDay = () => {
               This stunning designer evening gown is perfect for special occasions. Rent it now for a fraction of the retail price!
             </p>
             
-            <div className="flex gap-4 sm:gap-6 mb-6 md:mb-8">
+            <div className="flex gap-4 sm:gap-6 mb-6 md:mb-8 justify-center">
               <div className="flex flex-col items-center">
                 <div className="bg-muted w-12 h-12 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center text-stone-900 text-xl sm:text-2xl font-bold">
                   {formatTime(timeLeft.hours)}
