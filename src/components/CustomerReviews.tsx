@@ -96,13 +96,13 @@ const CustomerReviews = () => {
                   key={slideIndex} 
                   className="w-full flex-shrink-0"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 px-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 h-[100%] w-[100%]">
                     {reviews
                       .slice(slideIndex * itemsPerView, slideIndex * itemsPerView + itemsPerView)
                       .map((review) => (
                         <div
                           key={review.id}
-                          className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow h-full"
+                          className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow h-full"
                         >
                           <div className="flex items-center mb-4">
                             <img
@@ -123,7 +123,7 @@ const CustomerReviews = () => {
                               />
                             ))}
                           </div>
-                          <p className="text-gray-700">{review.text}</p>
+                          <p className="text-gray-700 text-sm md:text-base">{review.text}</p>
                         </div>
                       ))}
                   </div>

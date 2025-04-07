@@ -48,7 +48,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-b from-white to-pink-50">
+    <section className="py-16 px-6 bg-[#F4E3B2]">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-semibold text-rose-900 mb-4">How Lent-It Works</h2>
