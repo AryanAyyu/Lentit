@@ -121,7 +121,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-white/90 backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
+        ? "bg-[#F4E3B2] backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
         : "bg-transparent py-5 text-[#F4E3B2]"
     }`}>
       {/* Desktop Navbar */}
@@ -131,7 +131,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost" className="flex items-center text-foreground mr-4 py-2">
+                <Button variant="ghost" className={`flex items-center text-foreground mr-4 py-2 ${
+                  isScrolled
+                  ? "bg-[#F4E3B2] text-[#74070E]"
+                  : "bg-transparent text-[#F4E3B2]"
+                }`}>
                   <MapPin size={16} className="mr-1" />
                   <span className="text-sm">{selectedLocation}</span>
                   <ChevronDown size={14} className="ml-1 opacity-70" />
@@ -141,7 +145,7 @@ const Navbar = () => {
                 <div className="space-y-1">
                   <h3 className="font-medium text-sm px-2 py-1.5">Select Location</h3>
                   <div className="border-t my-1" />
-                  {locations.map((location) => (
+                  {locations. map((location) => (
                     <Button
                       key={location}
                       variant="ghost"
@@ -355,24 +359,23 @@ const Navbar = () => {
 
         {/* Mobile Menu - Full Screen Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[1000] bg-white">
+          <div className="fixed inset-0 z-[1000]">
             {/* Close Button - Fixed at top right */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed top-4 right-4 p-2 text-[#74070E] z-[1001]"
+              className="fixed top-5 left-3 p-2 text-[#74070E] z-[1001]"
             >
               <X size={24} />
             </button>
 
             {/* Menu Content - Scrollable container */}
-            <div className="h-full pt-16 pb-8 overflow-y-auto">
-              <div className="container mx-auto px-4">
-                {/* Location Selector */}
+            <div className="h-[100vh] w-[70vw] fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2] ">
+              <div className="container mx-auto px-4 mt-1 text-[#74070E]">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button variant="ghost" className="w-full justify-between mb-6">
-                      <div className="flex items-center">
-                        <MapPin size={16} className="mr-2" />
+                      <div className="flex items-center font-bold">
+                        <MapPin size={16} className="mr-2 font-bold" />
                         <span>{selectedLocation}</span>
                       </div>
                       <ChevronDown size={16} />
@@ -391,6 +394,7 @@ const Navbar = () => {
                     ))}
                   </PopoverContent>
                 </Popover>
+                {/* Location Selector */}
 
                 {/* Search */}
                 <button
@@ -409,9 +413,9 @@ const Navbar = () => {
                   {[...leftCategories, ...rightCategories].map((category, index) => (
                     <Disclosure key={index}>
                       {({ open }) => (
-                        <div className="border-b border-gray-100">
+                        <div className="border-b border-gray-700">
                           <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
-                            <span className="font-medium">{category.title}</span>
+                            <span className="font-bold">{category.title}</span>
                             <ChevronDown className={`transition-transform ${open ? 'rotate-180' : ''}`} />
                           </Disclosure.Button>
                           <Disclosure.Panel className="pl-4">
@@ -419,7 +423,7 @@ const Navbar = () => {
                               <Link
                                 key={idx}
                                 to="#"
-                                className="block py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                                className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 {item}
@@ -439,7 +443,11 @@ const Navbar = () => {
                     className="flex items-center py-3 px-4 rounded-lg hover:bg-gray-50"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Heart size={20} className="mr-3 text-[#74070E]" />
+                    <Heart size={20} className={`mr-3 text-[#74070E] ${
+                      isScrolled
+                      ? "bg-[#F4E3B2] text-[#74070E]"
+                  : "bg-transparent text-[#F4E3B2]"
+                    }`} />
                     <span>Wishlist ({wishlistItemCount})</span>
                   </Link>
                   <button className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50">
