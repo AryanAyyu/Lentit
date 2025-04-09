@@ -73,8 +73,8 @@ const CustomerReviews = () => {
   const transformValue = `translateX(-${currentIndex * 100}%)`;
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gray-50">
-      <div className="container mx-auto">
+    <section className="py-7 lg:py-10 px-4 sm:px-6 bg-gray-50">
+      <div className="mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-rose-900 mb-2">
             Customer Reviews

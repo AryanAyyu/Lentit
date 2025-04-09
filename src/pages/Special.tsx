@@ -264,7 +264,7 @@ const Special = () => {
       
       {/* Products Grid */}
       <section className="py-12 px-6 bg-gray-50">
-        <div className="container mx-auto">
+        <div className=" mx-auto">
             {products.length > 0 ? (
                 <div
                 ref={productsRef}

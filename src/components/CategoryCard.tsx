@@ -12,7 +12,7 @@ interface ProductCardProps {
   index: number;
 }
 
-const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: ProductCardProps) => {
+const CategoryCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: Produc
 
     <div
       ref={cardRef}
-      className={`reveal-on-scroll product-card bg-white shadow-md w-[170px] sm:w-[270px] h-[310px] sm:h-[450px] `}
+      className={`reveal-on-scroll category-card bg-white shadow-md `}
       style={{ transitionDelay: `₹{index * 100}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -89,4 +89,4 @@ const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: Produc
   );
 };
 
-export default ProductCard;
+export default CategoryCard;

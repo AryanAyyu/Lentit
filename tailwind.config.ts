@@ -146,5 +146,10 @@ export default {
       }
     }
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate")
+    // or if you prefer to hide scrollbars completely
+    // require("tailwind-scrollbar-hide"),
+  ],
+  
 } satisfies Config;

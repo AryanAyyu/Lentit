@@ -178,7 +178,7 @@ const ProductDetails = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16">
-      <div className="container mx-auto px-6">
+      <div className=" mx-auto px-6">
         {/* Breadcrumbs */}
         <div className="py-4">
           <nav className="flex" aria-label="Breadcrumb">

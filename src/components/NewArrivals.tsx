@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
@@ -32,74 +32,124 @@ const newArrivals = [
     price: 49.99,
     imageUrl: "https://plus.unsplash.com/premium_photo-1661308261387-9aca7336e9ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fFNpbGslMjBCb3clMjBUaWUlMjBTZXR8ZW58MHx8MHx8fDA%3D",
     hoverImageUrl: "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
+  },
+  {
+    id: 505,
+    name: "Leather Handbag",
+    price: 79.99,
+    imageUrl: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80",
+    hoverImageUrl: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&auto=format&fit=crop&w=738&q=80"
+  },
+  {
+    id: 506,
+    name: "Cashmere Scarf",
+    price: 59.99,
+    imageUrl: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+    hoverImageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=80"
+  },
+  {
+    id: 507,
+    name: "Silk Blouse",
+    price: 69.99,
+    imageUrl: "https://images.unsplash.com/photo-1539533018447-63fcce2678e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+    hoverImageUrl: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80"
+  },
+  {
+    id: 508,
+    name: "Wool Coat",
+    price: 89.99,
+    imageUrl: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80",
+    hoverImageUrl: "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
   }
 ];
 
 const NewArrivals = () => {
-  const arrivalsRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      }
-    );
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -300,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-    const elements = document.querySelectorAll(".new-arrival-item");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 300,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
-    <section className="py-8 px-4 bg-[#F4E3B2]"> {/* Reduced from py-16/px-6 */}
-      <div className="container mx-auto">
-        {/* Header Section - spacing reduced from mb-8/mb-12 */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <div className="flex justify-center flex-col">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900 mb-1 sm:mb-2">
+    <section className="py-3 px-4 bg-[#F4E3B2]">
+      <div className="max-w-9xl mx-auto">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900">
               New Arrivals
             </h2>
-            <p className="text-foreground/70 text-sm sm:text-base max-w-md">
+            <p className="text-foreground/70 text-sm sm:text-base text-center sm:text-left">
               The latest premium fashion items now available for rent
             </p>
           </div>
-          
-        </div>
-        
-        {/* Product Grid - gap reduced from gap-6 */}
-        <div
-          ref={arrivalsRef}
-          className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
-        >
-          {newArrivals.map((product, index) => (
-            <div
-              key={product.id}
-              className="new-arrival-item"
-              style={{ transitionDelay: `${index * 100}ms` }}
+          <Link to="/category/all" className="hidden sm:block">
+            <Button
+              variant="outline"
+              className="border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2"
+              size="sm"
             >
-              <ProductCard
-                {...product}
-                index={index}
-                className="hover:shadow-md transition-shadow duration-300"
-              />
-            </div>
-          ))}
+              View All Arrivals
+              <ArrowRight size={16} />
+            </Button>
+          </Link>
         </div>
 
-        {/* Mobile View All Button - spacing reduced from mt-8 */}
-        <div className="mt-6 sm:hidden text-center">
+        <div className="relative">
+          {/* Scroll buttons for desktop */}
+          <button 
+            onClick={scrollLeft}
+            className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-50"
+            aria-label="Scroll left"
+          >
+            <ArrowRight className="w-5 h-5 rotate-180 text-rose-900" />
+          </button>
+          
+          {/* Scrollable container */}
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-auto whitespace-nowrap pb-4 scrollbar-hide"
+          >
+            <div className="inline-flex gap-4 sm:gap-24">
+              {newArrivals.map((product) => (
+                <div 
+                  key={product.id}
+                  className="inline-block w-[200px] sm:w-[220px] flex-shrink-0"
+                >
+                  <ProductCard
+                    {...product}
+                    className="hover:shadow-md transition-shadow duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Scroll buttons for desktop */}
+          <button 
+            onClick={scrollRight}
+            className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-50"
+            aria-label="Scroll right"
+          >
+            <ArrowRight className="w-5 h-5 text-rose-900" />
+          </button>
+        </div>
+
+        {/* Mobile View All Button */}
+        <div className="mt-3 sm:hidden text-center">
           <Link to="/category/all">
             <Button
               variant="outline"

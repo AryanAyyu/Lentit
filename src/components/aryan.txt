@@ -195,44 +195,29 @@ const Index = () => {
         <CustomerReviews />
         
         {/* Featured Products */}
-        {/* Featured Products - Horizontal Scroll */}
-        <section className="py-2 px-2 sm:px-6 lg:px-8 bg-white">
+        <section className="py-8 px-6">
           <div className="mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-rose-900 mb-3">Featured Products</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover our curated selection of premium products, crafted with exceptional quality and timeless design.
-              </p>
+            <h2 className="text-3xl font-semibold text-center mb-4 text-rose-900">Featured Products</h2>
+            <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
+              Discover our curated selection of premium products, crafted with exceptional quality and timeless design.
+            </p>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-0">
+              {products.slice(0, visibleCount).map((product, index) => (
+                <ProductCard key={product.id} {...product} index={index} />
+              ))}
             </div>
-
-            <div className="relative group">
-              {/* Left scroll indicator (fades in when scrollable) */}
-              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Product scroll container */}
-              <div 
-                className="flex overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide gap-1 sm:gap-4"
-                style={{
-                  scrollSnapType: 'x mandatory',
-                  scrollPadding: '0 1rem'
-                }}
-              >
-                {products.map((product) => (
-                  <div 
-                    key={product.id}
-                    className="flex-shrink-0 w-60 sm:w-80 snap-start"
-                  >
-                    <ProductCard 
-                      {...product}
-                      className="h-full"
-                    />
-                  </div>
-                ))}
+            
+            {products.length > 5 && (
+              <div className="text-center mt-12">
+                <button
+                  onClick={toggleProducts}
+                  className="bg-[#F4E3B2] text-[#74070E] px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md active:transform active:scale-95"
+                >
+                  {isExpanded ? "View Less" : "View All Products"}
+                </button>
               </div>
-              
-              {/* Right scroll indicator (always visible if scrollable) */}
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l z-10 pointer-events-none" />
-            </div>
+            )}
           </div>
         </section>
         

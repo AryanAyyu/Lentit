@@ -1,20 +1,19 @@
-
 import { useEffect, useRef } from "react";
 import { Search, CreditCard, PackageOpen } from "lucide-react";
 
 const steps = [
   {
-    icon: <Search className="w-12 h-12 text-stone-500" />,
+    icon: <Search className="w-8 h-8 sm:w-12 sm:h-12 text-white" />,
     title: "Browse & Reserve",
     description: "Browse our extensive collection and select the perfect items for your occasion"
   },
   {
-    icon: <CreditCard className="w-12 h-12 text-stone-500" />,
+    icon: <CreditCard className="w-8 h-8 sm:w-12 sm:h-12 text-white" />,
     title: "Pay & Schedule Delivery",
     description: "Choose your rental period and delivery date that suits your needs"
   },
   {
-    icon: <PackageOpen className="w-12 h-12 text-stone-500" />,
+    icon: <PackageOpen className="w-8 h-8 sm:w-12 sm:h-12 text-white" />,
     title: "Wear & Return",
     description: "Enjoy your premium items and return them using our prepaid packaging when you're done"
   }
@@ -48,32 +47,47 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-[#F4E3B2]">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-semibold text-rose-900 mb-4">How Lent-It Works</h2>
-          <p className="text-foreground/70 max-w-xl mx-auto">
+    <section className="py-5 sm:py-8 px-4 sm:px-6 bg-[#F4E3B2]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900 mb-3 sm:mb-4">How Lent-It Works</h2>
+          <p className="text-foreground/70 max-w-xl mx-auto text-sm sm:text-base">
             Renting premium fashion has never been easier. Our simple three-step process ensures a seamless experience.
           </p>
         </div>
         
-        <div ref={stepsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-8 flex-wrap justify-center ">
+        <div ref={stepsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="step-item reveal-on-scroll flex flex-col items-center text-center"
+              className="step-item reveal-on-scroll"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="bg-pink-100 p-6 rounded-full mb-6 relative">
-                <div className="absolute inset-0 bg-pink-200/50 rounded-full transform scale-110 animate-pulse-subtle" />
-                {step.icon}
+              {/* Mobile layout - side by side */}
+              <div className="sm:hidden flex items-start gap-4 mb-4">
+                <div className="bg-rose-900 p-3 rounded-full relative shrink-0">
+                  <div className="absolute inset-0 bg-pink-200/50 rounded-full transform scale-110 animate-pulse-subtle" />
+                  {step.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-slate-800 mt-1">{step.title}</h3>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md flex-1 w-full">
+
+              {/* Desktop layout - stacked */}
+              <div className="hidden sm:flex flex-col items-center text-center">
+                <div className="bg-rose-900 p-6 rounded-full mb-6 relative">
+                  <div className="absolute inset-0 bg-pink-200/50 rounded-full transform scale-110 animate-pulse-subtle" />
+                  {step.icon}
+                </div>
                 <h3 className="text-xl font-semibold text-slate-800 mb-3">{step.title}</h3>
-                <p className="text-foreground/70">{step.description}</p>
               </div>
+
+              {/* Description (same for both) */}
+              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                <p className="text-foreground/70 text-sm sm:text-base">{step.description}</p>
+              </div>
+
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/3">
+                <div className="hidden sm:block absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/3">
                   <ArrowRight className="w-8 h-8 text-rose-900" />
                 </div>
               )}
@@ -85,7 +99,6 @@ const HowItWorks = () => {
   );
 };
 
-// This component doesn't exist in the file, let's create an ArrowRight component to use
 const ArrowRight = ({ className = "" }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 

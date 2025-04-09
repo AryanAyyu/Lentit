@@ -61,7 +61,7 @@ const Navbar = () => {
   // Scroll effects
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY > 20;
+      const scrolled = window.scrollY > 100;
       setIsScrolled(scrolled);
       if (isHomePage) {
         setShowLogo(scrolled);
@@ -126,7 +126,7 @@ const Navbar = () => {
     }`}>
       {/* Desktop Navbar */}
       <div className="hidden md:block">
-        <div className="container mx-auto px-6 flex items-center justify-between">
+        <div className="container mx-auto px-6 flex items-center justify-between ">
           {/* Left side */}
           <div className="flex items-center">
             <Popover>
@@ -341,7 +341,7 @@ const Navbar = () => {
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300  ml-10 ${
+            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out  ml-10 ${
               showLogo ? 'opacity-100' : 'opacity-0'
             }`}>
               <Logo isSmall={true} />
