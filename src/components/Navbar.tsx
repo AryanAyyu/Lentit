@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   Menu, X, ChevronDown, ShoppingBag, User, Heart, Search, MapPin, Bell 
@@ -27,24 +27,38 @@ import {
 import { Disclosure } from "@headlessui/react";
 import Logo from "./Logo";
 
+type ServiceType = "renting" | "thrifting";
+type Notification = {
+  id: number;
+  text: string;
+  read: boolean;
+  time: string;
+};
+type Category = {
+  title: string;
+  submenu: string[];
+};
+
 const productSuggestions = [
   "Elegant Silk Blouse",
   "Premium Denim Jeans",
   "Classic Cashmere Sweater"
 ];
 
+const serviceRoutes: Record<ServiceType, string> = {
+  renting: "/",
+  thrifting: "/thrift"
+};
+
 const Navbar = () => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [serviceType, setServiceType] = useState<"renting" | "thrifting">("renting");
-  const [selectedLocation, setSelectedLocation] = useState("New Delhi");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [notifications, setNotifications] = useState([
+  const [notifications, setNotifications] = useState<Notification[]>([
     { id: 1, text: "Your item has been shipped!", read: false, time: "2 hours ago" }
   ]);
-  const [unreadCount, setUnreadCount] = useState(0);
   
   const isMobile = useIsMobile();
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -52,6 +66,29 @@ const Navbar = () => {
   const { itemCount: wishlistItemCount } = useWishlist();
   const isHomePage = location.pathname === '/';
   const [showLogo, setShowLogo] = useState(!isHomePage);
+
+  // Determine current service type based on route
+  const currentServiceType = location.pathname === '/thrift' ? 'thrifting' : 'renting';
+  const [selectedLocation, setSelectedLocation] = useState("New Delhi");
+
+  // Categories data
+  const leftCategories: Category[] = [
+    { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
+    { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
+  ];
+
+  const rightCategories: Category[] = [
+    { title: "Costumes", submenu: ["Indian Ethnic Costumes", "Japanese Kimono & Yukata","Superhero Costumes","Doctor, Nurse & Lab Coat Costumes","Police, Army & Firefighter Costumes","Halloween Costumes"] },
+    { title: "Accessories", submenu: ["Jewellery", "Watches","Sunglasses","Belts & Scarves","Bags","Bridal & Ethnic Accessories"] }
+  ];
+
+  const locations = ["Delhi", "Mumbai", "Bangalore"];
+
+  // Calculate unread notifications
+  const unreadCount = useMemo(
+    () => notifications.filter(n => !n.read).length,
+    [notifications]
+  );
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -82,12 +119,6 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  // Notification count
-  useEffect(() => {
-    const count = notifications.filter(n => !n.read).length;
-    setUnreadCount(count);
-  }, [notifications]);
-
   const markAsRead = (id: number) => {
     setNotifications(notifications.map(n => 
       n.id === id ? { ...n, read: true } : n
@@ -98,24 +129,19 @@ const Navbar = () => {
     setNotifications(notifications.map(n => ({ ...n, read: true })));
   };
 
-  const leftCategories = [
-    { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
-    { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
-  ];
-
-  const rightCategories = [
-    { title: "Costumes", submenu: ["Indian Ethnic Costumes", "Japanese Kimono & Yukata","Superhero Costumes","Doctor, Nurse & Lab Coat Costumes","Police, Army & Firefighter Costumes","Halloween Costumes"] },
-    { title: "Accessories", submenu: ["Jewellery", "Watches","Sunglasses","Belts & Scarves","Bags","Bridal & Ethnic Accessories"] }
-  ];
-
-  const locations = ["Delhi", "Mumbai", "Bangalore"];
-
   const handleLinkHover = (index: number) => {
     dropdownRefs.current.forEach((ref, i) => {
       if (i !== index && ref) {
         ref.classList.remove("hover:opacity-100", "hover:visible", "hover:translate-y-0");
       }
     });
+  };
+
+  const handleServiceChange = (value: ServiceType) => {
+    navigate(serviceRoutes[value]);
+    if (isMobile) {
+      setMobileMenuOpen(false);
+    }
   };
 
   return (
@@ -126,7 +152,7 @@ const Navbar = () => {
     }`}>
       {/* Desktop Navbar */}
       <div className="hidden md:block">
-        <div className="container mx-auto px-6 flex items-center justify-between ">
+        <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left side */}
           <div className="flex items-center">
             <Popover>
@@ -145,7 +171,7 @@ const Navbar = () => {
                 <div className="space-y-1">
                   <h3 className="font-medium text-sm px-2 py-1.5">Select Location</h3>
                   <div className="border-t my-1" />
-                  {locations. map((location) => (
+                  {locations.map((location) => (
                     <Button
                       key={location}
                       variant="ghost"
@@ -162,10 +188,8 @@ const Navbar = () => {
             <div className="mr-6">
               <ToggleGroup 
                 type="single" 
-                value={serviceType}
-                onValueChange={(value) => {
-                  if (value) setServiceType(value as "renting" | "thrifting");
-                }}
+                value={currentServiceType}
+                onValueChange={(value) => handleServiceChange(value as ServiceType)}
                 className="border rounded-full"
               >
                 <ToggleGroupItem 
@@ -315,14 +339,12 @@ const Navbar = () => {
           </button>
 
           {/* Centered Toggle */}
-          <div className="flex-1 flex justify-center px-2 ">
+          <div className="flex-1 flex justify-center px-2">
             <ToggleGroup 
               type="single" 
-              value={serviceType}
-              onValueChange={(value) => {
-                if (value) setServiceType(value as "renting" | "thrifting");
-              }}
-              className="border rounded-full mr-20 "
+              value={currentServiceType}
+              onValueChange={(value) => handleServiceChange(value as ServiceType)}
+              className="border rounded-full mr-20"
             >
               <ToggleGroupItem 
                 value="renting" 
@@ -341,7 +363,7 @@ const Navbar = () => {
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out  ml-10 ${
+            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out ml-10 ${
               showLogo ? 'opacity-100' : 'opacity-0'
             }`}>
               <Logo isSmall={true} />
@@ -349,7 +371,7 @@ const Navbar = () => {
           )}
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-0 ">
+          <div className="flex items-center space-x-0">
             <Link to="/login" className="p-2 ml-3">
               <User size={20} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
             </Link>
@@ -369,7 +391,7 @@ const Navbar = () => {
             </button>
 
             {/* Menu Content - Scrollable container */}
-            <div className="h-[100vh] w-[70vw] fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2] ">
+            <div className="h-[100vh] w-[70vw] fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2]">
               <div className="container mx-auto px-4 mt-1 text-[#74070E]">
                 <Popover>
                   <PopoverTrigger asChild>
@@ -394,7 +416,29 @@ const Navbar = () => {
                     ))}
                   </PopoverContent>
                 </Popover>
-                {/* Location Selector */}
+
+                {/* Service Type Toggle (Mobile) */}
+                <div className="mb-6">
+                  <ToggleGroup 
+                    type="single" 
+                    value={currentServiceType}
+                    onValueChange={(value) => handleServiceChange(value as ServiceType)}
+                    className="border rounded-full w-full"
+                  >
+                    <ToggleGroupItem 
+                      value="renting" 
+                      className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
+                    >
+                      Renting
+                    </ToggleGroupItem>
+                    <ToggleGroupItem 
+                      value="thrifting" 
+                      className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
+                    >
+                      Thrifting
+                    </ToggleGroupItem>
+                  </ToggleGroup>
+                </div>
 
                 {/* Search */}
                 <button
@@ -443,11 +487,7 @@ const Navbar = () => {
                     className="flex items-center py-3 px-4 rounded-lg hover:bg-gray-50"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Heart size={20} className={`mr-3 text-[#74070E] ${
-                      isScrolled
-                      ? "bg-[#F4E3B2] text-[#74070E]"
-                  : "bg-transparent text-[#F4E3B2]"
-                    }`} />
+                    <Heart size={20} className="mr-3 text-[#74070E]" />
                     <span>Wishlist ({wishlistItemCount})</span>
                   </Link>
                   <button className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50">

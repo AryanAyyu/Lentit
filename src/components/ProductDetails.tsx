@@ -25,66 +25,62 @@ import { cn } from "@/lib/utils";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 
-// Mock product data
-const productData = {
-  id: 1,
-  name: "Premium Navy Suit",
-  price: 29.99, // Price per day
-  securityDeposit: 99.99,
-  description: "This premium Premium Navy Suit is perfect for special occasions, formal events, or professional settings. Crafted with high-quality materials for comfort and style.\n\nWhen you rent with LENT-IT, you're not just saving money, you're also making an environmentally conscious choice by reducing waste and supporting sustainable fashion practices.",
-  features: [
-    "Premium quality materials and craftsmanship",
-    "Perfect fit with multiple size options",
-    "Professionally cleaned and sanitized between each rental",
-    "Delivered in protective packaging",
-    "Easy returns - we handle all logistics"
-  ],
-  rentalProcess: [
-    "Select your product and rental duration",
-    "Choose your delivery and return dates",
-    "Pay the rental fee and security deposit",
-    "Receive your freshly cleaned item",
-    "Return using our prepaid shipping method",
-    "Receive your security deposit back after successful return"
-  ],
-  specifications: [
-    { name: "Material", value: "Wool Blend" },
-    { name: "Color", value: "Navy Blue" },
-    { name: "Care", value: "Dry Clean Only" },
-    { name: "Fit", value: "Regular" },
-    { name: "Pieces", value: "2 (Jacket & Trousers)" }
-  ],
-  reviews: [
-    { id: 1, author: "Michael K.", rating: 5, text: "Perfect fit and excellent quality. Arrived on time and in perfect condition.", date: "2 weeks ago" },
-    { id: 2, author: "Sarah T.", rating: 4, text: "Great suit, looked very professional for my interview. Return process was easy.", date: "1 month ago" },
-    { id: 3, author: "David R.", rating: 5, text: "Saved so much money by renting this suit for a one-time event. Will definitely use LENT-IT again!", date: "2 months ago" }
-  ],
-  colors: [
-    { name: "Navy", value: "#1a2b4d" },
-    { name: "Charcoal", value: "#333333" },
-    { name: "Black", value: "#000000" }
-  ],
-  sizes: ["XS", "S", "M", "L", "XL"],
-  images: [
-    "https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
-    "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
-    "https://images.unsplash.com/photo-1582142306909-195724d0b8d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
-    "https://images.unsplash.com/photo-1583846783214-7229a91b20ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80"
-  ],
-  recommended: [
-    {id: 101, name: "Designer Bow Tie", price: 5.99, imageUrl: "https://images.unsplash.com/photo-1607027382291-a225a312d6d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"},
-    {id: 102, name: "Premium Watch", price: 15.99, imageUrl: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"},
-    {id: 103, name: "Luxury Evening Suit", price: 34.99, imageUrl: "https://images.unsplash.com/photo-1627651055994-e3a4aa0419a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=749&q=80"}
-  ]
+// Mock product data - this would normally come from an API
+const getProductData = (category: string, subcategory: string, productId: string) => {
+  // In a real app, you would fetch this data based on the params
+  return {
+    id: productId,
+    name: "Premium Navy Suit",
+    price: 29.99,
+    securityDeposit: 99.99,
+    description: `This premium Premium Navy Suit from ${category}/${subcategory} collection is perfect for special occasions.`,
+    features: [
+      "Premium quality materials and craftsmanship",
+      "Perfect fit with multiple size options",
+      "Professionally cleaned and sanitized",
+    ],
+    rentalProcess: [
+      "Select your product and rental duration",
+      "Choose your delivery and return dates",
+      "Pay the rental fee and security deposit",
+    ],
+    specifications: [
+      { name: "Material", value: "Wool Blend" },
+      { name: "Color", value: "Navy Blue" },
+      { name: "Care", value: "Dry Clean Only" },
+    ],
+    reviews: [
+      { id: 1, author: "Michael K.", rating: 5, text: "Perfect fit and excellent quality.", date: "2 weeks ago" },
+    ],
+    colors: [
+      { name: "Navy", value: "#1a2b4d" },
+      { name: "Charcoal", value: "#333333" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    images: [
+      "https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80",
+    ],
+    recommended: [
+      {id: "101", name: "Designer Bow Tie", price: 5.99, imageUrl: "https://plus.unsplash.com/premium_photo-1723924810262-c67a0950f311?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"},
+      {id: "102", name: "Premium Watch", price: 15.99, imageUrl: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"},
+    ]
+  };
 };
 
 const ProductDetails = () => {
-  const { id } = useParams<{ id: string }>();
+  const { category, subcategory, productId } = useParams<{ 
+    category: string; 
+    subcategory: string;
+    productId: string 
+  }>();
+  
+  const productData = getProductData(category || '', subcategory || '', productId || '');
+  
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [isWishlist, setIsWishlist] = useState(false);
   const [isTryOn, setIsTryOn] = useState(false);
   const [startDate, setStartDate] = useState<Date | undefined>(addDays(new Date(), 1));
   const [endDate, setEndDate] = useState<Date | undefined>(addDays(new Date(), 3));
@@ -93,43 +89,25 @@ const ProductDetails = () => {
   
   const { addToCart } = useCart();
   const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
-  const isItemInWishlist = id ? isInWishlist(parseInt(id)) : false;
+  const isItemInWishlist = isInWishlist(productData.id);
 
-  // Calculate the rental duration and total cost
   const rentalDays = startDate && endDate 
     ? Math.max(1, Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)))
     : 1;
   
   const rentalFee = productData.price * rentalDays;
-  const securityDeposit = productData.securityDeposit;
-  const totalCost = rentalFee + securityDeposit;
+  const totalCost = rentalFee + productData.securityDeposit;
 
   useEffect(() => {
-    // Simulate loading of data
     window.scrollTo(0, 0);
-    const timeout = setTimeout(() => {
-      setIsInView(true);
-    }, 300);
-
+    const timeout = setTimeout(() => setIsInView(true), 300);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [category, subcategory, productId]);
 
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const decreaseQuantity = () => quantity > 1 && setQuantity(quantity - 1);
+  const increaseQuantity = () => setQuantity(quantity + 1);
+  const handleTryOn = () => setIsTryOn(!isTryOn);
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  // Virtual try on function
-  const handleTryOn = () => {
-    setIsTryOn(!isTryOn);
-  };
-
-  // Add to cart function
   const handleAddToCart = () => {
     if (!selectedSize) {
       toast.error("Please select a size before adding to cart");
@@ -141,10 +119,6 @@ const ProductDetails = () => {
       return;
     }
     
-    const rentalDays = startDate && endDate 
-      ? Math.max(1, Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)))
-      : 1;
-    
     addToCart({
       id: productData.id,
       name: productData.name,
@@ -153,16 +127,17 @@ const ProductDetails = () => {
       size: selectedSize,
       color: selectedColor.name,
       imageUrl: productData.images[0],
-      startDate: startDate || new Date(),
-      endDate: endDate || addDays(new Date(), 1),
+      startDate: startDate,
+      endDate: endDate,
       rentalDays: rentalDays,
-      securityDeposit: productData.securityDeposit
+      securityDeposit: productData.securityDeposit,
+      category: category || '',
+      subcategory: subcategory || ''
     });
     
     toast.success("Added to cart successfully!");
   };
 
-  // Toggle wishlist
   const toggleWishlist = () => {
     if (isItemInWishlist) {
       removeFromWishlist(productData.id);
@@ -171,14 +146,16 @@ const ProductDetails = () => {
         id: productData.id,
         name: productData.name,
         price: productData.price,
-        imageUrl: productData.images[0]
+        imageUrl: productData.images[0],
+        category: category || '',
+        subcategory: subcategory || ''
       });
     }
   };
 
   return (
     <div className="min-h-screen pt-20 pb-16">
-      <div className=" mx-auto px-6">
+      <div className="mx-auto px-6 lg:pt-10">
         {/* Breadcrumbs */}
         <div className="py-4">
           <nav className="flex" aria-label="Breadcrumb">
@@ -191,8 +168,16 @@ const ProductDetails = () => {
               <li>
                 <div className="flex items-center">
                   <ChevronRight className="w-4 h-4 text-foreground/50" />
-                  <Link to="/collections" className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee">
-                    Collections
+                  <Link to={`/category/${category}`} className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee">
+                    {category}
+                  </Link>
+                </div>
+              </li>
+              <li>
+                <div className="flex items-center">
+                  <ChevronRight className="w-4 h-4 text-foreground/50" />
+                  <Link to={`/products/${category}/${subcategory}`} className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee">
+                    {subcategory}
                   </Link>
                 </div>
               </li>
@@ -208,6 +193,7 @@ const ProductDetails = () => {
           </nav>
         </div>
 
+        {/* Product Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
           {/* Product Images */}
           <div className={`space-y-4 transition-all duration-700 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[-20px]'}`}>
@@ -216,7 +202,7 @@ const ProductDetails = () => {
                 <div className="absolute inset-0 z-10 bg-black/70 flex items-center justify-center">
                   <div className="text-center p-6 max-w-md">
                     <h3 className="text-xl font-semibold text-white mb-4">Virtual Try-On Mode</h3>
-                    <p className="text-white/80 mb-6">Use your camera to see how this item would look on you. Please allow camera access when prompted.</p>
+                    <p className="text-white/80 mb-6">Use your camera to see how this item would look on you.</p>
                     <button
                       onClick={handleTryOn}
                       className="bg-vanilla hover:bg-vanilla/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300"
@@ -275,7 +261,6 @@ const ProductDetails = () => {
                         selected={startDate}
                         onSelect={(date) => {
                           setStartDate(date);
-                          // Auto-adjust end date to be at least one day after start date
                           if (date && (!endDate || date >= endDate)) {
                             setEndDate(addDays(date, 1));
                           }
@@ -320,7 +305,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Security Deposit (Refundable):</span>
-                  <span className="font-medium">₹{securityDeposit.toFixed(2)}</span>
+                  <span className="font-medium">₹{productData.securityDeposit.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold border-t pt-2 mt-2">
                   <span>Total:</span>
@@ -343,7 +328,6 @@ const ProductDetails = () => {
                     }`}
                     onClick={() => setSelectedColor(color)}
                     style={{ backgroundColor: color.value }}
-                    aria-label={`Select ${color.name} color`}
                   >
                     {selectedColor.name === color.name && (
                       <span className="text-white">✓</span>
@@ -371,9 +355,6 @@ const ProductDetails = () => {
                   </button>
                 ))}
               </div>
-              <a href="#" className="text-sm text-vanilla mt-2 inline-block">
-                Size Guide
-              </a>
             </div>
             
             {/* Quantity selector */}
@@ -383,7 +364,6 @@ const ProductDetails = () => {
                 <button
                   className="px-4 py-2 text-foreground/70 hover:text-foreground transition-colors"
                   onClick={decreaseQuantity}
-                  aria-label="Decrease quantity"
                 >
                   <Minus size={16} />
                 </button>
@@ -393,7 +373,6 @@ const ProductDetails = () => {
                 <button
                   className="px-4 py-2 text-foreground/70 hover:text-foreground transition-colors"
                   onClick={increaseQuantity}
-                  aria-label="Increase quantity"
                 >
                   <Plus size={16} />
                 </button>
@@ -423,12 +402,12 @@ const ProductDetails = () => {
                 className="border border-coffee text-coffee hover:bg-coffee/10 font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
                 onClick={toggleWishlist}
               >
-                <Heart className={`${isWishlist ? "fill-coffee" : ""}`} size={18} />
-                {isWishlist ? "Saved" : "Save"}
+                <Heart className={`${isItemInWishlist ? "fill-coffee" : ""}`} size={18} />
+                {isItemInWishlist ? "Saved" : "Save"}
               </button>
             </div>
             
-            {/* Shipping info - Modified to be side by side */}
+            {/* Shipping info */}
             <div className="border-t border-border pt-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-start space-x-3">
@@ -449,7 +428,7 @@ const ProductDetails = () => {
                   <Shield className="text-vanilla mt-1 flex-shrink-0" size={18} />
                   <div>
                     <h4 className="font-medium">Authenticity Guaranteed</h4>
-                    <p className="text-sm text-foreground/70">Quality assurance with every rental</p>
+                    <p className="text-sm text-foreground/70">Quality assurance</p>
                   </div>
                 </div>
               </div>
@@ -457,7 +436,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {/* Product details, specifications, and reviews tabs */}
+        {/* Product details tabs */}
         <div className="mt-16">
           <Tabs defaultValue="description" className="w-full" onValueChange={setActiveTab}>
             <TabsList className="w-full max-w-md mx-auto grid grid-cols-3">
@@ -555,9 +534,13 @@ const ProductDetails = () => {
         {/* Recommended Products */}
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-coffee mb-8">You may also like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {productData.recommended.map((product, index) => (
-              <Link key={product.id} to={`/product/${product.id}`} className="group">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {productData.recommended.map((product) => (
+              <Link 
+                key={product.id} 
+                to={`/product/${category}/${subcategory}/${product.id}`} 
+                className="group"
+              >
                 <div className="bg-muted/30 rounded-lg overflow-hidden">
                   <div className="aspect-[3/4] overflow-hidden">
                     <img 

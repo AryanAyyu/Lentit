@@ -1,24 +1,43 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 
 interface ProductCardProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   imageUrl: string;
   hoverImageUrl?: string;
   index: number;
+  category: string;
+  subcategory: string;
+  description?: string;
+  sizes?: string[];
+  colors?: string[];
+  rating?: number;
+  reviews?: number;
 }
 
-const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: ProductCardProps) => {
+const ProductCard = ({ 
+  id, 
+  name, 
+  price, 
+  imageUrl, 
+  hoverImageUrl, 
+  index, 
+  category,
+  subcategory,
+  description,
+  sizes,
+  colors,
+  rating,
+  reviews
+}: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,16 +65,17 @@ const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: Produc
   }, []);
 
   return (
-
     <div
       ref={cardRef}
-      className={`reveal-on-scroll product-card bg-white shadow-md w-[170px] sm:w-[270px] h-[310px] sm:h-[450px] `}
-      style={{ transitionDelay: `₹{index * 100}ms` }}
+      className={`reveal-on-scroll product-card bg-white shadow-md w-[170px] sm:w-[270px] h-[310px] sm:h-[450px]`}
+      style={{ transitionDelay: `${index * 100}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      
-      <Link to={`/product/₹{id}`} className="block overflow-hidden relative aspect-[3/4]">
+      <Link 
+        to={`/product/${category}/${subcategory}/${id}`} 
+        className="block overflow-hidden relative aspect-[3/4]"
+      >
         <div className="absolute top-4 right-4 z-20">
           <button
             onClick={(e) => {
@@ -84,6 +104,7 @@ const ProductCard = ({ id, name, price, imageUrl, hoverImageUrl, index }: Produc
       <div className="p-4">
         <h3 className="font-medium text-stone-900 mb-1 line-clamp-1">{name}</h3>
         <p className="text-rose-900 font-medium">₹{price.toFixed(2)}</p>
+        
       </div>
     </div>
   );
