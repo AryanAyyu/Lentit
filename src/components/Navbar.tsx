@@ -115,7 +115,7 @@ const Navbar = () => {
       if (i !== index && ref) {
         ref.classList.remove("hover:opacity-100", "hover:visible", "hover:translate-y-0");
       }
-    });
+    }); 
   };
 
   return (
