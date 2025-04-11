@@ -19,6 +19,7 @@ import Navbar from './Navbar';
 import Cart from './Cart';
 import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
+import Footer from './Footer';
 
 const IndividualProducts = () => {
   const location = useLocation();
@@ -287,7 +288,8 @@ const IndividualProducts = () => {
           </div>
         </div>
       </div>
-    </div>
+        </div>
+        <Footer/>
     </div>
   );
 };

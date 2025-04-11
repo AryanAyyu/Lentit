@@ -12,6 +12,7 @@ import { thriftStores } from '@/data/mockData';
 import Navbar from './Navbar';
 import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
+import Footer from './Footer';
 
 const ThriftStores = () => {
   const location = useLocation();
@@ -137,7 +138,8 @@ const ThriftStores = () => {
           </div>
         )}
       </div>
-      </div>
+        </div>
+        <Footer/>
     </div>
   );
 };

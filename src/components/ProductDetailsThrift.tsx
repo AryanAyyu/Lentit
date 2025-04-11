@@ -26,6 +26,7 @@ import { featuredProducts } from '../data/mockData';
 import Navbar from './Navbar';
 import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
+import Footer from './Footer';
 
 const ProductDetailsThrift = () => {
   const location = useLocation();
@@ -237,6 +238,7 @@ const ProductDetailsThrift = () => {
                 </div>
             </div>
         </div>
+        <Footer/>
     </div>
   );
 };

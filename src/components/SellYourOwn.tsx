@@ -25,6 +25,7 @@ import { Upload, ImagePlus, Tag, CheckCircle2, IndianRupee } from 'lucide-react'
 import Navbar from './Navbar';
 import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
+import Footer from './Footer';
 
 const MAX_FILE_SIZE = 5000000; // 5MB
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -161,6 +162,7 @@ const SellYourOwn = () => {
           </div>
         </div>
         </div>
+        <Footer />
         </div>
     );
   }
@@ -446,7 +448,8 @@ const SellYourOwn = () => {
           </Form>
         </div>
       </div>
-    </div>
+        </div>
+        <Footer />
     </div>
   );
 };

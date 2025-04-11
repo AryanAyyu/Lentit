@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { thriftStores } from '@/data/mockData';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const ThriftStoreDetails = () => {
   const location = useLocation();
@@ -181,8 +182,9 @@ const ThriftStoreDetails = () => {
           </div>
         )}
       </div>
-      </div>
-      </div>
+        </div>
+        <Footer/>
+    </div>
   );
 };
 
