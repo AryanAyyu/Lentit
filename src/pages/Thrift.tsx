@@ -16,6 +16,12 @@ import TopImage from "@/components/TopImage";
 import HomePage from "@/components/DownloadModal";
 import MobileMenu from "@/components/MobileMenu";
 import Footer from "@/components/Footer";
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle2, ArrowRight, ShoppingBag, Users, Tag, IndianRupee } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { thriftStores, featuredProducts } from '@/data/mockData';
 
 // Mock products data
 const products = [
@@ -78,6 +84,12 @@ const products = [
 ];
 
 const Thrift = () => {
+  const partneredStores = thriftStores.filter(store => store.isVerified).slice(0, 4);
+  const initialFeaturedProducts = featuredProducts.slice(0, 5);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  
+  const displayedProducts = showAllProducts ? featuredProducts.slice(0, 10) : initialFeaturedProducts;
+
   // Product visibility state
   const [visibleCount, setVisibleCount] = useState(4);
   const isExpanded = visibleCount >= products.length;
@@ -94,7 +106,7 @@ const Thrift = () => {
   const [unreadCount] = useState(2);
 
   // Categories and locations data
-  const locations = ["New York", "Los Angeles", "Chicago", "Miami", "Houston"];
+  const locations = ["Delhi", "Mumbai", "Kanpur", "Lucknow", "Kolkata"];
   
   const leftCategories = [
     {
@@ -126,8 +138,10 @@ const Thrift = () => {
   // Scroll effect and intersection observer
   useEffect(() => {
     const handleScroll = () => {
-      setShowNavbar(window.scrollY > 150);
+      setShowNavbar(window.scrollY > 100);
     };
+
+    window.scrollTo(0, 0);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -182,6 +196,160 @@ const Thrift = () => {
         <ScrollEffect />
         {/* <Hero /> */}
         <HomePage/>
+
+        {/* Category Section */}
+        <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-thrift-800">
+            How Would You Like to Shop?
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Buy from Individuals */}
+            <Link to="/thrift/individual-products" className="block">
+              <div className="category-card-thrift bg-gradient-to-br from-thrift-50 to-thrift-100 border border-thrift-200 hover:border-thrift-300">
+                <Users size={48} className="text-thrift-600" />
+                <h3 className="text-xl font-bold text-thrift-800">Buy from Individuals</h3>
+                <p className="text-thrift-600 mb-4">
+                  Browse unique pre-loved items sold directly by people like you.
+                </p>
+                <Button variant="secondary" className="mt-auto">
+                  Browse Items <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </Link>
+
+            {/* Shop Thrift Stores */}
+            <Link to="/thrift/thrift-stores" className="block">
+              <div className="category-card-thrift bg-gradient-to-br from-accent1-light to-accent1 border border-accent1 hover:border-accent1-dark">
+                <ShoppingBag size={48} className="text-accent1-dark" />
+                <h3 className="text-xl font-bold text-thrift-800">Shop Thrift Stores</h3>
+                <p className="text-thrift-600 mb-4">
+                  Discover curated collections from established thrift stores.
+                </p>
+                <Button variant="secondary" className="mt-auto">
+                  Find Stores <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </Link>
+
+            {/* Sell Your Own */}
+            <Link to="/thrift/sell" className="block">
+              <div className="category-card-thrift bg-gradient-to-br from-accent2-light to-accent2 border border-accent2 hover:border-accent2-dark">
+                <Tag size={48} className="text-white" />
+                <h3 className="text-xl font-bold text-thrift-800">Sell Your Own</h3>
+                <p className="text-thrift-600 mb-4">
+                  List your pre-loved clothing and accessories for others to discover.
+                </p>
+                <Button variant="secondary" className="mt-auto">
+                  Start Selling <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </Link>
+          </div>
+        </div>
+        </section>
+
+        {/* Partnered Thrift Stores Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-3xl font-bold text-thrift-800">
+              Partnered Thrift Stores
+            </h2>
+            <Link to="/thrift/thrift-stores">
+              <Button variant="outline" className="border-thrift-500 text-thrift-600">
+                View All Stores
+              </Button>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {partneredStores.map((store) => (
+              <Link to={`/thrift/thrift-stores/${store.id}`} key={store.id}>
+                <Card className="h-full store-card-thrift hover:border-thrift-300">
+                  <div className="h-48 bg-gray-200 relative">
+                    <img 
+                      src={store.image} 
+                      alt={store.name} 
+                      className="w-full h-full object-cover"
+                    />
+                    {store.isVerified && (
+                      <Badge className="absolute top-2 right-2 bg-thrift-600 text-white flex items-center gap-1">
+                        <CheckCircle2 className="h-3 w-3" /> Verified
+                      </Badge>
+                    )}
+                  </div>
+                  <CardContent className="pt-4">
+                    <h3 className="font-bold text-lg mb-1">{store.name}</h3>
+                    <p className="text-gray-500 text-sm mb-2">{store.location}</p>
+                    <div className="flex items-center">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className={i < Math.floor(store.rating) ? "text-yellow-400" : "text-gray-300"}>★</span>
+                        ))}
+                      </div>
+                      <span className="ml-2 text-sm text-gray-600">{store.rating.toFixed(1)}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-10 text-thrift-800">
+            Featured Products
+          </h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {displayedProducts.map((product) => (
+              <Link to={`/thrift/productthrift/${product.id}`} key={product.id}>
+                <Card className="product-card-thrift overflow-hidden">
+                  <div className="h-56 bg-gray-200 overflow-hidden">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-bold text-thrift-700 flex items-center">
+                        <IndianRupee className="h-3.5 w-3.5 mr-0.5" /> {product.price.toFixed(2)}
+                      </span>
+                      <span className="text-sm text-gray-500">{product.size}</span>
+                    </div>
+                    <p className="text-xs text-gray-500 truncate">Seller: {product.seller}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          
+          <div className="text-center mt-10">
+            {!showAllProducts ? (
+              <Button 
+                className="bg-teal-600 hover:bg-teal-700 text-white"
+                onClick={() => setShowAllProducts(true)}
+              >
+                View More Products
+              </Button>
+            ) : (
+              <Link to="/thrift/individual-products">
+                <Button className="bg-teal-600 hover:bg-teal-700 text-white">
+                  View All Products
+                </Button>
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
         
         <AppDownload />
 

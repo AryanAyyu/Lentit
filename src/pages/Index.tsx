@@ -94,7 +94,7 @@ const Index = () => {
   const [unreadCount] = useState(2);
 
   // Categories and locations data
-  const locations = ["New York", "Los Angeles", "Chicago", "Miami", "Houston"];
+  const locations = ["Delhi", "Mumbai", "Kanpur", "Lucknow", "Kolkata"];
   
   const leftCategories = [
     {

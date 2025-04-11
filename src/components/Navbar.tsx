@@ -68,27 +68,41 @@ const Navbar = () => {
   const [showLogo, setShowLogo] = useState(!isHomePage);
 
   // Determine current service type based on route
-  const currentServiceType = location.pathname === '/thrift' ? 'thrifting' : 'renting';
+  const currentServiceType = location.pathname.startsWith('/thrift') ? 'thrifting' : 'renting';
   const [selectedLocation, setSelectedLocation] = useState("New Delhi");
 
-  // Categories data
-  const leftCategories: Category[] = [
+  // Categories data for Renting
+  const rentingLeftCategories: Category[] = [
     { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
     { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
   ];
 
-  const rightCategories: Category[] = [
+  const rentingRightCategories: Category[] = [
     { title: "Costumes", submenu: ["Indian Ethnic Costumes", "Japanese Kimono & Yukata","Superhero Costumes","Doctor, Nurse & Lab Coat Costumes","Police, Army & Firefighter Costumes","Halloween Costumes"] },
     { title: "Accessories", submenu: ["Jewellery", "Watches","Sunglasses","Belts & Scarves","Bags","Bridal & Ethnic Accessories"] }
   ];
 
-  const locations = ["Delhi", "Mumbai", "Bangalore"];
+  // Categories data for Thrifting
+  const thriftingLeftCategories: Category[] = [
+    { title: "Buy Clothes", submenu: ["Men's Clothing", "Women's Clothing", "Kids"] },
+    { title: "Buy Accessories", submenu: [ "Accessories", "Footwear", "Vintage"] }
+  ];
+
+  const thriftingRightCategories: Category[] = [
+    { title: "Sell", submenu: ["List an Item", "My Listings", "Pricing", "Shipping Guide", "Seller Dashboard"] }
+  ];
+
+  const locations = ["Delhi", "Mumbai", "Kanpur", "Lucknow", "Kolkata"];
 
   // Calculate unread notifications
   const unreadCount = useMemo(
     () => notifications.filter(n => !n.read).length,
     [notifications]
   );
+
+  // Get the appropriate categories based on service type
+  const leftCategories = currentServiceType === 'thrifting' ? thriftingLeftCategories : rentingLeftCategories;
+  const rightCategories = currentServiceType === 'thrifting' ? thriftingRightCategories : rentingRightCategories;
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -207,67 +221,133 @@ const Navbar = () => {
               </ToggleGroup>
             </div>
 
-            <ul className="flex items-center space-x-6">
-              {leftCategories.map((category, index) => (
-                <li 
-                  key={index}
-                  ref={el => dropdownRefs.current[index] = el}
-                  className="group relative py-2"
-                  onMouseEnter={() => handleLinkHover(index)}
-                >
-                  <Link to="#" className="nav-link py-2 flex items-center">
-                    {category.title}
-                    <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
-                  </Link>
-                  <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                    <ul className="space-y-2">
-                      {category.submenu.map((item, idx) => (
-                        <li key={idx}>
-                          <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {/* Left Categories - Different layout for thrifting */}
+            {currentServiceType === 'thrifting' ? (
+              <div className="flex items-center gap-3"> {/* Reduced margin for thrifting */}
+                <ul className="flex items-center space-x-4"> {/* Reduced spacing */}
+                  {leftCategories.map((category, index) => (
+                    <li 
+                      key={index}
+                      ref={el => dropdownRefs.current[index] = el}
+                      className="group relative py-2 sm:ml-6"
+                      onMouseEnter={() => handleLinkHover(index)}
+                    >
+                      <Link to="#" className="nav-link py-2 flex items-center">
+                        {category.title}
+                        <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                      </Link>
+                      <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
+                        <ul className="space-y-2">
+                          {category.submenu.map((item, idx) => (
+                            <li key={idx}>
+                              <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                                {item}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <ul className="flex items-center space-x-6">
+                {leftCategories.map((category, index) => (
+                  <li 
+                    key={index}
+                    ref={el => dropdownRefs.current[index] = el}
+                    className="group relative py-2"
+                    onMouseEnter={() => handleLinkHover(index)}
+                  >
+                    <Link to="#" className="nav-link py-2 flex items-center">
+                      {category.title}
+                      <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                    </Link>
+                    <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
+                      <ul className="space-y-2">
+                        {category.submenu.map((item, idx) => (
+                          <li key={idx}>
+                            <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                              {item}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          {/* Center Logo */}
-          <div className="w-1/3 flex justify-center items-center">
+          {/* Center Logo - Adjusted width for thrifting */}
+          <div className={`flex justify-center items-center mr-10 ${
+            currentServiceType === 'thrifting' ? 'w-1/4' : 'w-1/3'
+          }`}>
             {showLogo && <Logo isSmall={isScrolled} className={isScrolled ? "ml-10" : ""} />}
           </div>
 
           {/* Right side */}
           <div className="flex items-center">
-            <ul className="flex items-center space-x-6 mr-6">
-              {rightCategories.map((category, index) => (
-                <li 
-                  key={index}
-                  ref={el => dropdownRefs.current[index + leftCategories.length] = el}
-                  className="group relative py-2"
-                  onMouseEnter={() => handleLinkHover(index + leftCategories.length)}
-                >
-                  <Link to="#" className="nav-link py-2 flex items-center">
-                    {category.title}
-                    <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
-                  </Link>
-                  <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                    <ul className="space-y-2">
-                      {category.submenu.map((item, idx) => (
-                        <li key={idx}>
-                          <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {/* Right Categories - Different layout for thrifting */}
+            {currentServiceType === 'thrifting' ? (
+              <div className="flex items-center mr-12"> {/* Reduced margin for thrifting */}
+                <ul className="flex items-center space-x-4"> {/* Reduced spacing */}
+                  {rightCategories.map((category, index) => (
+                    <li 
+                      key={index}
+                      ref={el => dropdownRefs.current[index + leftCategories.length] = el}
+                      className="group relative py-2"
+                      onMouseEnter={() => handleLinkHover(index + leftCategories.length)}
+                    >
+                      <Link to="#" className="nav-link py-2 flex items-center">
+                        {category.title}
+                        <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                      </Link>
+                      <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
+                        <ul className="space-y-2">
+                          {category.submenu.map((item, idx) => (
+                            <li key={idx}>
+                              <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                                {item}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <ul className="flex items-center space-x-6 mr-6">
+                {rightCategories.map((category, index) => (
+                  <li 
+                    key={index}
+                    ref={el => dropdownRefs.current[index + leftCategories.length] = el}
+                    className="group relative py-2"
+                    onMouseEnter={() => handleLinkHover(index + leftCategories.length)}
+                  >
+                    <Link to="#" className="nav-link py-2 flex items-center">
+                      {category.title}
+                      <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                    </Link>
+                    <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
+                      <ul className="space-y-2">
+                        {category.submenu.map((item, idx) => (
+                          <li key={idx}>
+                            <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                              {item}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             <button onClick={() => setIsSearchOpen(true)} className="mr-6">
               <Search size={20} />
