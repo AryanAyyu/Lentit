@@ -65,13 +65,12 @@ const Navbar = () => {
       setIsScrolled(scrolled);
       if (isHomePage) {
         setShowLogo(scrolled);
-      }
-    };
+    }
 
     if (!isHomePage) {
       setShowLogo(true);
     }
-    
+  }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
