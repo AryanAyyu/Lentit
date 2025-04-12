@@ -426,7 +426,7 @@ const SellYourOwn = () => {
               <div className="pt-4">
                 <Button 
                   type="submit"
-                  className="w-full bg-thrift-600 hover:bg-thrift-700 text-white"
+                  className="w-full bg-teal-600 hover:bg-teal-700 text-white"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

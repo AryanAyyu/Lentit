@@ -127,7 +127,7 @@ const ThriftStores = () => {
             <p className="text-gray-500">We couldn't find any stores matching your search criteria.</p>
             <Button 
               variant="link" 
-              className="text-thrift-600 mt-2"
+              className="text-teal-600 mt-2"
               onClick={() => {
                 setSearchTerm('');
                 setShowVerifiedOnly(false);
