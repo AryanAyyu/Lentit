@@ -7,6 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Special from "./Special";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CategoryCard from "@/components/CategoryCard";
 
 
 
@@ -346,13 +348,13 @@ const CategoryPage = () => {
   
 
   return (
-    <div className="min-h-screen">
-      <Navbar visible={false} />
+    <div className="min-h-screen ">
+      <Navbar  />
       
       {/* Category Header */}
       <div className="pt-28 pb-8 px-6 bg-muted">
         <div className="container mx-auto">
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-4 pt-10">
             <Link to="/" className="text-foreground/70 hover:text-vanilla transition-colors">
               Home
             </Link>
@@ -391,11 +393,11 @@ const CategoryPage = () => {
 
       {/* Products Grid */}
       <section className="py-12 px-6">
-        <div className="container mx-auto">
+        <div className=" mx-auto">
           {products.length > 0 ? (
             <div ref={productsRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product, index) => (
-                <ProductCard key={product.id} {...product} index={index} />
+                <CategoryCard key={product.id} {...product} index={index} />
               ))}
             </div>
           ) : (
@@ -411,6 +413,7 @@ const CategoryPage = () => {
           )}
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };

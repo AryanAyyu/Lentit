@@ -8,7 +8,6 @@ const ProductDetailsPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      {/* <Navbar visible={false} /> */}
       <ProductDetails />
       
       <Footer/>

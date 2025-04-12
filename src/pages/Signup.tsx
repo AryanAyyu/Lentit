@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -48,7 +49,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar visible={false} />
+      <Navbar />
       <div className="container mx-auto px-4 py-16 flex items-center justify-center mt-9">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
@@ -153,6 +154,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

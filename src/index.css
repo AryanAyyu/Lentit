@@ -102,7 +102,12 @@
 
   .product-card {
     @apply rounded-2xl overflow-hidden transition-all duration-300 ease-out
-           hover:shadow-xl hover:transform hover:scale-[1.02];
+           hover:shadow-xl hover:transform hover:scale-[1.02] ;
+  }
+
+  .category-card {
+    @apply rounded-2xl overflow-hidden transition-all duration-300 ease-out
+           hover:shadow-xl hover:transform hover:scale-[1.02] ;
   }
 
   .btn-primary {
@@ -125,6 +130,12 @@
     transform: translateY(-10px);
   }
 }
+@media (min-width: 1024px) {
+  .responsive-margin {
+    margin-right: calc(5vw - 1rem);
+  }
+}
+
 
 .animate-float {
   animation: float 6s infinite ease-in-out;
@@ -135,4 +146,25 @@
   text-align: center;
   max-width: 100%;
   padding: 0;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.category-card-thrift {
+  @apply flex flex-col items-center justify-center text-center gap-4 p-6 rounded-lg transition-all duration-300 hover:shadow-lg;
+}
+
+.product-card-thrift {
+  @apply bg-white rounded-lg overflow-hidden shadow transition-all duration-300 hover:shadow-md flex flex-col;
+}
+
+.store-card-thrift {
+  @apply bg-white rounded-lg overflow-hidden shadow transition-all duration-300 hover:shadow-md flex flex-col;
 }

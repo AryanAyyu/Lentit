@@ -16,6 +16,13 @@ import { CartProvider } from "./contexts/CartContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import Special from "./pages/Special";
+import Thrift from "./pages/Thrift";
+import ProductListing from "./components/ProductListing";
+import IndividualProducts from "./components/IndividualProducts";
+import ThriftStores from "./components/ThriftStore";
+import ThriftStoreDetails from "./components/ThriftStoreDetails";
+import SellYourOwn from "./components/SellYourOwn";
+import ProductDetailsThrift from "./components/ProductDetailsThrift";
 
 const queryClient = new QueryClient();
 
@@ -28,18 +35,25 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/category/:category" element={<CategoryPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/special/:category" element={<Special />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+            
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/thrift" element={<Thrift />} />
+              <Route path="/category/:category" element={<Special />} /> {/* Changed from CategoryPage to Special */}
+              <Route path="/products/:category/:subcategory" element={<ProductListing />} />
+              <Route path="/product/:category/:subcategory/:productId" element={<ProductDetails />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/thrift/individual-products" element={<IndividualProducts />} />
+              <Route path="/thrift/thrift-stores" element={<ThriftStores />} />
+              <Route path="/thrift/thrift-stores/:id" element={<ThriftStoreDetails />} />
+              <Route path="/thrift/productthrift/:id" element={<ProductDetailsThrift />} />
+              <Route path="/thrift/sell" element={<SellYourOwn />} />
+              {/* Remove the /special/:category route as it's redundant with /category/:category */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
             </BrowserRouter>
           </WishlistProvider>
         </CartProvider>
@@ -47,5 +61,4 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
 export default App;

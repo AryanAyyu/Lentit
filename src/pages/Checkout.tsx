@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import Footer from '@/components/Footer';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -118,7 +119,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen pt-16">
-      <Navbar visible={false} />
+      <Navbar />
       
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold mb-2 text-coffee">Checkout</h1>
@@ -400,6 +401,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
