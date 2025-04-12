@@ -197,7 +197,7 @@ const ProductDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
           {/* Product Images */}
           <div className={`space-y-4 transition-all duration-700 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[-20px]'}`}>
-            <div className="bg-muted/30 rounded-xl overflow-hidden aspect-[4/5] relative">
+            <div className="rounded-xl overflow-hidden aspect-[4/5] relative">
               {isTryOn && (
                 <div className="absolute inset-0 z-10 bg-black/70 flex items-center justify-center">
                   <div className="text-center p-6 max-w-md">
@@ -215,7 +215,7 @@ const ProductDetails = () => {
               <img
                 src={productData.images[selectedImage]}
                 alt={productData.name}
-                className="w-full h-full object-cover transition-all duration-500"
+                className="w-full h-full md:h-[80vh] object-cover transition-all duration-500"
               />
             </div>
             <div className="grid grid-cols-4 gap-2">
@@ -239,8 +239,8 @@ const ProductDetails = () => {
 
           {/* Product Info */}
           <div className={`transition-all duration-700 delay-200 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[20px]'}`}>
-            <h1 className="text-3xl font-semibold text-coffee mb-2">{productData.name}</h1>
-            <p className="text-xl text-vanilla mb-1">₹{productData.price} <span className="text-sm text-foreground/70">per day</span></p>
+            <h1 className="text-3xl font-semibold text-rose-900 mb-2">{productData.name}</h1>
+            <p className="text-xl text-rose-900 mb-1">₹{productData.price} <span className="text-sm text-foreground/70">per day</span></p>
             
             {/* Rental Duration Section */}
             <div className="mb-6 mt-4 bg-muted/30 p-4 rounded-lg">
@@ -309,7 +309,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex justify-between text-lg font-semibold border-t pt-2 mt-2">
                   <span>Total:</span>
-                  <span className="text-vanilla">₹{totalCost.toFixed(2)}</span>
+                  <span className="text-rose-900">₹{totalCost.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -383,7 +383,7 @@ const ProductDetails = () => {
             <div className="flex flex-wrap gap-4 mb-6">
               <button
                 onClick={handleTryOn}
-                className="flex items-center space-x-2 px-4 py-2 border border-vanilla text-vanilla rounded-md hover:bg-vanilla/10 transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 border border-rose-900 text-rose-900 rounded-md hover:bg-vanilla/10 transition-colors"
               >
                 <Eye size={18} />
                 <span>Try Me</span>
@@ -393,13 +393,13 @@ const ProductDetails = () => {
             {/* Action buttons */}
             <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3 mb-8">
               <button 
-                className="bg-coffee hover:bg-coffee/90 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
+                className="bg-rose-900 hover:bg-coffee/90 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
                 onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
               <button 
-                className="border border-coffee text-coffee hover:bg-coffee/10 font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
+                className="border border-rose-900 text-rose-900 hover:bg-coffee/10 font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
                 onClick={toggleWishlist}
               >
                 <Heart className={`${isItemInWishlist ? "fill-coffee" : ""}`} size={18} />
@@ -542,11 +542,11 @@ const ProductDetails = () => {
                 className="group"
               >
                 <div className="bg-muted/30 rounded-lg overflow-hidden">
-                  <div className="aspect-[3/4] overflow-hidden">
+                  <div className="overflow-hidden">
                     <img 
                       src={product.imageUrl} 
                       alt={product.name} 
-                      className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+                      className="w-full h-[35vh] object-cover transition-transform group-hover:scale-105 duration-500"
                     />
                   </div>
                   <div className="p-4">

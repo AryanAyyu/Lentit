@@ -1,17 +1,26 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+// import { useRouter } from "next/router";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { 
-  Menu, X, ChevronDown, ShoppingBag, User, Heart, Search, MapPin, Bell 
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ShoppingBag,
+  User,
+  Heart,
+  Search,
+  MapPin,
+  Bell,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import Cart from "@/components/Cart";
 import Wishlist from "@/components/Wishlist";
-import { 
+import {
   Popover,
   PopoverContent,
-  PopoverTrigger 
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -42,111 +51,186 @@ type Category = {
 const productSuggestions = [
   "Elegant Silk Blouse",
   "Premium Denim Jeans",
-  "Classic Cashmere Sweater"
+  "Classic Cashmere Sweater",
 ];
 
 const serviceRoutes: Record<ServiceType, string> = {
   renting: "/",
-  thrifting: "/thrift"
+  thrifting: "/thrift",
 };
 
 const Navbar = () => {
+  // const router = useRouter();
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
-    { id: 1, text: "Your item has been shipped!", read: false, time: "2 hours ago" }
+    {
+      id: 1,
+      text: "Your item has been shipped!",
+      read: false,
+      time: "2 hours ago",
+    },
   ]);
-  
+
   const isMobile = useIsMobile();
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === "/";
   const [showLogo, setShowLogo] = useState(!isHomePage);
 
   // Determine current service type based on route
-  const currentServiceType = location.pathname.startsWith('/thrift') ? 'thrifting' : 'renting';
+  const currentServiceType = location.pathname.startsWith("/thrift")
+    ? "thrifting"
+    : "renting";
   const [selectedLocation, setSelectedLocation] = useState("New Delhi");
 
   // Categories data for Renting
   const rentingLeftCategories: Category[] = [
-    { title: "Men", submenu: ["Sherwani", "Kurta & Pajama", "Ethnic Wear", "Ethnic Footwear","Suits & Blazers","Jackets"] },
-    { title: "Women", submenu: ["Lehengas", "Sarees", "Gowns","Jackets","Heels","Kurtis & Suit Sets"] }
+    {
+      title: "Men",
+      submenu: [
+        "Sherwani",
+        "Kurta & Pajama",
+        "Ethnic Wear",
+        "Ethnic Footwear",
+        "Suits & Blazers",
+        "Jackets",
+      ],
+    },
+    {
+      title: "Women",
+      submenu: [
+        "Lehengas",
+        "Sarees",
+        "Gowns",
+        "Jackets",
+        "Heels",
+        "Kurtis & Suit Sets",
+      ],
+    },
   ];
 
   const rentingRightCategories: Category[] = [
-    { title: "Costumes", submenu: ["Indian Ethnic Costumes", "Japanese Kimono & Yukata","Superhero Costumes","Doctor, Nurse & Lab Coat Costumes","Police, Army & Firefighter Costumes","Halloween Costumes"] },
-    { title: "Accessories", submenu: ["Jewellery", "Watches","Sunglasses","Belts & Scarves","Bags","Bridal & Ethnic Accessories"] }
+    {
+      title: "Costumes",
+      submenu: [
+        "Indian Ethnic Costumes",
+        "Japanese Kimono & Yukata",
+        "Superhero Costumes",
+        "Doctor, Nurse & Lab Coat Costumes",
+        "Police, Army & Firefighter Costumes",
+        "Halloween Costumes",
+      ],
+    },
+    {
+      title: "Accessories",
+      submenu: [
+        "Jewellery",
+        "Watches",
+        "Sunglasses",
+        "Belts & Scarves",
+        "Bags",
+        "Bridal & Ethnic Accessories",
+      ],
+    },
   ];
 
   // Categories data for Thrifting
   const thriftingLeftCategories: Category[] = [
-    { title: "Buy Clothes", submenu: ["Men's Clothing", "Women's Clothing", "Kids"] },
-    { title: "Buy Accessories", submenu: [ "Accessories", "Footwear", "Vintage"] }
+    {
+      title: "Buy Clothes",
+      submenu: ["Men's Clothing", "Women's Clothing", "Kids"],
+    },
+    {
+      title: "Buy Accessories",
+      submenu: ["Accessories", "Footwear", "Vintage"],
+    },
   ];
 
   const thriftingRightCategories: Category[] = [
-    { title: "Sell", submenu: ["List an Item", "My Listings", "Pricing", "Shipping Guide", "Seller Dashboard"] }
+    {
+      title: "Sell",
+      submenu: [
+        "List an Item",
+        "My Listings",
+        "Pricing",
+        "Shipping Guide",
+        "Seller Dashboard",
+      ],
+    },
   ];
 
   const locations = ["Delhi", "Mumbai", "Kanpur", "Lucknow", "Kolkata"];
 
   // Calculate unread notifications
   const unreadCount = useMemo(
-    () => notifications.filter(n => !n.read).length,
+    () => notifications.filter((n) => !n.read).length,
     [notifications]
   );
 
   // Get the appropriate categories based on service type
-  const leftCategories = currentServiceType === 'thrifting' ? thriftingLeftCategories : rentingLeftCategories;
-  const rightCategories = currentServiceType === 'thrifting' ? thriftingRightCategories : rentingRightCategories;
+  const leftCategories =
+    currentServiceType === "thrifting"
+      ? thriftingLeftCategories
+      : rentingLeftCategories;
+  const rightCategories =
+    currentServiceType === "thrifting"
+      ? thriftingRightCategories
+      : rentingRightCategories;
 
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
 
-  // Scroll effects
+  const transparentRoutes = ["/", "/thrift"];
+
+  const isTransparentRoute = transparentRoutes.includes(location.pathname);
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY > 100;
-      setIsScrolled(scrolled);
-      if (isHomePage) {
-        setShowLogo(scrolled);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
-    if (!isHomePage) {
-      setShowLogo(true);
+    if (isTransparentRoute) {
+      window.addEventListener("scroll", handleScroll);
+      handleScroll();
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      setIsScrolled(true);
     }
-    
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, [isTransparentRoute]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileMenuOpen]);
 
   const markAsRead = (id: number) => {
-    setNotifications(notifications.map(n => 
-      n.id === id ? { ...n, read: true } : n
-    ));
+    setNotifications(
+      notifications.map((n) => (n.id === id ? { ...n, read: true } : n))
+    );
   };
 
   const markAllAsRead = () => {
-    setNotifications(notifications.map(n => ({ ...n, read: true })));
+    setNotifications(notifications.map((n) => ({ ...n, read: true })));
   };
 
   const handleLinkHover = (index: number) => {
     dropdownRefs.current.forEach((ref, i) => {
       if (i !== index && ref) {
-        ref.classList.remove("hover:opacity-100", "hover:visible", "hover:translate-y-0");
+        ref.classList.remove(
+          "hover:opacity-100",
+          "hover:visible",
+          "hover:translate-y-0"
+        );
       }
     });
   };
@@ -159,11 +243,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "bg-[#F4E3B2] backdrop-blur-md shadow-sm py-3 text-[#74070E]" 
-        : "bg-transparent py-5 text-[#F4E3B2]"
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#F4E3B2] backdrop-blur-md shadow-sm py-3 text-[#74070E]"
+          : "bg-transparent py-5 text-[#F4E3B2]"
+      }`}
+    >
       {/* Desktop Navbar */}
       <div className="hidden md:block">
         <div className="container mx-auto px-6 flex items-center justify-between">
@@ -171,11 +257,14 @@ const Navbar = () => {
           <div className="flex items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost" className={`flex items-center text-foreground mr-4 py-2 ${
-                  isScrolled
-                  ? "bg-[#F4E3B2] text-[#74070E]"
-                  : "bg-transparent text-[#F4E3B2]"
-                }`}>
+                <Button
+                  variant="ghost"
+                  className={`flex items-center text-foreground mr-4 py-2 ${
+                    isScrolled
+                      ? "bg-[#F4E3B2] text-[#74070E]"
+                      : "bg-transparent text-[#F4E3B2]"
+                  }`}
+                >
                   <MapPin size={16} className="mr-1" />
                   <span className="text-sm">{selectedLocation}</span>
                   <ChevronDown size={14} className="ml-1 opacity-70" />
@@ -183,7 +272,9 @@ const Navbar = () => {
               </PopoverTrigger>
               <PopoverContent className="w-56 p-2">
                 <div className="space-y-1">
-                  <h3 className="font-medium text-sm px-2 py-1.5">Select Location</h3>
+                  <h3 className="font-medium text-sm px-2 py-1.5">
+                    Select Location
+                  </h3>
                   <div className="border-t my-1" />
                   {locations.map((location) => (
                     <Button
@@ -200,20 +291,22 @@ const Navbar = () => {
             </Popover>
 
             <div className="mr-6">
-              <ToggleGroup 
-                type="single" 
+              <ToggleGroup
+                type="single"
                 value={currentServiceType}
-                onValueChange={(value) => handleServiceChange(value as ServiceType)}
+                onValueChange={(value) =>
+                  handleServiceChange(value as ServiceType)
+                }
                 className="border rounded-full"
               >
-                <ToggleGroupItem 
-                  value="renting" 
+                <ToggleGroupItem
+                  value="renting"
                   className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
                 >
                   Renting
                 </ToggleGroupItem>
-                <ToggleGroupItem 
-                  value="thrifting" 
+                <ToggleGroupItem
+                  value="thrifting"
                   className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
                 >
                   Thrifting
@@ -222,25 +315,35 @@ const Navbar = () => {
             </div>
 
             {/* Left Categories - Different layout for thrifting */}
-            {currentServiceType === 'thrifting' ? (
-              <div className="flex items-center gap-3"> {/* Reduced margin for thrifting */}
-                <ul className="flex items-center space-x-4"> {/* Reduced spacing */}
+            {currentServiceType === "thrifting" ? (
+              <div className="flex items-center gap-3">
+                {" "}
+                {/* Reduced margin for thrifting */}
+                <ul className="flex items-center space-x-4">
+                  {" "}
+                  {/* Reduced spacing */}
                   {leftCategories.map((category, index) => (
-                    <li 
+                    <li
                       key={index}
-                      ref={el => dropdownRefs.current[index] = el}
+                      ref={(el) => (dropdownRefs.current[index] = el)}
                       className="group relative py-2 sm:ml-6"
                       onMouseEnter={() => handleLinkHover(index)}
                     >
                       <Link to="#" className="nav-link py-2 flex items-center">
                         {category.title}
-                        <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                        <ChevronDown
+                          size={16}
+                          className="ml-1 transition-transform group-hover:rotate-180"
+                        />
                       </Link>
                       <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
                         <ul className="space-y-2">
                           {category.submenu.map((item, idx) => (
                             <li key={idx}>
-                              <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                              <Link
+                                to="#"
+                                className="block py-1.5 px-2 hover:text-[#74070E]"
+                              >
                                 {item}
                               </Link>
                             </li>
@@ -254,21 +357,27 @@ const Navbar = () => {
             ) : (
               <ul className="flex items-center space-x-6">
                 {leftCategories.map((category, index) => (
-                  <li 
+                  <li
                     key={index}
-                    ref={el => dropdownRefs.current[index] = el}
+                    ref={(el) => (dropdownRefs.current[index] = el)}
                     className="group relative py-2"
                     onMouseEnter={() => handleLinkHover(index)}
                   >
                     <Link to="#" className="nav-link py-2 flex items-center">
                       {category.title}
-                      <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                      <ChevronDown
+                        size={16}
+                        className="ml-1 transition-transform group-hover:rotate-180"
+                      />
                     </Link>
                     <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
                       <ul className="space-y-2">
                         {category.submenu.map((item, idx) => (
                           <li key={idx}>
-                            <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                            <Link
+                              to="#"
+                              className="block py-1.5 px-2 hover:text-[#74070E]"
+                            >
                               {item}
                             </Link>
                           </li>
@@ -282,34 +391,56 @@ const Navbar = () => {
           </div>
 
           {/* Center Logo - Adjusted width for thrifting */}
-          <div className={`flex justify-center items-center mr-10 ${
-            currentServiceType === 'thrifting' ? 'w-1/4' : 'w-1/3'
-          }`}>
-            {showLogo && <Logo isSmall={isScrolled} className={isScrolled ? "ml-10" : ""} />}
+          <div
+            className={`flex justify-center items-center mr-10 ${
+              currentServiceType === "thrifting" ? "w-1/4" : "w-1/3"
+            }`}
+          >
+            {showLogo && (
+              <Logo
+                isSmall={isScrolled}
+                className={isScrolled ? "ml-10" : ""}
+              />
+            )}
           </div>
 
           {/* Right side */}
           <div className="flex items-center">
             {/* Right Categories - Different layout for thrifting */}
-            {currentServiceType === 'thrifting' ? (
-              <div className="flex items-center mr-12"> {/* Reduced margin for thrifting */}
-                <ul className="flex items-center space-x-4"> {/* Reduced spacing */}
+            {currentServiceType === "thrifting" ? (
+              <div className="flex items-center mr-12">
+                {" "}
+                {/* Reduced margin for thrifting */}
+                <ul className="flex items-center space-x-4">
+                  {" "}
+                  {/* Reduced spacing */}
                   {rightCategories.map((category, index) => (
-                    <li 
+                    <li
                       key={index}
-                      ref={el => dropdownRefs.current[index + leftCategories.length] = el}
+                      ref={(el) =>
+                        (dropdownRefs.current[index + leftCategories.length] =
+                          el)
+                      }
                       className="group relative py-2"
-                      onMouseEnter={() => handleLinkHover(index + leftCategories.length)}
+                      onMouseEnter={() =>
+                        handleLinkHover(index + leftCategories.length)
+                      }
                     >
                       <Link to="#" className="nav-link py-2 flex items-center">
                         {category.title}
-                        <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                        <ChevronDown
+                          size={16}
+                          className="ml-1 transition-transform group-hover:rotate-180"
+                        />
                       </Link>
                       <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
                         <ul className="space-y-2">
                           {category.submenu.map((item, idx) => (
                             <li key={idx}>
-                              <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                              <Link
+                                to="#"
+                                className="block py-1.5 px-2 hover:text-[#74070E]"
+                              >
                                 {item}
                               </Link>
                             </li>
@@ -323,21 +454,31 @@ const Navbar = () => {
             ) : (
               <ul className="flex items-center space-x-6 mr-6">
                 {rightCategories.map((category, index) => (
-                  <li 
+                  <li
                     key={index}
-                    ref={el => dropdownRefs.current[index + leftCategories.length] = el}
+                    ref={(el) =>
+                      (dropdownRefs.current[index + leftCategories.length] = el)
+                    }
                     className="group relative py-2"
-                    onMouseEnter={() => handleLinkHover(index + leftCategories.length)}
+                    onMouseEnter={() =>
+                      handleLinkHover(index + leftCategories.length)
+                    }
                   >
                     <Link to="#" className="nav-link py-2 flex items-center">
                       {category.title}
-                      <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                      <ChevronDown
+                        size={16}
+                        className="ml-1 transition-transform group-hover:rotate-180"
+                      />
                     </Link>
                     <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
                       <ul className="space-y-2">
                         {category.submenu.map((item, idx) => (
                           <li key={idx}>
-                            <Link to="#" className="block py-1.5 px-2 hover:text-[#74070E]">
+                            <Link
+                              to="#"
+                              className="block py-1.5 px-2 hover:text-[#74070E]"
+                            >
                               {item}
                             </Link>
                           </li>
@@ -368,8 +509,8 @@ const Navbar = () => {
                 <div className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium">Notifications</h3>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       onClick={markAllAsRead}
                       className="text-xs"
@@ -380,9 +521,11 @@ const Navbar = () => {
                 </div>
                 <div className="max-h-[300px] overflow-auto">
                   {notifications.map((notification) => (
-                    <div 
-                      key={notification.id} 
-                      className={`p-4 border-b cursor-pointer ${notification.read ? '' : 'bg-blue-50'}`}
+                    <div
+                      key={notification.id}
+                      className={`p-4 border-b cursor-pointer ${
+                        notification.read ? "" : "bg-blue-50"
+                      }`}
                       onClick={() => markAsRead(notification.id)}
                     >
                       <div className="flex justify-between">
@@ -391,7 +534,9 @@ const Navbar = () => {
                           <span className="h-2 w-2 bg-red-400 rounded-full"></span>
                         )}
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1">{notification.time}</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {notification.time}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -411,29 +556,31 @@ const Navbar = () => {
       <div className="md:hidden">
         <div className="container mx-auto px-4 flex items-center justify-between align-items-center">
           {/* Menu Button */}
-          <button 
-            onClick={() => setMobileMenuOpen(true)}
-            className=""
-          >
-            <Menu size={24} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
+          <button onClick={() => setMobileMenuOpen(true)} className="">
+            <Menu
+              size={24}
+              className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
+            />
           </button>
 
           {/* Centered Toggle */}
           <div className="flex-1 flex justify-center px-2">
-            <ToggleGroup 
-              type="single" 
+            <ToggleGroup
+              type="single"
               value={currentServiceType}
-              onValueChange={(value) => handleServiceChange(value as ServiceType)}
+              onValueChange={(value) =>
+                handleServiceChange(value as ServiceType)
+              }
               className="border rounded-full mr-20"
             >
-              <ToggleGroupItem 
-                value="renting" 
+              <ToggleGroupItem
+                value="renting"
                 className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
                 Renting
               </ToggleGroupItem>
-              <ToggleGroupItem 
-                value="thrifting" 
+              <ToggleGroupItem
+                value="thrifting"
                 className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
               >
                 Thrifting
@@ -443,9 +590,11 @@ const Navbar = () => {
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out ml-10 ${
-              showLogo ? 'opacity-100' : 'opacity-0'
-            }`}>
+            <div
+              className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out ml-10 ${
+                showLogo ? "opacity-100" : "opacity-0"
+              }`}
+            >
               <Logo isSmall={true} />
             </div>
           )}
@@ -453,7 +602,10 @@ const Navbar = () => {
           {/* Right Icons */}
           <div className="flex items-center space-x-0">
             <Link to="/login" className="p-2 ml-3">
-              <User size={20} className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"} />
+              <User
+                size={20}
+                className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
+              />
             </Link>
             <Cart />
           </div>
@@ -475,7 +627,10 @@ const Navbar = () => {
               <div className="container mx-auto px-4 mt-1 text-[#74070E]">
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="ghost" className="w-full justify-between mb-6">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-between mb-6"
+                    >
                       <div className="flex items-center font-bold">
                         <MapPin size={16} className="mr-2 font-bold" />
                         <span>{selectedLocation}</span>
@@ -499,20 +654,22 @@ const Navbar = () => {
 
                 {/* Service Type Toggle (Mobile) */}
                 <div className="mb-6">
-                  <ToggleGroup 
-                    type="single" 
+                  <ToggleGroup
+                    type="single"
                     value={currentServiceType}
-                    onValueChange={(value) => handleServiceChange(value as ServiceType)}
+                    onValueChange={(value) =>
+                      handleServiceChange(value as ServiceType)
+                    }
                     className="border rounded-full w-full"
                   >
-                    <ToggleGroupItem 
-                      value="renting" 
+                    <ToggleGroupItem
+                      value="renting"
                       className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
                     >
                       Renting
                     </ToggleGroupItem>
-                    <ToggleGroupItem 
-                      value="thrifting" 
+                    <ToggleGroupItem
+                      value="thrifting"
                       className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
                     >
                       Thrifting
@@ -534,30 +691,38 @@ const Navbar = () => {
 
                 {/* Categories */}
                 <div className="space-y-2 mb-6">
-                  {[...leftCategories, ...rightCategories].map((category, index) => (
-                    <Disclosure key={index}>
-                      {({ open }) => (
-                        <div className="border-b border-gray-700">
-                          <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
-                            <span className="font-bold">{category.title}</span>
-                            <ChevronDown className={`transition-transform ${open ? 'rotate-180' : ''}`} />
-                          </Disclosure.Button>
-                          <Disclosure.Panel className="pl-4">
-                            {category.submenu.map((item, idx) => (
-                              <Link
-                                key={idx}
-                                to="#"
-                                className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {item}
-                              </Link>
-                            ))}
-                          </Disclosure.Panel>
-                        </div>
-                      )}
-                    </Disclosure>
-                  ))}
+                  {[...leftCategories, ...rightCategories].map(
+                    (category, index) => (
+                      <Disclosure key={index}>
+                        {({ open }) => (
+                          <div className="border-b border-gray-700">
+                            <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
+                              <span className="font-bold">
+                                {category.title}
+                              </span>
+                              <ChevronDown
+                                className={`transition-transform ${
+                                  open ? "rotate-180" : ""
+                                }`}
+                              />
+                            </Disclosure.Button>
+                            <Disclosure.Panel className="pl-4">
+                              {category.submenu.map((item, idx) => (
+                                <Link
+                                  key={idx}
+                                  to="#"
+                                  className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {item}
+                                </Link>
+                              ))}
+                            </Disclosure.Panel>
+                          </div>
+                        )}
+                      </Disclosure>
+                    )
+                  )}
                 </div>
 
                 {/* Additional Links */}
