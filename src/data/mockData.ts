@@ -6,6 +6,7 @@ export interface Product {
     image: string;
     seller: string;
     size: string;
+    brand:string;
     condition: string;
     description: string;
     category: string;
@@ -33,6 +34,7 @@ export interface Product {
       seller: "Mia Thompson",
       size: "M",
       condition: "Good",
+brand: "Zara",
       description: "Classic vintage denim jacket from the 90s. Slightly worn but in great condition.",
       category: "Outerwear"
     },
@@ -43,6 +45,7 @@ export interface Product {
       image: "https://plus.unsplash.com/premium_photo-1723914108893-ac3047a4f1df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8RmxvcmFsJTIwU3VtbWVyJTIwRHJlc3N8ZW58MHx8MHx8fDA%3D",
       seller: "Emma Wilson",
       size: "S",
+      brand: "Zara",
       condition: "Like New",
       description: "Beautiful floral summer dress, worn only once for a photoshoot.",
       category: "Dresses"
@@ -55,6 +58,7 @@ export interface Product {
       seller: "James Miller",
       size: "42 EU",
       condition: "Good",
+brand: "Zara",
       description: "Genuine leather Chelsea boots. Some signs of wear but still look great.",
       category: "Footwear"
     },
@@ -65,6 +69,7 @@ export interface Product {
       image: "https://images.unsplash.com/photo-1631541909061-71e349d1f203?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Q2FzaG1lcmUlMjBTd2VhdGVyfGVufDB8fDB8fHww",
       seller: "Olivia Brown",
       size: "L",
+      brand: "Zara",
       condition: "Excellent",
       description: "Soft cashmere sweater in a beautiful cream color. Barely worn.",
       category: "Knitwear"
@@ -77,6 +82,7 @@ export interface Product {
       seller: "Noah Garcia",
       size: "32x30",
       condition: "Good",
+brand: "Zara",
       description: "Classic Levi's 501 jeans. Slightly faded for that perfect vintage look.",
       category: "Bottoms"
     },
@@ -87,6 +93,7 @@ export interface Product {
       image: "https://images.unsplash.com/photo-1594495024437-db507fd23fcc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UmF5JTIwQmFuJTIwU3VuZ2xhc3Nlc3xlbnwwfHwwfHx8MA%3D%3D",
       seller: "Sophie Martinez",
       size: "One Size",
+      brand: "Zara",
       condition: "Like New",
       description: "Authentic Ray-Ban Wayfarer sunglasses with case. No scratches.",
       category: "Accessories"
@@ -98,6 +105,7 @@ export interface Product {
       image: "https://plus.unsplash.com/premium_photo-1729708586826-0f7d8d8357d3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U2FyZWUlMjBCbG91c2V8ZW58MHx8MHx8fDA%3D",
       seller: "Lily Chen",
       size: "M",
+      brand: "Zara",
       condition: "Excellent",
       description: "Elegant silk blouse in a soft blush color. Perfect for office or evening wear.",
       category: "Tops"
@@ -110,6 +118,7 @@ export interface Product {
       seller: "Ethan Williams",
       size: "L",
       condition: "Good",
+brand: "Zara",
       description: "Authentic vintage concert t-shirt from the 80s. Rare collector's item.",
       category: "Tops"
     },
@@ -120,6 +129,7 @@ export interface Product {
       image: "https://images.unsplash.com/photo-1601924928357-22d3b3abfcfb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGVzaWduZXIlMjBIYW5kYmFnfGVufDB8fDB8fHww",
       seller: "Isabella Lopez",
       size: "One Size",
+      brand: "Zara",
       condition: "Very Good",
       description: "Genuine leather designer handbag. Minor wear but still looks luxurious.",
       category: "Accessories"
@@ -131,6 +141,7 @@ export interface Product {
       image: "https://plus.unsplash.com/premium_photo-1675130119403-2b03d148773e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8V29vbCUyMGNvYXR8ZW58MHx8MHx8fDA%3D",
       seller: "Daniel Taylor",
       size: "XL",
+      brand: "Zara",
       condition: "Excellent",
       description: "Classic wool peacoat in navy blue. Warm and stylish for winter.",
       category: "Outerwear"
@@ -156,6 +167,7 @@ export interface Product {
           seller: "Vintage Treasures",
           size: "M",
           condition: "Good",
+brand: "Zara",
           description: "Authentic 1970s disco shirt with pointed collar and psychedelic pattern.",
           category: "Tops",
           storeId: 1
@@ -167,6 +179,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Vintage Treasures",
           size: "L",
+          brand: "Zara",
           condition: "Excellent",
           description: "Colorful 90s windbreaker jacket. Perfect for that retro look.",
           category: "Outerwear",
@@ -180,6 +193,7 @@ export interface Product {
           seller: "Vintage Treasures",
           size: "30x32",
           condition: "Good",
+brand: "Zara",
           description: "Authentic vintage Levi's jeans from the 80s. Perfect worn-in look.",
           category: "Bottoms",
           storeId: 1
@@ -202,6 +216,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "EcoThrift",
           size: "One Size",
+          brand: "Zara",
           condition: "New",
           description: "Handmade bag created from upcycled denim jeans. Sustainable and stylish.",
           category: "Accessories",
@@ -214,6 +229,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "EcoThrift",
           size: "M",
+          brand: "Zara",
           condition: "Like New",
           description: "Cozy organic cotton sweater in a neutral beige tone.",
           category: "Knitwear",
@@ -237,6 +253,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Urban Secondhand",
           size: "One Size",
+          brand: "Zara",
           condition: "Excellent",
           description: "Luxury designer silk scarf in a vibrant print. Perfect accessory for any outfit.",
           category: "Accessories",
@@ -249,6 +266,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Urban Secondhand",
           size: "28x30",
+          brand: "Zara",
           condition: "Like New",
           description: "High-end denim jeans in a classic cut. Barely worn, still has original tags.",
           category: "Bottoms",
@@ -272,6 +290,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Retro Revival",
           size: "S",
+          brand: "Zara",
           condition: "Excellent",
           description: "Beautiful 50s-inspired swing dress with polka dot pattern. Perfect for vintage lovers.",
           category: "Dresses",
@@ -285,6 +304,7 @@ export interface Product {
           seller: "Retro Revival",
           size: "M",
           condition: "Good",
+brand: "Zara",
           description: "Classic 80s biker leather jacket with authentic worn patina.",
           category: "Outerwear",
           storeId: 4
@@ -308,6 +328,7 @@ export interface Product {
           seller: "Community Closet",
           size: "M",
           condition: "Good",
+brand: "Zara",
           description: "Simple white t-shirt in good condition. A wardrobe staple.",
           category: "Tops",
           storeId: 5
@@ -319,6 +340,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Community Closet",
           size: "34x32",
+          brand: "Zara",
           condition: "Very Good",
           description: "Professional black work pants. Suitable for office wear.",
           category: "Bottoms",
@@ -342,6 +364,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Luxury Resale Boutique",
           size: "One Size",
+          brand: "Zara",
           condition: "Like New",
           description: "Authentic designer sunglasses with case and authentication card. Minimal wear.",
           category: "Accessories",
@@ -354,6 +377,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Luxury Resale Boutique",
           size: "One Size",
+          brand: "Zara",
           condition: "Excellent",
           description: "Genuine luxury handbag in classic style. Includes dust bag and authentication card.",
           category: "Accessories",
@@ -378,6 +402,7 @@ export interface Product {
           seller: "Sustainable Style Co.",
           size: "L",
           condition: "Good",
+brand: "Zara",
           description: "Warm wool sweater made from recycled materials. Eco-friendly and cozy.",
           category: "Knitwear",
           storeId: 7
@@ -389,6 +414,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Sustainable Style Co.",
           size: "M",
+          brand: "Zara",
           condition: "Excellent",
           description: "Simple and elegant dress made from organic cotton. Perfect for summer.",
           category: "Dresses",
@@ -413,6 +439,7 @@ export interface Product {
           seller: "Vintage Sports Gear",
           size: "XL",
           condition: "Good",
+brand: "Zara",
           description: "Authentic vintage basketball jersey from the 90s. Collector's item for sports fans.",
           category: "Sportswear",
           storeId: 8
@@ -424,6 +451,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Vintage Sports Gear",
           size: "M",
+          brand: "Zara",
           condition: "Very Good",
           description: "Colorful track jacket from the 80s in excellent vintage condition.",
           category: "Sportswear",
@@ -447,6 +475,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Kids' Closet Exchange",
           size: "5T",
+          brand: "Zara",
           condition: "Excellent",
           description: "Warm winter coat for children. Barely worn, in great condition.",
           category: "Kids",
@@ -459,6 +488,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Kids' Closet Exchange",
           size: "US 12 Kids",
+          brand: "Zara",
           condition: "Like New",
           description: "Colorful kids' sneakers. Only worn a few times, children grow so fast!",
           category: "Kids",
@@ -482,6 +512,7 @@ export interface Product {
           image: "https://plus.unsplash.com/premium_photo-1709865803550-240a0c1bcb41?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Bookworm's Closet",
           size: "One Size",
+          brand: "Zara",
           condition: "New",
           description: "Handmade tote bag featuring classic book covers. Perfect for carrying your reading material!",
           category: "Accessories",
@@ -494,6 +525,7 @@ export interface Product {
           image: "https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fDcwcyUyMERpc2NvJTIwU2hpcnR8ZW58MHx8MHx8fDA%3D",
           seller: "Bookworm's Closet",
           size: "L",
+          brand: "Zara",
           condition: "Excellent",
           description: "Comfortable t-shirt featuring a famous literary quote. For book lovers!",
           category: "Tops",
