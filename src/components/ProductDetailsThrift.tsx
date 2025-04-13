@@ -170,7 +170,7 @@ const ProductDetailsThrift = () => {
                     </div>
                     
                     <div className="flex gap-4 mb-8">
-                    <Button className="flex-grow bg-thrift-600 hover:bg-thrift-700 text-white">
+                    <Button className="flex-grow bg-teal-600 hover:bg-teal-700 text-white">
                         <ShoppingCart className="h-4 w-4 mr-2" /> Add to Cart
                     </Button>
                     <Button variant="outline" className="border-thrift-500 text-thrift-600" size="icon">
