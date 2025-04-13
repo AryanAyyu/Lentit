@@ -342,7 +342,7 @@ const Navbar = () => {
                             <li key={idx}>
                               <Link
                                 to="#"
-                                className="block py-1.5 px-2 hover:text-[#74070E]"
+                                className="block py-1.5 px-2 text-[#74070E] hover:underline"
                               >
                                 {item}
                               </Link>
@@ -371,12 +371,12 @@ const Navbar = () => {
                       />
                     </Link>
                     <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                      <ul className="space-y-2">
+                      <ul className="space-y-2 text-rose-900">
                         {category.submenu.map((item, idx) => (
                           <li key={idx}>
                             <Link
                               to="#"
-                              className="block py-1.5 px-2 hover:text-[#74070E]"
+                              className="block py-1.5 px-2 hover:underline"
                             >
                               {item}
                             </Link>
@@ -439,7 +439,7 @@ const Navbar = () => {
                             <li key={idx}>
                               <Link
                                 to="#"
-                                className="block py-1.5 px-2 hover:text-[#74070E]"
+                                className="block py-1.5 px-2 text-[#74070E] hover:underline"
                               >
                                 {item}
                               </Link>
@@ -477,7 +477,7 @@ const Navbar = () => {
                           <li key={idx}>
                             <Link
                               to="#"
-                              className="block py-1.5 px-2 hover:text-[#74070E]"
+                              className="block py-1.5 px-2 text-[#74070E] hover:underline"
                             >
                               {item}
                             </Link>
