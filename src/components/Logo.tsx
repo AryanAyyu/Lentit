@@ -15,9 +15,10 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isThriftPage = location.pathname.startsWith("/thrift");
 
   const handleClick = () => {
-    if (isHomePage) {
+    if (isHomePage || isThriftPage) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -25,22 +26,25 @@ const Logo: React.FC<LogoProps> = ({
     }
   };
 
+  const logoText = isThriftPage ? "Lent-It" : "Lent-It";
+  const logoLink = isThriftPage ? "/thrift" : "/";
+
   return (
     <div
       className={cn(
-        "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer ",
+        "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer",
         isSmall
-          ? "text-3xl text-[#74070E] ml-8 "
+          ? "text-3xl text-[#74070E] ml-8"
           : "text-6xl md:text-7xl lg:text-5xl text-white",
         className
       )}
     >
       <Link
-        to="/"
+        to={logoLink}
         onClick={handleClick}
         className="hover:opacity-90 transition-opacity"
       >
-        <span>Lent-It</span>
+        <span>{logoText}</span>
       </Link>
     </div>
   );

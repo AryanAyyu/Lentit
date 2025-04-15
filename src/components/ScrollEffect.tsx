@@ -8,10 +8,10 @@ const ScrollEffect: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const isTransparentRoute = ['/', '/thrift'].includes(location.pathname);
 
   useEffect(() => {
-    if (!isHomePage) return;
+    if (!isTransparentRoute) return;
 
     const handleScroll = () => {
       const threshold = isMobile ? 50 : 100;
@@ -20,9 +20,9 @@ const ScrollEffect: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile, isHomePage]);
+  }, [isMobile, isTransparentRoute]);
 
-  if (!isHomePage) return null;
+  if (!isTransparentRoute) return null;
 
   return (
     <div 

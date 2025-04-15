@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-// import { useRouter } from "next/router";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -60,12 +59,12 @@ const serviceRoutes: Record<ServiceType, string> = {
 };
 
 const Navbar = () => {
-  // const router = useRouter();
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
@@ -79,16 +78,14 @@ const Navbar = () => {
   const dropdownRefs = useRef<(HTMLLIElement | null)[]>([]);
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
-  const isHomePage = location.pathname === "/";
-  const [showLogo, setShowLogo] = useState(!isHomePage);
+  const [selectedLocation, setSelectedLocation] = useState("New Delhi");
 
   // Determine current service type based on route
   const currentServiceType = location.pathname.startsWith("/thrift")
     ? "thrifting"
     : "renting";
-  const [selectedLocation, setSelectedLocation] = useState("New Delhi");
 
-  // Categories data for Renting
+  // Categories data
   const rentingLeftCategories: Category[] = [
     {
       title: "Men",
@@ -139,7 +136,6 @@ const Navbar = () => {
     },
   ];
 
-  // Categories data for Thrifting
   const thriftingLeftCategories: Category[] = [
     {
       title: "Buy Clothes",
@@ -188,12 +184,14 @@ const Navbar = () => {
   }, [location]);
 
   const transparentRoutes = ["/", "/thrift"];
-
   const isTransparentRoute = transparentRoutes.includes(location.pathname);
 
+  // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const shouldShow = window.scrollY > 20;
+      setIsScrolled(shouldShow);
+      setShowLogo(shouldShow);
     };
 
     if (isTransparentRoute) {
@@ -202,6 +200,7 @@ const Navbar = () => {
       return () => window.removeEventListener("scroll", handleScroll);
     } else {
       setIsScrolled(true);
+      setShowLogo(true);
     }
   }, [isTransparentRoute]);
 
@@ -314,14 +313,10 @@ const Navbar = () => {
               </ToggleGroup>
             </div>
 
-            {/* Left Categories - Different layout for thrifting */}
+            {/* Left Categories */}
             {currentServiceType === "thrifting" ? (
               <div className="flex items-center gap-3">
-                {" "}
-                {/* Reduced margin for thrifting */}
                 <ul className="flex items-center space-x-4">
-                  {" "}
-                  {/* Reduced spacing */}
                   {leftCategories.map((category, index) => (
                     <li
                       key={index}
@@ -390,30 +385,26 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Center Logo - Adjusted width for thrifting */}
-          <div
-            className={`flex justify-center items-center mr-10 ${
-              currentServiceType === "thrifting" ? "w-1/4" : "w-1/3"
-            }`}
-          >
-            {showLogo && (
+          {/* Center Logo - Only visible after scroll */}
+          {showLogo && (
+            <div
+              className={`flex justify-center items-center ${
+                currentServiceType === "thrifting" ? "w-1/4" : "w-1/3"
+              }`}
+            >
               <Logo
                 isSmall={isScrolled}
                 className={isScrolled ? "ml-10" : ""}
               />
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Right side */}
           <div className="flex items-center">
-            {/* Right Categories - Different layout for thrifting */}
+            {/* Right Categories */}
             {currentServiceType === "thrifting" ? (
               <div className="flex items-center mr-12">
-                {" "}
-                {/* Reduced margin for thrifting */}
                 <ul className="flex items-center space-x-4">
-                  {" "}
-                  {/* Reduced spacing */}
                   {rightCategories.map((category, index) => (
                     <li
                       key={index}
@@ -590,11 +581,7 @@ const Navbar = () => {
 
           {/* Scroll-triggered Logo */}
           {showLogo && (
-            <div
-              className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ease-in-out ml-10 ${
-                showLogo ? "opacity-100" : "opacity-0"
-              }`}
-            >
+            <div className="absolute left-1/2 transform -translate-x-1/2">
               <Logo isSmall={true} />
             </div>
           )}
