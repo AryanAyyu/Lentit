@@ -582,13 +582,13 @@ const Navbar = () => {
           {/* Scroll-triggered Logo */}
           {showLogo && (
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <Logo isSmall={true} />
+              <Logo isSmall={true} className="ml-[110px]"/>
             </div>
           )}
 
           {/* Right Icons */}
           <div className="flex items-center space-x-0">
-            <Link to="/login" className="p-2 ml-3">
+            <Link to="/login" className="p-2 ml-4">
               <User
                 size={20}
                 className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
@@ -639,30 +639,7 @@ const Navbar = () => {
                   </PopoverContent>
                 </Popover>
 
-                {/* Service Type Toggle (Mobile) */}
-                <div className="mb-6">
-                  <ToggleGroup
-                    type="single"
-                    value={currentServiceType}
-                    onValueChange={(value) =>
-                      handleServiceChange(value as ServiceType)
-                    }
-                    className="border rounded-full w-full"
-                  >
-                    <ToggleGroupItem
-                      value="renting"
-                      className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
-                    >
-                      Renting
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                      value="thrifting"
-                      className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] w-1/2"
-                    >
-                      Thrifting
-                    </ToggleGroupItem>
-                  </ToggleGroup>
-                </div>
+                
 
                 {/* Search */}
                 <button

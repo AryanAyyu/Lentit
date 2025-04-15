@@ -183,7 +183,7 @@ const SellYourOwn = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     );
   }
@@ -506,7 +506,7 @@ const SellYourOwn = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };

@@ -23,6 +23,8 @@ import ThriftStoreDetails from "./components/ThriftStoreDetails";
 import SellYourOwn from "./components/SellYourOwn";
 import ProductDetailsThrift from "./components/ProductDetailsThrift";
 import SellYourProduct from "./pages/SellYourProduct";
+import NewArrivalsPageThrift from "./components/NewArrivalsPageThrift";
+import OnlyForYouPageThrift from "./components/OnlyForYouPageThrift";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +71,9 @@ const App = () => (
                   element={<ProductDetailsThrift />}
                 />
                 <Route path="/thrift/sell" element={<SellYourProduct />} />
+                <Route path="/only-for-you" element={<OnlyForYouPageThrift />} />
+                <Route path="/new-arrivals" element={<NewArrivalsPageThrift/>} />
+
                 {/* Remove the /special/:category route as it's redundant with /category/:category */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

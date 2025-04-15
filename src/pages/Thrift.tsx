@@ -29,6 +29,10 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { thriftStores, featuredProducts } from "@/data/mockData";
+import NewArrivalsThrift from "@/components/NewArrivalsThrift";
+import OnlyForYouThrift from "@/components/OnlyForYouThrift";
+import DealOfTheDayThrift from "@/components/DealOfTheDayThrift";
+import ThriftingQuote from "@/components/ThriftingQuote";
 
 // Mock products data
 const products = [
@@ -284,6 +288,7 @@ const Thrift = () => {
             </div>
           </div>
         </section>
+        
 
         {/* Partnered Thrift Stores Section */}
         <section className="py-16 bg-gray-50">
@@ -349,21 +354,63 @@ const Thrift = () => {
             </div>
           </div>
         </section>
+        <NewArrivalsThrift/>
+        <DealOfTheDayThrift/>
+        <OnlyForYouThrift/>
+        <ThriftingQuote/>
+        
+        
 
-        {/* Featured Products Section */}
-        <section className="py-16 bg-white">
+        
+        <section className="py-4 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-10 text-thrift-800">
               Featured Products
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {displayedProducts.map((product) => (
-                <Link
-                  to={`/thrift/productthrift/${product.id}`}
-                  key={product.id}
-                >
-                  <Card className="product-card-thrift overflow-hidden">
+            {/* Mobile horizontal scroll - shows all featured products */}
+            <div className="md:hidden overflow-x-auto pb-4 -mx-4 px-4">
+              <div className="flex space-x-4 w-max">
+                {featuredProducts.map((product) => (
+                  <div key={product.id} className="w-64 flex-shrink-0">
+                    <Link to={`/thrift/productthrift/${product.id}`}>
+                      <Card className="product-card-thrift h-full">
+                        <div className="h-56 bg-gray-200 overflow-hidden">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
+                        </div>
+                        <CardContent className="p-4">
+                          <h3 className="font-medium text-base mb-1 truncate">
+                            {product.name}
+                          </h3>
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-bold text-thrift-700 flex items-center">
+                              <IndianRupee className="h-3.5 w-3.5 mr-0.5" />
+                              {product.price.toFixed(2)}
+                            </span>
+                            <span className="text-sm text-gray-500">
+                              {product.size}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 truncate">
+                            Seller: {product.seller}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop grid - shows exactly 4 products */}
+            <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.slice(0, 4).map((product) => (
+                <Link to={`/thrift/productthrift/${product.id}`} key={product.id}>
+                  <Card className="product-card-thrift h-full">
                     <div className="h-56 bg-gray-200 overflow-hidden">
                       <img
                         src={product.image}
@@ -377,7 +424,7 @@ const Thrift = () => {
                       </h3>
                       <div className="flex justify-between items-center mb-2">
                         <span className="font-bold text-thrift-700 flex items-center">
-                          <IndianRupee className="h-3.5 w-3.5 mr-0.5" />{" "}
+                          <IndianRupee className="h-3.5 w-3.5 mr-0.5" />
                           {product.price.toFixed(2)}
                         </span>
                         <span className="text-sm text-gray-500">
@@ -393,21 +440,13 @@ const Thrift = () => {
               ))}
             </div>
 
-            <div className="text-center mt-10">
-              {!showAllProducts ? (
-                <Button
-                  className="bg-rose-900 hover:bg-rose-800 text-white"
-                  onClick={() => setShowAllProducts(true)}
-                >
-                  View More Products
+            {/* View All button - hidden on mobile */}
+            <div className="hidden md:block text-center mt-10">
+              <Link to="/thrift/individual-products">
+                <Button className="bg-teal-600 hover:bg-teal-700 text-white">
+                  View All Products
                 </Button>
-              ) : (
-                <Link to="/thrift/individual-products">
-                  <Button className="bg-teal-600 hover:bg-teal-700 text-white">
-                    View All Products
-                  </Button>
-                </Link>
-              )}
+              </Link>
             </div>
           </div>
         </section>
