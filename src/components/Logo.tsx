@@ -1,6 +1,6 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Link, useLocation } from "react-router-dom";
 
 interface LogoProps {
   className?: string;
@@ -8,27 +8,35 @@ interface LogoProps {
   forceShow?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ className, isSmall = false, forceShow = false }) => {
+const Logo: React.FC<LogoProps> = ({
+  className,
+  isSmall = false,
+  forceShow = false,
+}) => {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === "/";
 
   const handleClick = () => {
     if (isHomePage) {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
 
   return (
-    <div className={cn(
-      "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer ",
-      isSmall ? "text-3xl text-[#74070E] ml-8 " : "text-6xl md:text-7xl lg:text-8xl text-white",
-      className
-    )}>
-      <Link 
-        to="/" 
+    <div
+      className={cn(
+        "relative flex items-center whitespace-nowrap font-bold transition-all duration-500 cursor-pointer ",
+        isSmall
+          ? "text-3xl text-[#74070E] ml-8 "
+          : "text-6xl md:text-7xl lg:text-5xl text-white",
+        className
+      )}
+    >
+      <Link
+        to="/"
         onClick={handleClick}
         className="hover:opacity-90 transition-opacity"
       >

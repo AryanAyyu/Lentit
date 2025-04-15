@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { 
-  ChevronRight, 
-  Minus, 
-  Plus, 
-  Heart, 
-  Eye, 
+import {
+  ChevronRight,
+  Minus,
+  Plus,
+  Heart,
+  Eye,
   CalendarIcon,
-  Truck, 
+  Truck,
   Shield,
-  RotateCcw, 
-  Check
+  RotateCcw,
+  Check,
 } from "lucide-react";
 import { format, addDays } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -26,7 +26,11 @@ import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 
 // Mock product data - this would normally come from an API
-const getProductData = (category: string, subcategory: string, productId: string) => {
+const getProductData = (
+  category: string,
+  subcategory: string,
+  productId: string
+) => {
   // In a real app, you would fetch this data based on the params
   return {
     id: productId,
@@ -50,7 +54,13 @@ const getProductData = (category: string, subcategory: string, productId: string
       { name: "Care", value: "Dry Clean Only" },
     ],
     reviews: [
-      { id: 1, author: "Michael K.", rating: 5, text: "Perfect fit and excellent quality.", date: "2 weeks ago" },
+      {
+        id: 1,
+        author: "Michael K.",
+        rating: 5,
+        text: "Perfect fit and excellent quality.",
+        date: "2 weeks ago",
+      },
     ],
     colors: [
       { name: "Navy", value: "#1a2b4d" },
@@ -62,39 +72,65 @@ const getProductData = (category: string, subcategory: string, productId: string
       "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80",
     ],
     recommended: [
-      {id: "101", name: "Designer Bow Tie", price: 5.99, imageUrl: "https://plus.unsplash.com/premium_photo-1723924810262-c67a0950f311?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"},
-      {id: "102", name: "Premium Watch", price: 15.99, imageUrl: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"},
-    ]
+      {
+        id: "101",
+        name: "Designer Bow Tie",
+        price: 5.99,
+        imageUrl:
+          "https://plus.unsplash.com/premium_photo-1723924810262-c67a0950f311?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      },
+      {
+        id: "102",
+        name: "Premium Watch",
+        price: 15.99,
+        imageUrl:
+          "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+      },
+    ],
   };
 };
 
 const ProductDetails = () => {
-  const { category, subcategory, productId } = useParams<{ 
-    category: string; 
+  const { category, subcategory, productId } = useParams<{
+    category: string;
     subcategory: string;
-    productId: string 
+    productId: string;
   }>();
-  
-  const productData = getProductData(category || '', subcategory || '', productId || '');
-  
+
+  const productData = getProductData(
+    category || "",
+    subcategory || "",
+    productId || ""
+  );
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(productData.colors[0]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isTryOn, setIsTryOn] = useState(false);
-  const [startDate, setStartDate] = useState<Date | undefined>(addDays(new Date(), 1));
-  const [endDate, setEndDate] = useState<Date | undefined>(addDays(new Date(), 3));
+  const [startDate, setStartDate] = useState<Date | undefined>(
+    addDays(new Date(), 1)
+  );
+  const [endDate, setEndDate] = useState<Date | undefined>(
+    addDays(new Date(), 3)
+  );
   const [isInView, setIsInView] = useState(false);
   const [activeTab, setActiveTab] = useState("description");
-  
+
   const { addToCart } = useCart();
   const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
-  const isItemInWishlist = isInWishlist(productData.id);
+  const isItemInWishlist = isInWishlist(Number(productData.id));
 
-  const rentalDays = startDate && endDate 
-    ? Math.max(1, Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)))
-    : 1;
-  
+  const rentalDays =
+    startDate && endDate
+      ? Math.max(
+          1,
+          Math.ceil(
+            (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+          )
+        )
+      : 1;
+
   const rentalFee = productData.price * rentalDays;
   const totalCost = rentalFee + productData.securityDeposit;
 
@@ -113,14 +149,14 @@ const ProductDetails = () => {
       toast.error("Please select a size before adding to cart");
       return;
     }
-    
+
     if (!startDate || !endDate) {
       toast.error("Please select rental dates");
       return;
     }
-    
+
     addToCart({
-      id: productData.id,
+      id: Number(productData.id),
       name: productData.name,
       price: productData.price,
       quantity: quantity,
@@ -131,24 +167,24 @@ const ProductDetails = () => {
       endDate: endDate,
       rentalDays: rentalDays,
       securityDeposit: productData.securityDeposit,
-      category: category || '',
-      subcategory: subcategory || ''
+      // category: category || '',
+      // subcategory: subcategory || ''
     });
-    
+
     toast.success("Added to cart successfully!");
   };
 
   const toggleWishlist = () => {
     if (isItemInWishlist) {
-      removeFromWishlist(productData.id);
+      removeFromWishlist(Number(productData.id));
     } else {
       addToWishlist({
-        id: productData.id,
+        id: Number(productData.id),
         name: productData.name,
         price: productData.price,
         imageUrl: productData.images[0],
-        category: category || '',
-        subcategory: subcategory || ''
+        // category: category || '',
+        // subcategory: subcategory || ''
       });
     }
   };
@@ -161,14 +197,20 @@ const ProductDetails = () => {
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
-                <Link to="/" className="text-sm font-medium text-foreground/70 hover:text-coffee">
+                <Link
+                  to="/"
+                  className="text-sm font-medium text-foreground/70 hover:text-coffee"
+                >
                   Home
                 </Link>
               </li>
               <li>
                 <div className="flex items-center">
                   <ChevronRight className="w-4 h-4 text-foreground/50" />
-                  <Link to={`/category/${category}`} className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee">
+                  <Link
+                    to={`/category/${category}`}
+                    className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee"
+                  >
                     {category}
                   </Link>
                 </div>
@@ -176,7 +218,10 @@ const ProductDetails = () => {
               <li>
                 <div className="flex items-center">
                   <ChevronRight className="w-4 h-4 text-foreground/50" />
-                  <Link to={`/products/${category}/${subcategory}`} className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee">
+                  <Link
+                    to={`/products/${category}/${subcategory}`}
+                    className="ml-1 text-sm font-medium text-foreground/70 hover:text-coffee"
+                  >
                     {subcategory}
                   </Link>
                 </div>
@@ -196,13 +241,21 @@ const ProductDetails = () => {
         {/* Product Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
           {/* Product Images */}
-          <div className={`space-y-4 transition-all duration-700 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[-20px]'}`}>
+          <div
+            className={`space-y-4 transition-all duration-700 ${
+              isInView ? "opacity-100" : "opacity-0 translate-x-[-20px]"
+            }`}
+          >
             <div className="rounded-xl overflow-hidden aspect-[4/5] relative">
               {isTryOn && (
                 <div className="absolute inset-0 z-10 bg-black/70 flex items-center justify-center">
                   <div className="text-center p-6 max-w-md">
-                    <h3 className="text-xl font-semibold text-white mb-4">Virtual Try-On Mode</h3>
-                    <p className="text-white/80 mb-6">Use your camera to see how this item would look on you.</p>
+                    <h3 className="text-xl font-semibold text-white mb-4">
+                      Virtual Try-On Mode
+                    </h3>
+                    <p className="text-white/80 mb-6">
+                      Use your camera to see how this item would look on you.
+                    </p>
                     <button
                       onClick={handleTryOn}
                       className="bg-vanilla hover:bg-vanilla/90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300"
@@ -223,7 +276,9 @@ const ProductDetails = () => {
                 <button
                   key={index}
                   className={`rounded-lg overflow-hidden aspect-square ${
-                    selectedImage === index ? "ring-2 ring-vanilla" : "opacity-70 hover:opacity-100"
+                    selectedImage === index
+                      ? "ring-2 ring-vanilla"
+                      : "opacity-70 hover:opacity-100"
                   }`}
                   onClick={() => setSelectedImage(index)}
                 >
@@ -238,24 +293,40 @@ const ProductDetails = () => {
           </div>
 
           {/* Product Info */}
-          <div className={`transition-all duration-700 delay-200 ${isInView ? 'opacity-100' : 'opacity-0 translate-x-[20px]'}`}>
-            <h1 className="text-3xl font-semibold text-rose-900 mb-2">{productData.name}</h1>
-            <p className="text-xl text-rose-900 mb-1">₹{productData.price} <span className="text-sm text-foreground/70">per day</span></p>
-            
+          <div
+            className={`transition-all duration-700 delay-200 ${
+              isInView ? "opacity-100" : "opacity-0 translate-x-[20px]"
+            }`}
+          >
+            <h1 className="text-3xl font-semibold text-rose-900 mb-2">
+              {productData.name}
+            </h1>
+            <p className="text-xl text-rose-900 mb-1">
+              ₹{productData.price}{" "}
+              <span className="text-sm text-foreground/70">per day</span>
+            </p>
+
             {/* Rental Duration Section */}
             <div className="mb-6 mt-4 bg-muted/30 p-4 rounded-lg">
-              <h3 className="text-sm font-semibold text-foreground mb-3">Rental Duration</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-3">
+                Rental Duration
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-xs text-foreground/70 mb-1">Start Date:</p>
                   <Popover>
                     <PopoverTrigger asChild>
                       <button className="w-full flex items-center justify-between px-4 py-2 border border-input rounded-md bg-background hover:bg-accent/50 transition-colors">
-                        <span>{startDate ? format(startDate, "PPP") : "Select date"}</span>
+                        <span>
+                          {startDate ? format(startDate, "PPP") : "Select date"}
+                        </span>
                         <CalendarIcon size={16} />
                       </button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-lg z-50" align="start">
+                    <PopoverContent
+                      className="w-auto p-0 bg-white shadow-lg rounded-lg z-50"
+                      align="start"
+                    >
                       <Calendar
                         mode="single"
                         selected={startDate}
@@ -271,17 +342,22 @@ const ProductDetails = () => {
                     </PopoverContent>
                   </Popover>
                 </div>
-                
+
                 <div>
                   <p className="text-xs text-foreground/70 mb-1">End Date:</p>
                   <Popover>
                     <PopoverTrigger asChild>
                       <button className="w-full flex items-center justify-between px-4 py-2 border border-input rounded-md bg-background hover:bg-accent/50 transition-colors">
-                        <span>{endDate ? format(endDate, "PPP") : "Select date"}</span>
+                        <span>
+                          {endDate ? format(endDate, "PPP") : "Select date"}
+                        </span>
                         <CalendarIcon size={16} />
                       </button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-lg z-50" align="start">
+                    <PopoverContent
+                      className="w-auto p-0 bg-white shadow-lg rounded-lg z-50"
+                      align="start"
+                    >
                       <Calendar
                         mode="single"
                         selected={endDate}
@@ -293,11 +369,13 @@ const ProductDetails = () => {
                   </Popover>
                 </div>
               </div>
-              
+
               <div className="mt-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span>Rental Period:</span>
-                  <span className="font-medium">{rentalDays} day{rentalDays !== 1 ? 's' : ''}</span>
+                  <span className="font-medium">
+                    {rentalDays} day{rentalDays !== 1 ? "s" : ""}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Rental Fee:</span>
@@ -305,7 +383,9 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>Security Deposit (Refundable):</span>
-                  <span className="font-medium">₹{productData.securityDeposit.toFixed(2)}</span>
+                  <span className="font-medium">
+                    ₹{productData.securityDeposit.toFixed(2)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold border-t pt-2 mt-2">
                   <span>Total:</span>
@@ -313,10 +393,12 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Color selector */}
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-foreground mb-3">Color: {selectedColor.name}</h3>
+              <h3 className="text-sm font-medium text-foreground mb-3">
+                Color: {selectedColor.name}
+              </h3>
               <div className="flex space-x-3">
                 {productData.colors.map((color) => (
                   <button
@@ -336,7 +418,7 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Size selector */}
             <div className="mb-6">
               <h3 className="text-sm font-medium text-foreground mb-3">Size</h3>
@@ -356,10 +438,12 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Quantity selector */}
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-foreground mb-3">Quantity</h3>
+              <h3 className="text-sm font-medium text-foreground mb-3">
+                Quantity
+              </h3>
               <div className="flex border border-border rounded-md w-fit">
                 <button
                   className="px-4 py-2 text-foreground/70 hover:text-foreground transition-colors"
@@ -389,46 +473,64 @@ const ProductDetails = () => {
                 <span>Try Me</span>
               </button>
             </div>
-            
+
             {/* Action buttons */}
             <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3 mb-8">
-              <button 
+              <button
                 className="bg-rose-900 hover:bg-coffee/90 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
                 onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
-              <button 
+              <button
                 className="border border-rose-900 text-rose-900 hover:bg-coffee/10 font-medium py-3 px-6 rounded-lg transition-all duration-300 flex-1 flex items-center justify-center gap-2"
                 onClick={toggleWishlist}
               >
-                <Heart className={`${isItemInWishlist ? "fill-coffee" : ""}`} size={18} />
+                <Heart
+                  className={`${isItemInWishlist ? "fill-coffee" : ""}`}
+                  size={18}
+                />
                 {isItemInWishlist ? "Saved" : "Save"}
               </button>
             </div>
-            
+
             {/* Shipping info */}
             <div className="border-t border-border pt-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-start space-x-3">
-                  <Truck className="text-vanilla mt-1 flex-shrink-0" size={18} />
+                  <Truck
+                    className="text-vanilla mt-1 flex-shrink-0"
+                    size={18}
+                  />
                   <div>
                     <h4 className="font-medium">Free Standard Shipping</h4>
-                    <p className="text-sm text-foreground/70">3-5 business days</p>
+                    <p className="text-sm text-foreground/70">
+                      3-5 business days
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <RotateCcw className="text-vanilla mt-1 flex-shrink-0" size={18} />
+                  <RotateCcw
+                    className="text-vanilla mt-1 flex-shrink-0"
+                    size={18}
+                  />
                   <div>
                     <h4 className="font-medium">Easy Returns</h4>
-                    <p className="text-sm text-foreground/70">30-day return window</p>
+                    <p className="text-sm text-foreground/70">
+                      30-day return window
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Shield className="text-vanilla mt-1 flex-shrink-0" size={18} />
+                  <Shield
+                    className="text-vanilla mt-1 flex-shrink-0"
+                    size={18}
+                  />
                   <div>
                     <h4 className="font-medium">Authenticity Guaranteed</h4>
-                    <p className="text-sm text-foreground/70">Quality assurance</p>
+                    <p className="text-sm text-foreground/70">
+                      Quality assurance
+                    </p>
                   </div>
                 </div>
               </div>
@@ -438,41 +540,67 @@ const ProductDetails = () => {
 
         {/* Product details tabs */}
         <div className="mt-16">
-          <Tabs defaultValue="description" className="w-full" onValueChange={setActiveTab}>
+          <Tabs
+            defaultValue="description"
+            className="w-full"
+            onValueChange={setActiveTab}
+          >
             <TabsList className="w-full max-w-md mx-auto grid grid-cols-3">
               <TabsTrigger value="description">Description</TabsTrigger>
               <TabsTrigger value="specifications">Specifications</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="description" className="mt-6">
-              <div className={`transition-opacity duration-500 ${activeTab === 'description' ? 'opacity-100' : 'opacity-0'}`}>
+              <div
+                className={`transition-opacity duration-500 ${
+                  activeTab === "description" ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="max-w-3xl mx-auto">
-                  <h2 className="text-2xl font-semibold text-coffee mb-4">Product Description</h2>
+                  <h2 className="text-2xl font-semibold text-coffee mb-4">
+                    Product Description
+                  </h2>
                   <div className="prose text-foreground/80 max-w-none mb-8">
-                    {productData.description.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4">{paragraph}</p>
-                    ))}
+                    {productData.description
+                      .split("\n\n")
+                      .map((paragraph, index) => (
+                        <p key={index} className="mb-4">
+                          {paragraph}
+                        </p>
+                      ))}
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                     <div>
-                      <h3 className="text-xl font-semibold text-coffee mb-4">Features</h3>
+                      <h3 className="text-xl font-semibold text-coffee mb-4">
+                        Features
+                      </h3>
                       <ul className="space-y-2">
                         {productData.features.map((feature, index) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <Check size={18} className="text-vanilla mt-1 flex-shrink-0" />
+                          <li
+                            key={index}
+                            className="flex items-start space-x-2"
+                          >
+                            <Check
+                              size={18}
+                              className="text-vanilla mt-1 flex-shrink-0"
+                            />
                             <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    
+
                     <div>
-                      <h3 className="text-xl font-semibold text-coffee mb-4">Rental Process</h3>
+                      <h3 className="text-xl font-semibold text-coffee mb-4">
+                        Rental Process
+                      </h3>
                       <ol className="space-y-2 list-decimal list-inside">
                         {productData.rentalProcess.map((step, index) => (
-                          <li key={index} className="pl-1">{step}</li>
+                          <li key={index} className="pl-1">
+                            {step}
+                          </li>
                         ))}
                       </ol>
                     </div>
@@ -480,18 +608,33 @@ const ProductDetails = () => {
                 </div>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="specifications" className="mt-6">
-              <div className={`transition-opacity duration-500 ${activeTab === 'specifications' ? 'opacity-100' : 'opacity-0'}`}>
+              <div
+                className={`transition-opacity duration-500 ${
+                  activeTab === "specifications" ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="max-w-3xl mx-auto">
-                  <h2 className="text-2xl font-semibold text-coffee mb-4">Product Specifications</h2>
+                  <h2 className="text-2xl font-semibold text-coffee mb-4">
+                    Product Specifications
+                  </h2>
                   <div className="overflow-hidden bg-white shadow-sm border border-input rounded-lg">
                     <table className="min-w-full divide-y divide-input">
                       <tbody className="divide-y divide-input">
                         {productData.specifications.map((spec, index) => (
-                          <tr key={index} className={index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">{spec.name}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground/80">{spec.value}</td>
+                          <tr
+                            key={index}
+                            className={
+                              index % 2 === 0 ? "bg-background" : "bg-muted/30"
+                            }
+                          >
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
+                              {spec.name}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground/80">
+                              {spec.value}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -500,26 +643,46 @@ const ProductDetails = () => {
                 </div>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="reviews" className="mt-6">
-              <div className={`transition-opacity duration-500 ${activeTab === 'reviews' ? 'opacity-100' : 'opacity-0'}`}>
+              <div
+                className={`transition-opacity duration-500 ${
+                  activeTab === "reviews" ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="max-w-3xl mx-auto">
-                  <h2 className="text-2xl font-semibold text-coffee mb-4">Customer Reviews</h2>
+                  <h2 className="text-2xl font-semibold text-coffee mb-4">
+                    Customer Reviews
+                  </h2>
                   <div className="space-y-6">
                     {productData.reviews.map((review) => (
-                      <div key={review.id} className="border border-input rounded-lg p-4 bg-white">
+                      <div
+                        key={review.id}
+                        className="border border-input rounded-lg p-4 bg-white"
+                      >
                         <div className="flex justify-between items-start">
                           <div>
                             <p className="font-medium">{review.author}</p>
                             <div className="flex items-center mt-1">
                               {[...Array(5)].map((_, i) => (
-                                <svg key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                                <svg
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < review.rating
+                                      ? "text-yellow-400"
+                                      : "text-gray-300"
+                                  }`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
                                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                               ))}
                             </div>
                           </div>
-                          <span className="text-sm text-foreground/60">{review.date}</span>
+                          <span className="text-sm text-foreground/60">
+                            {review.date}
+                          </span>
                         </div>
                         <p className="mt-3 text-foreground/80">{review.text}</p>
                       </div>
@@ -533,19 +696,21 @@ const ProductDetails = () => {
 
         {/* Recommended Products */}
         <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-coffee mb-8">You may also like</h2>
+          <h2 className="text-2xl font-semibold text-coffee mb-8">
+            You may also like
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {productData.recommended.map((product) => (
-              <Link 
-                key={product.id} 
-                to={`/product/${category}/${subcategory}/${product.id}`} 
+              <Link
+                key={product.id}
+                to={`/product/${category}/${subcategory}/${product.id}`}
                 className="group"
               >
                 <div className="bg-muted/30 rounded-lg overflow-hidden">
                   <div className="overflow-hidden">
-                    <img 
-                      src={product.imageUrl} 
-                      alt={product.name} 
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
                       className="w-full h-[35vh] object-cover transition-transform group-hover:scale-105 duration-500"
                     />
                   </div>
