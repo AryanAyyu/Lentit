@@ -25,6 +25,7 @@ import ProductDetailsThrift from "./components/ProductDetailsThrift";
 import SellYourProduct from "./pages/SellYourProduct";
 import NewArrivalsPageThrift from "./components/NewArrivalsPageThrift";
 import OnlyForYouPageThrift from "./components/OnlyForYouPageThrift";
+import Wishlist from "./components/Wishlist";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/wishlist" element={<Wishlist />} />
                 <Route
                   path="/thrift/individual-products"
                   element={<IndividualProducts />}

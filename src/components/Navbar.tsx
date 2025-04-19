@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/command";
 import { Disclosure } from "@headlessui/react";
 import Logo from "./Logo";
+import MobileNotifications from "@/components/MobileNotification";
 
 type ServiceType = "renting" | "thrifting";
 type Notification = {
@@ -44,7 +45,11 @@ type Notification = {
 };
 type Category = {
   title: string;
-  submenu: string[];
+  path: string;
+  submenu: {
+    title: string;
+    path: string;
+  }[];
 };
 
 const productSuggestions = [
@@ -65,12 +70,25 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
+  const [isMobileNotificationsOpen, setIsMobileNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
       text: "Your item has been shipped!",
       read: false,
       time: "2 hours ago",
+    },
+    {
+      id: 2,
+      text: "New items matching your wishlist",
+      read: false,
+      time: "1 day ago",
+    },
+    {
+      id: 3,
+      text: "Your rental period ends tomorrow",
+      read: true,
+      time: "3 days ago",
     },
   ]);
 
@@ -85,28 +103,30 @@ const Navbar = () => {
     ? "thrifting"
     : "renting";
 
-  // Categories data
+  // Categories data with paths
   const rentingLeftCategories: Category[] = [
     {
       title: "Men",
+      path: "/products/men",
       submenu: [
-        "Sherwani",
-        "Kurta & Pajama",
-        "Ethnic Wear",
-        "Ethnic Footwear",
-        "Suits & Blazers",
-        "Jackets",
+        { title: "Sherwani", path: "/products/men/sherwani" },
+        { title: "Kurta & Pajama", path: "/products/men/kurta-pajama" },
+        { title: "Ethnic Wear", path: "/products/men/ethnic-wear" },
+        { title: "Ethnic Footwear", path: "/products/men/ethnic-footwear" },
+        { title: "Suits & Blazers", path: "/products/men/suits-blazers" },
+        { title: "Jackets", path: "/products/men/jackets" },
       ],
     },
     {
       title: "Women",
+      path: "/products/women",
       submenu: [
-        "Lehengas",
-        "Sarees",
-        "Gowns",
-        "Jackets",
-        "Heels",
-        "Kurtis & Suit Sets",
+        { title: "Lehengas", path: "/products/women/lehengas" },
+        { title: "Sarees", path: "/products/women/sarees" },
+        { title: "Gowns", path: "/products/women/gowns" },
+        { title: "Jackets", path: "/products/women/jackets" },
+        { title: "Heels", path: "/products/women/heels" },
+        { title: "Kurtis & Suit Sets", path: "/products/women/kurtis-suit-sets" },
       ],
     },
   ];
@@ -114,24 +134,26 @@ const Navbar = () => {
   const rentingRightCategories: Category[] = [
     {
       title: "Costumes",
+      path: "/products/costumes",
       submenu: [
-        "Indian Ethnic Costumes",
-        "Japanese Kimono & Yukata",
-        "Superhero Costumes",
-        "Doctor, Nurse & Lab Coat Costumes",
-        "Police, Army & Firefighter Costumes",
-        "Halloween Costumes",
+        { title: "Indian Ethnic Costumes", path: "/products/costumes/indian-ethnic" },
+        { title: "Japanese Kimono & Yukata", path: "/products/costumes/japanese" },
+        { title: "Superhero Costumes", path: "/products/costumes/superhero" },
+        { title: "Doctor, Nurse & Lab Coat Costumes", path: "/products/costumes/medical" },
+        { title: "Police, Army & Firefighter Costumes", path: "/products/costumes/uniform" },
+        { title: "Halloween Costumes", path: "/products/costumes/halloween" },
       ],
     },
     {
       title: "Accessories",
+      path: "/products/accessories",
       submenu: [
-        "Jewellery",
-        "Watches",
-        "Sunglasses",
-        "Belts & Scarves",
-        "Bags",
-        "Bridal & Ethnic Accessories",
+        { title: "Jewellery", path: "/products/accessories/jewellery" },
+        { title: "Watches", path: "/products/accessories/watches" },
+        { title: "Sunglasses", path: "/products/accessories/sunglasses" },
+        { title: "Belts & Scarves", path: "/products/accessories/belts-scarves" },
+        { title: "Bags", path: "/products/accessories/bags" },
+        { title: "Bridal & Ethnic Accessories", path: "/products/accessories/bridal" },
       ],
     },
   ];
@@ -139,23 +161,34 @@ const Navbar = () => {
   const thriftingLeftCategories: Category[] = [
     {
       title: "Buy Clothes",
-      submenu: ["Men's Clothing", "Women's Clothing", "Kids"],
+      path: "/products/buy-clothes",
+      submenu: [
+        { title: "Men's Clothing", path: "/products/buy-clothes/mens" },
+        { title: "Women's Clothing", path: "/products/buy-clothes/womens" },
+        { title: "Kids", path: "/products/buy-clothes/kids" },
+      ],
     },
     {
       title: "Buy Accessories",
-      submenu: ["Accessories", "Footwear", "Vintage"],
+      path: "/products/buy-accessories",
+      submenu: [
+        { title: "Accessories", path: "/products/buy-accessories/accessories" },
+        { title: "Footwear", path: "/products/buy-accessories/footwear" },
+        { title: "Vintage", path: "/products/buy-accessories/vintage" },
+      ],
     },
   ];
 
   const thriftingRightCategories: Category[] = [
     {
       title: "Sell",
+      path: "/sell",
       submenu: [
-        "List an Item",
-        "My Listings",
-        "Pricing",
-        "Shipping Guide",
-        "Seller Dashboard",
+        { title: "List an Item", path: "/sell/list" },
+        { title: "My Listings", path: "/sell/listings" },
+        { title: "Pricing", path: "/sell/pricing" },
+        { title: "Shipping Guide", path: "/sell/shipping" },
+        { title: "Seller Dashboard", path: "/sell/dashboard" },
       ],
     },
   ];
@@ -206,11 +239,11 @@ const Navbar = () => {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    document.body.style.overflow = mobileMenuOpen || isMobileNotificationsOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, isMobileNotificationsOpen]);
 
   const markAsRead = (id: number) => {
     setNotifications(
@@ -241,6 +274,45 @@ const Navbar = () => {
     }
   };
 
+  const renderNotifications = () => (
+    <div className="w-full p-0">
+      <div className="p-4 border-b">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">Notifications</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={markAllAsRead}
+            className="text-xs"
+          >
+            Mark all as read
+          </Button>
+        </div>
+      </div>
+      <div className="max-h-[300px] overflow-auto">
+        {notifications.map((notification) => (
+          <div
+            key={notification.id}
+            className={`p-4 border-b cursor-pointer ${
+              notification.read ? "" : "bg-blue-50"
+            }`}
+            onClick={() => markAsRead(notification.id)}
+          >
+            <div className="flex justify-between">
+              <p className="text-sm">{notification.text}</p>
+              {!notification.read && (
+                <span className="h-2 w-2 bg-red-400 rounded-full"></span>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              {notification.time}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -269,7 +341,7 @@ const Navbar = () => {
                   <ChevronDown size={14} className="ml-1 opacity-70" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-56 p-2">
+              <PopoverContent className="w-56 p-2" style={{ zIndex: 1001 }}>
                 <div className="space-y-1">
                   <h3 className="font-medium text-sm px-2 py-1.5">
                     Select Location
@@ -314,75 +386,50 @@ const Navbar = () => {
             </div>
 
             {/* Left Categories */}
-            {currentServiceType === "thrifting" ? (
-              <div className="flex items-center gap-3">
-                <ul className="flex items-center space-x-4">
-                  {leftCategories.map((category, index) => (
-                    <li
-                      key={index}
-                      ref={(el) => (dropdownRefs.current[index] = el)}
-                      className="group relative py-2 sm:ml-6"
-                      onMouseEnter={() => handleLinkHover(index)}
-                    >
-                      <Link to="#" className="nav-link py-2 flex items-center">
-                        {category.title}
-                        <ChevronDown
-                          size={16}
-                          className="ml-1 transition-transform group-hover:rotate-180"
-                        />
-                      </Link>
-                      <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                        <ul className="space-y-2">
-                          {category.submenu.map((item, idx) => (
-                            <li key={idx}>
-                              <Link
-                                to="#"
-                                className="block py-1.5 px-2 text-[#74070E] hover:underline"
-                              >
-                                {item}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <ul className="flex items-center space-x-6">
-                {leftCategories.map((category, index) => (
-                  <li
-                    key={index}
-                    ref={(el) => (dropdownRefs.current[index] = el)}
-                    className="group relative py-2"
-                    onMouseEnter={() => handleLinkHover(index)}
+            <ul className="flex items-center space-x-6">
+              {leftCategories.map((category, index) => (
+                <li
+                  key={index}
+                  ref={(el) => (dropdownRefs.current[index] = el)}
+                  className="group relative py-2"
+                  onMouseEnter={() => handleLinkHover(index)}
+                >
+                  <Link 
+                    to={category.path} 
+                    className="nav-link py-2 flex items-center"
+                    onClick={(e) => {
+                      if (category.submenu.length > 0) {
+                        e.preventDefault();
+                      }
+                    }}
                   >
-                    <Link to="#" className="nav-link py-2 flex items-center">
-                      {category.title}
+                    {category.title}
+                    {category.submenu.length > 0 && (
                       <ChevronDown
                         size={16}
                         className="ml-1 transition-transform group-hover:rotate-180"
                       />
-                    </Link>
-                    <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                      <ul className="space-y-2 text-rose-900">
+                    )}
+                  </Link>
+                  {category.submenu.length > 0 && (
+                    <div className="absolute left-0 top-full mt-1 min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                      <ul className="space-y-2">
                         {category.submenu.map((item, idx) => (
                           <li key={idx}>
                             <Link
-                              to="#"
-                              className="block py-1.5 px-2 hover:underline"
+                              to={item.path}
+                              className="block py-1.5 px-2 text-[#74070E] hover:underline"
                             >
-                              {item}
+                              {item.title}
                             </Link>
                           </li>
                         ))}
                       </ul>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Center Logo - Only visible after scroll */}
@@ -402,84 +449,54 @@ const Navbar = () => {
           {/* Right side */}
           <div className="flex items-center">
             {/* Right Categories */}
-            {currentServiceType === "thrifting" ? (
-              <div className="flex items-center mr-12">
-                <ul className="flex items-center space-x-4">
-                  {rightCategories.map((category, index) => (
-                    <li
-                      key={index}
-                      ref={(el) =>
-                        (dropdownRefs.current[index + leftCategories.length] =
-                          el)
+            <ul className="flex items-center space-x-6 mr-6">
+              {rightCategories.map((category, index) => (
+                <li
+                  key={index}
+                  ref={(el) =>
+                    (dropdownRefs.current[index + leftCategories.length] = el)
+                  }
+                  className="group relative py-2"
+                  onMouseEnter={() =>
+                    handleLinkHover(index + leftCategories.length)
+                  }
+                >
+                  <Link 
+                    to={category.path} 
+                    className="nav-link py-2 flex items-center"
+                    onClick={(e) => {
+                      if (category.submenu.length > 0) {
+                        e.preventDefault();
                       }
-                      className="group relative py-2"
-                      onMouseEnter={() =>
-                        handleLinkHover(index + leftCategories.length)
-                      }
-                    >
-                      <Link to="#" className="nav-link py-2 flex items-center">
-                        {category.title}
-                        <ChevronDown
-                          size={16}
-                          className="ml-1 transition-transform group-hover:rotate-180"
-                        />
-                      </Link>
-                      <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
-                        <ul className="space-y-2">
-                          {category.submenu.map((item, idx) => (
-                            <li key={idx}>
-                              <Link
-                                to="#"
-                                className="block py-1.5 px-2 text-[#74070E] hover:underline"
-                              >
-                                {item}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <ul className="flex items-center space-x-6 mr-6">
-                {rightCategories.map((category, index) => (
-                  <li
-                    key={index}
-                    ref={(el) =>
-                      (dropdownRefs.current[index + leftCategories.length] = el)
-                    }
-                    className="group relative py-2"
-                    onMouseEnter={() =>
-                      handleLinkHover(index + leftCategories.length)
-                    }
+                    }}
                   >
-                    <Link to="#" className="nav-link py-2 flex items-center">
-                      {category.title}
+                    {category.title}
+                    {category.submenu.length > 0 && (
                       <ChevronDown
                         size={16}
                         className="ml-1 transition-transform group-hover:rotate-180"
                       />
-                    </Link>
-                    <div className="nav-dropdown min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50">
+                    )}
+                  </Link>
+                  {category.submenu.length > 0 && (
+                    <div className="absolute left-0 top-full mt-1 min-w-[180px] bg-white shadow-lg rounded-lg p-4 z-50 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
                       <ul className="space-y-2">
                         {category.submenu.map((item, idx) => (
                           <li key={idx}>
                             <Link
-                              to="#"
+                              to={item.path}
                               className="block py-1.5 px-2 text-[#74070E] hover:underline"
                             >
-                              {item}
+                              {item.title}
                             </Link>
                           </li>
                         ))}
                       </ul>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+                  )}
+                </li>
+              ))}
+            </ul>
 
             <button onClick={() => setIsSearchOpen(true)} className="mr-6">
               <Search size={20} />
@@ -496,41 +513,14 @@ const Navbar = () => {
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 p-0">
-                <div className="p-4 border-b">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium">Notifications</h3>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={markAllAsRead}
-                      className="text-xs"
-                    >
-                      Mark all as read
-                    </Button>
-                  </div>
-                </div>
-                <div className="max-h-[300px] overflow-auto">
-                  {notifications.map((notification) => (
-                    <div
-                      key={notification.id}
-                      className={`p-4 border-b cursor-pointer ${
-                        notification.read ? "" : "bg-blue-50"
-                      }`}
-                      onClick={() => markAsRead(notification.id)}
-                    >
-                      <div className="flex justify-between">
-                        <p className="text-sm">{notification.text}</p>
-                        {!notification.read && (
-                          <span className="h-2 w-2 bg-red-400 rounded-full"></span>
-                        )}
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {notification.time}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+              <PopoverContent 
+                className="w-80 p-0" 
+                style={{ 
+                  zIndex: 1001,
+                  marginTop: '8px'
+                }}
+              >
+                {renderNotifications()}
               </PopoverContent>
             </Popover>
 
@@ -588,6 +578,8 @@ const Navbar = () => {
 
           {/* Right Icons */}
           <div className="flex items-center space-x-0">
+            
+            
             <Link to="/login" className="p-2 ml-4">
               <User
                 size={20}
@@ -600,7 +592,7 @@ const Navbar = () => {
 
         {/* Mobile Menu - Full Screen Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[1000]">
+          <div className="fixed inset-0 z-[1000] bg-white">
             {/* Close Button - Fixed at top right */}
             <button
               onClick={() => setMobileMenuOpen(false)}
@@ -610,7 +602,7 @@ const Navbar = () => {
             </button>
 
             {/* Menu Content - Scrollable container */}
-            <div className="h-[100vh] w-[70vw] fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2]">
+            <div className="h-[100vh] w-full fixed pt-16 pb-8 overflow-y-auto bg-[#F4E3B2]">
               <div className="container mx-auto px-4 mt-1 text-[#74070E]">
                 <Popover>
                   <PopoverTrigger asChild>
@@ -625,7 +617,7 @@ const Navbar = () => {
                       <ChevronDown size={16} />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full">
+                  <PopoverContent className="w-full" style={{ zIndex: 1001 }}>
                     {locations.map((location) => (
                       <Button
                         key={location}
@@ -638,8 +630,6 @@ const Navbar = () => {
                     ))}
                   </PopoverContent>
                 </Popover>
-
-                
 
                 {/* Search */}
                 <button
@@ -661,27 +651,41 @@ const Navbar = () => {
                         {({ open }) => (
                           <div className="border-b border-gray-700">
                             <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
-                              <span className="font-bold">
+                              <Link 
+                                to={category.submenu.length > 0 ? "#" : category.path}
+                                onClick={(e) => {
+                                  if (category.submenu.length > 0) {
+                                    e.preventDefault();
+                                  } else {
+                                    setMobileMenuOpen(false);
+                                  }
+                                }}
+                                className="font-bold"
+                              >
                                 {category.title}
-                              </span>
-                              <ChevronDown
-                                className={`transition-transform ${
-                                  open ? "rotate-180" : ""
-                                }`}
-                              />
+                              </Link>
+                              {category.submenu.length > 0 && (
+                                <ChevronDown
+                                  className={`transition-transform ${
+                                    open ? "rotate-180" : ""
+                                  }`}
+                                />
+                              )}
                             </Disclosure.Button>
-                            <Disclosure.Panel className="pl-4">
-                              {category.submenu.map((item, idx) => (
-                                <Link
-                                  key={idx}
-                                  to="#"
-                                  className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
-                                  onClick={() => setMobileMenuOpen(false)}
-                                >
-                                  {item}
-                                </Link>
-                              ))}
-                            </Disclosure.Panel>
+                            {category.submenu.length > 0 && (
+                              <Disclosure.Panel className="pl-4">
+                                {category.submenu.map((item, idx) => (
+                                  <Link
+                                    key={idx}
+                                    to={item.path}
+                                    className="py-2.5 px-2 text-gray-600 hover:bg-gray-50 rounded-lg flex justify-ends"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                  >
+                                    {item.title}
+                                  </Link>
+                                ))}
+                              </Disclosure.Panel>
+                            )}
                           </div>
                         )}
                       </Disclosure>
@@ -691,15 +695,17 @@ const Navbar = () => {
 
                 {/* Additional Links */}
                 <div className="space-y-2">
-                  <Link
-                    to="/wishlist"
-                    className="flex items-center py-3 px-4 rounded-lg hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Heart size={20} className="mr-3 text-[#74070E]" />
+                  <div className="flex items-center w-full py-1 px-1 rounded-lg hover:bg-gray-50">
+                    <Wishlist  />
                     <span>Wishlist ({wishlistItemCount})</span>
-                  </Link>
-                  <button className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50">
+                  </div>
+                  <button 
+                    className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50 "
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setIsMobileNotificationsOpen(true);
+                    }}
+                  >
                     <Bell size={20} className="mr-3 text-[#74070E]" />
                     <span>Notifications ({unreadCount})</span>
                   </button>
@@ -709,6 +715,16 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* Mobile Notifications Panel */}
+      <MobileNotifications
+        isOpen={isMobileNotificationsOpen}
+        onClose={() => setIsMobileNotificationsOpen(false)}
+        notifications={notifications}
+        markAsRead={markAsRead}
+        markAllAsRead={markAllAsRead}
+        unreadCount={unreadCount}
+      />
 
       {/* Search Dialog (Shared) */}
       <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>

@@ -24,12 +24,13 @@ const Wishlist = () => {
         <Button variant="ghost" className="relative p-2">
           <Heart size={20} />
           {itemCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-[#74070E] text-[#F4E3B2] text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+            <span className="hidden sm:flex absolute -top-1 -right-1 bg-[#74070E] text-[#F4E3B2] text-xs font-bold rounded-full h-5 w-5 items-center justify-center">
               {itemCount}
             </span>
           )}
         </Button>
       </SheetTrigger>
+
       <SheetContent 
         side={isMobile ? "bottom" : "right"} 
         className={`w-full ${isMobile ? 'h-[80vh] rounded-t-lg' : 'sm:max-w-md'} flex flex-col`}
@@ -41,7 +42,7 @@ const Wishlist = () => {
         </SheetHeader>
         
         {itemCount === 0 ? (
-          <div className="flex flex-col items-center justify-center flex-1 p-4 sm:p-6 text-center">
+          <div className=" flex flex-col items-center justify-center flex-1 p-4 sm:p-6 text-center">
             <Heart size={isMobile ? 48 : 64} className="text-rose-200 mb-3 sm:mb-4" />
             <h3 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">Your wishlist is empty</h3>
             <p className="text-stone-500 text-sm sm:text-base mb-4 sm:mb-6">
