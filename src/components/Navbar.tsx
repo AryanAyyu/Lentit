@@ -70,7 +70,8 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
-  const [isMobileNotificationsOpen, setIsMobileNotificationsOpen] = useState(false);
+  const [isMobileNotificationsOpen, setIsMobileNotificationsOpen] =
+    useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
@@ -126,7 +127,10 @@ const Navbar = () => {
         { title: "Gowns", path: "/products/women/gowns" },
         { title: "Jackets", path: "/products/women/jackets" },
         { title: "Heels", path: "/products/women/heels" },
-        { title: "Kurtis & Suit Sets", path: "/products/women/kurtis-suit-sets" },
+        {
+          title: "Kurtis & Suit Sets",
+          path: "/products/women/kurtis-suit-sets",
+        },
       ],
     },
   ];
@@ -136,11 +140,23 @@ const Navbar = () => {
       title: "Costumes",
       path: "/products/costumes",
       submenu: [
-        { title: "Indian Ethnic Costumes", path: "/products/costumes/indian-ethnic" },
-        { title: "Japanese Kimono & Yukata", path: "/products/costumes/japanese" },
+        {
+          title: "Indian Ethnic Costumes",
+          path: "/products/costumes/indian-ethnic",
+        },
+        {
+          title: "Japanese Kimono & Yukata",
+          path: "/products/costumes/japanese",
+        },
         { title: "Superhero Costumes", path: "/products/costumes/superhero" },
-        { title: "Doctor, Nurse & Lab Coat Costumes", path: "/products/costumes/medical" },
-        { title: "Police, Army & Firefighter Costumes", path: "/products/costumes/uniform" },
+        {
+          title: "Doctor, Nurse & Lab Coat Costumes",
+          path: "/products/costumes/medical",
+        },
+        {
+          title: "Police, Army & Firefighter Costumes",
+          path: "/products/costumes/uniform",
+        },
         { title: "Halloween Costumes", path: "/products/costumes/halloween" },
       ],
     },
@@ -151,9 +167,15 @@ const Navbar = () => {
         { title: "Jewellery", path: "/products/accessories/jewellery" },
         { title: "Watches", path: "/products/accessories/watches" },
         { title: "Sunglasses", path: "/products/accessories/sunglasses" },
-        { title: "Belts & Scarves", path: "/products/accessories/belts-scarves" },
+        {
+          title: "Belts & Scarves",
+          path: "/products/accessories/belts-scarves",
+        },
         { title: "Bags", path: "/products/accessories/bags" },
-        { title: "Bridal & Ethnic Accessories", path: "/products/accessories/bridal" },
+        {
+          title: "Bridal & Ethnic Accessories",
+          path: "/products/accessories/bridal",
+        },
       ],
     },
   ];
@@ -239,7 +261,8 @@ const Navbar = () => {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen || isMobileNotificationsOpen ? "hidden" : "";
+    document.body.style.overflow =
+      mobileMenuOpen || isMobileNotificationsOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -394,8 +417,8 @@ const Navbar = () => {
                   className="group relative py-2"
                   onMouseEnter={() => handleLinkHover(index)}
                 >
-                  <Link 
-                    to={category.path} 
+                  <Link
+                    to={category.path}
                     className="nav-link py-2 flex items-center"
                     onClick={(e) => {
                       if (category.submenu.length > 0) {
@@ -461,8 +484,8 @@ const Navbar = () => {
                     handleLinkHover(index + leftCategories.length)
                   }
                 >
-                  <Link 
-                    to={category.path} 
+                  <Link
+                    to={category.path}
                     className="nav-link py-2 flex items-center"
                     onClick={(e) => {
                       if (category.submenu.length > 0) {
@@ -513,11 +536,11 @@ const Navbar = () => {
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent 
-                className="w-80 p-0" 
-                style={{ 
+              <PopoverContent
+                className="w-80 p-0"
+                style={{
                   zIndex: 1001,
-                  marginTop: '8px'
+                  marginTop: "8px",
                 }}
               >
                 {renderNotifications()}
@@ -572,14 +595,12 @@ const Navbar = () => {
           {/* Scroll-triggered Logo */}
           {showLogo && (
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <Logo isSmall={true} className="ml-[110px]"/>
+              <Logo isSmall={true} className="ml-[110px]" />
             </div>
           )}
 
           {/* Right Icons */}
           <div className="flex items-center space-x-0">
-            
-            
             <Link to="/login" className="p-2 ml-4">
               <User
                 size={20}
@@ -651,8 +672,12 @@ const Navbar = () => {
                         {({ open }) => (
                           <div className="border-b border-gray-700">
                             <Disclosure.Button className="flex justify-between items-center w-full py-3 px-2">
-                              <Link 
-                                to={category.submenu.length > 0 ? "#" : category.path}
+                              <Link
+                                to={
+                                  category.submenu.length > 0
+                                    ? "#"
+                                    : category.path
+                                }
                                 onClick={(e) => {
                                   if (category.submenu.length > 0) {
                                     e.preventDefault();
@@ -696,11 +721,11 @@ const Navbar = () => {
                 {/* Additional Links */}
                 <div className="space-y-2">
                   <div className="flex items-center w-full py-1 px-1 rounded-lg hover:bg-gray-50">
-                    <Wishlist  />
+                    <Wishlist />
                     <span>Wishlist ({wishlistItemCount})</span>
                   </div>
-                  <button 
-                    className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50 "
+                  <button
+                    className="flex items-center w-full py-3 px-4 rounded-lg hover:bg-gray-50 h-100vh fixed z-[999] "
                     onClick={() => {
                       setMobileMenuOpen(false);
                       setIsMobileNotificationsOpen(true);
