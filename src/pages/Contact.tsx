@@ -46,7 +46,7 @@ const Contact = () => {
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-left font-">
+            <h1 className="text-4xl font-bold mb-4 text-left md:text-center font-">
               CONTACT US
             </h1>
             <p className="text-[#74070E]/80 text-left">
@@ -92,7 +92,7 @@ const Contact = () => {
           {/* Form & Business Hours */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
             {/* Form Section */}
-            <div className="inline-flex flex-col text-left">
+            <div className=" flex-col text-left block md:hidden">
               <h2 className="text-2xl font-bold ml-3">Need more support?</h2>
               <p className="m-3">
                 Our dedicated Customer Service Team are here to help! Chat with
@@ -105,6 +105,117 @@ const Contact = () => {
                 Pay only via Lent-It Website/App or at doorstep on delivery and
                 disregard unusual payment requests.
               </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <h2 className="text-2xl font-semibold mb-6 ">
+                Send Us a Message
+              </h2>
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5 w-[90%] md:w-[80%] bg-[#fff1c7] p-10 rounded-2xl"
+              >
+                {[
+                  {
+                    id: "name",
+                    label: "Full Name",
+                    type: "text",
+                    value: formData.name,
+                  },
+                  {
+                    id: "email",
+                    label: "Email Address",
+                    type: "email",
+                    value: formData.email,
+                  },
+                  {
+                    id: "subject",
+                    label: "Subject",
+                    type: "text",
+                    value: formData.subject,
+                  },
+                ].map(({ id, label, type, value }) => (
+                  <div key={id}>
+                    <label
+                      htmlFor={id}
+                      className="block text-sm font-medium mb-1"
+                    >
+                      {label}
+                    </label>
+                    <Input
+                      id={id}
+                      name={id}
+                      type={type}
+                      value={value}
+                      onChange={handleChange}
+                      required
+                      placeholder={label}
+                      className="w-full border-[#74070E] focus:ring-[#74070E]"
+                    />
+                  </div>
+                ))}
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-1"
+                  >
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your message..."
+                    className="w-full min-h-[150px] border-[#74070E] focus:ring-[#74070E]"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-[#74070E] hover:bg-[#5e060b] text-[#F4E3B2]"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+
+              {/* Social Links */}
+              <div className="mt-8 flex space-x-10 justify-center md:justify-start md:space-x-32 text-[#74070E]">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#5e060b]"
+                >
+                  <FaFacebookF size={20} />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#5e060b]"
+                >
+                  <FaInstagram size={20} />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#5e060b]"
+                >
+                  <FaTwitter size={20} />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#5e060b]"
+                >
+                  <FaLinkedinIn size={20} />
+                </a>
+              </div>
             </div>
             {/* Business Hours + Map */}
             <div>
