@@ -556,52 +556,67 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navbar */}
+      {/* Mobile Navbar - Updated Layout */}
       <div className="md:hidden">
-        <div className="container mx-auto px-4 flex items-center justify-between align-items-center">
-          {/* Menu Button */}
-          <button onClick={() => setMobileMenuOpen(true)} className="">
+        <div className="container mx-auto px-4 flex items-center justify-between relative">
+          {/* Menu Button - Fixed on the left */}
+          <button 
+            onClick={() => setMobileMenuOpen(true)} 
+            className="z-10 flex-shrink-0"
+          >
             <Menu
               size={24}
               className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
             />
           </button>
 
-          {/* Centered Toggle */}
-          <div className="flex-1 flex justify-center px-2">
+          {/* Service Toggle Buttons with spacing */}
+          <div className="flex-1 flex justify-center items-center gap-2 px-2 mx-2">
+            {/* Renting Button */}
             <ToggleGroup
               type="single"
               value={currentServiceType}
               onValueChange={(value) =>
                 handleServiceChange(value as ServiceType)
               }
-              className="border rounded-full mr-20"
+              className="flex mr-[100px]"
             >
               <ToggleGroupItem
                 value="renting"
-                className="text-xs rounded-l-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
+                className="text-xs px-3 py-1 border border-[#74070E] data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-l-full"
               >
                 Renting
               </ToggleGroupItem>
+            </ToggleGroup>
+
+            {/* Logo - Centered with conditional rendering */}
+            {showLogo && (
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-0 ml-[-30px]">
+                <Logo isSmall={true} className="max-w-full" />
+              </div>
+            )}
+
+            {/* Thrifting Button */}
+            <ToggleGroup
+              type="single"
+              value={currentServiceType}
+              onValueChange={(value) =>
+                handleServiceChange(value as ServiceType)
+              }
+              className="flex"
+            >
               <ToggleGroupItem
                 value="thrifting"
-                className="text-xs rounded-r-full px-3 data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2]"
+                className="text-xs px-3 py-1 border border-[#74070E] data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-r-full"
               >
                 Thrifting
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
 
-          {/* Scroll-triggered Logo */}
-          {showLogo && (
-            <div className="absolute left-1/2 transform -translate-x-1/2">
-              <Logo isSmall={true} className="ml-[110px]" />
-            </div>
-          )}
-
-          {/* Right Icons */}
-          <div className="flex items-center space-x-0">
-            <Link to="/login" className="p-2 ml-4">
+          {/* Right Icons - Fixed on the right */}
+          <div className="flex items-center space-x-[-5px] z-10 flex-shrink-0 ml-[-10px]">
+            <Link to="/login" className="p-1">
               <User
                 size={20}
                 className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
