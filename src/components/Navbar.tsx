@@ -615,7 +615,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Icons - Fixed on the right */}
-          <div className="flex items-center space-x-[-5px] z-10 flex-shrink-0 ml-[-10px]">
+          <div className="flex items-center z-10 flex-shrink-0 ">
             <Link to="/login" className="p-1">
               <User
                 size={20}

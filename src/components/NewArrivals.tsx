@@ -85,18 +85,18 @@ const NewArrivals = () => {
   };
 
   return (
-    <section className="py-3 px-4 bg-[#F4E3B2]">
+    <section className="py-3 px-1 md:px-3 lg:px-5 bg-[#F4E3B2]">
       <div className="max-w-9xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900">
+        <div className="flex justify-between  mb-6  lg:flex-row sm:flex-col md:flex-col sm:items-center   sm:text-center md:items-center   md:text-center lg:items-start   lg:text-center ">
+          <div className="flex flex-col items-center w-fit mx-auto lg:mx-0">
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-semibold text-rose-900">
               New Arrivals
             </h2>
-            <p className="text-foreground/70 text-sm sm:text-base text-center sm:text-left">
+            <p className="text-foreground/70 text-sm md:text-md lg:text-md sm:text-base text-center ">
               The latest premium fashion items now available for rent
             </p>
           </div>
-          <Link to="/category/all" className="hidden sm:block">
+          <Link to="/category/all" className="hidden md:hidden lg:block">
             <Button
               variant="outline"
               className="border-rose-600 text-rose-900 hover:bg-rose-50 hover:text-rose-900 flex items-center gap-2"
@@ -109,25 +109,17 @@ const NewArrivals = () => {
         </div>
 
         <div className="relative">
-          {/* Scroll buttons for desktop */}
-          <button 
-            onClick={scrollLeft}
-            className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-50"
-            aria-label="Scroll left"
-          >
-            <ArrowRight className="w-5 h-5 rotate-180 text-rose-900" />
-          </button>
           
           {/* Scrollable container */}
           <div 
             ref={scrollContainerRef}
-            className="overflow-x-auto whitespace-nowrap pb-4 scrollbar-hide"
+            className="overflow-x-auto whitespace-nowrap pb-3 md:pb-2 lg:pb-0 scrollbar-hide"
           >
-            <div className="inline-flex gap-4 sm:gap-24">
+            <div className="inline-flex gap-3 lg:gap-5 md:gap-1 ">
               {newArrivals.map((product) => (
                 <div 
                   key={product.id}
-                  className="inline-block w-[200px] sm:w-[220px] flex-shrink-0"
+                  className="inline-block w-30 md:w-80 flex-shrink-0  "
                 >
                   <ProductCard
                     {...product}
@@ -137,19 +129,10 @@ const NewArrivals = () => {
               ))}
             </div>
           </div>
-
-          {/* Scroll buttons for desktop */}
-          <button 
-            onClick={scrollRight}
-            className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-50"
-            aria-label="Scroll right"
-          >
-            <ArrowRight className="w-5 h-5 text-rose-900" />
-          </button>
         </div>
 
         {/* Mobile View All Button */}
-        <div className="mt-3 sm:hidden text-center">
+        <div className="mt-3 lg:hidden text-center">
           <Link to="/category/all">
             <Button
               variant="outline"
