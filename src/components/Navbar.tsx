@@ -292,6 +292,9 @@ const Navbar = () => {
 
   const handleServiceChange = (value: ServiceType) => {
     navigate(serviceRoutes[value]);
+    if(value === "renting") {
+      window.scrollTo(0,0);
+    }
     if (isMobile) {
       setMobileMenuOpen(false);
     }
@@ -345,7 +348,7 @@ const Navbar = () => {
       }`}
     >
       {/* Desktop Navbar */}
-      <div className="hidden md:block">
+      <div className="hidden md:hidden lg:block">
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Left side */}
           <div className="flex items-center">
@@ -557,12 +560,12 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar - Updated Layout */}
-      <div className="md:hidden">
-        <div className="container mx-auto px-4 flex items-center justify-between relative">
-          {/* Menu Button - Fixed on the left */}
+      <div className="md:block lg:hidden">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Left side - Menu button */}
           <button 
             onClick={() => setMobileMenuOpen(true)} 
-            className="z-10 flex-shrink-0"
+            className="z-10"
           >
             <Menu
               size={24}
@@ -570,56 +573,51 @@ const Navbar = () => {
             />
           </button>
 
-          {/* Service Toggle Buttons with spacing */}
-          <div className="flex-1 flex justify-center items-center gap-2 px-2 mx-2">
-            {/* Renting Button */}
-            <ToggleGroup
-              type="single"
-              value={currentServiceType}
-              onValueChange={(value) =>
-                handleServiceChange(value as ServiceType)
-              }
-              className="flex mr-[100px]"
-            >
-              <ToggleGroupItem
-                value="renting"
-                className="text-xs px-3 py-1 border border-[#74070E] data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-l-full"
+          {/* Center - Service toggle and logo */}
+          <div className="flex-1 flex items-center justify-center gap-2 mx-2 relative">
+            {/* Service toggle - positioned to the left of the logo */}
+            <div className="flex items-center gap-1 absolute left-0">
+              <ToggleGroup
+                type="single"
+                value={currentServiceType}
+                onValueChange={(value) =>
+                  handleServiceChange(value as ServiceType)
+                }
+                className="flex"
               >
-                Renting
-              </ToggleGroupItem>
-            </ToggleGroup>
+                <ToggleGroupItem
+                  value="renting"
+                  className={`text-xs px-3 py-1 border ${
+                    isScrolled ? "border-[#74070E]" : "border-[#F4E3B2]"
+                  } data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-l-full`}
+                >
+                  Renting
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="thrifting"
+                  className={`text-xs px-3 py-1 border ${
+                    isScrolled ? "border-[#74070E]" : "border-[#F4E3B2]"
+                  } data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-r-full`}
+                >
+                  Thrifting
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
 
-            {/* Logo - Centered with conditional rendering */}
+            {/* Logo - centered with proper spacing */}
             {showLogo && (
-              <div className="absolute left-1/2 transform -translate-x-1/2 z-0 ml-[-30px]">
-                <Logo isSmall={true} className="max-w-full" />
+              <div className=" ml-[90px] md:mx-auto lg:mx-auto">
+                <Logo isSmall={true} />
               </div>
             )}
-
-            {/* Thrifting Button */}
-            <ToggleGroup
-              type="single"
-              value={currentServiceType}
-              onValueChange={(value) =>
-                handleServiceChange(value as ServiceType)
-              }
-              className="flex"
-            >
-              <ToggleGroupItem
-                value="thrifting"
-                className="text-xs px-3 py-1 border border-[#74070E] data-[state=on]:bg-[#74070E] data-[state=on]:text-[#F4E3B2] rounded-r-full"
-              >
-                Thrifting
-              </ToggleGroupItem>
-            </ToggleGroup>
           </div>
 
-          {/* Right Icons - Fixed on the right */}
-          <div className="flex items-center z-10 flex-shrink-0 ">
-            <Link to="/login" className="p-1">
+          {/* Right side - Icons */}
+          <div className="flex items-center gap-2 z-10 ml-[-35px]">
+            <Link to="/login">
               <User
                 size={20}
-                className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
+                className={ `ml-[5px] ${isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}`}
               />
             </Link>
             <Cart />

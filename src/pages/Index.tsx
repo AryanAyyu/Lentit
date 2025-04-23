@@ -125,6 +125,7 @@ const Index = () => {
 
   // Scroll effect and intersection observer
   useEffect(() => {
+    
     const handleScroll = () => {
       setShowNavbar(window.scrollY > 150);
     };

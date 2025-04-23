@@ -67,7 +67,7 @@ const ProductCard = ({
   return (
     <div
       ref={cardRef}
-      className={`reveal-on-scroll product-card bg-white shadow-md w-full max-w-[250px] h-[310px] md:h-[400px] lg:h-[400px] mx-auto`}
+      className={`reveal-on-scroll product-card bg-white shadow-md w-[170px] md:w-[250px] max-w-[250px] h-[310px] md:h-[400px] lg:h-[400px] mx-auto`}
       style={{ transitionDelay: `${index * 100}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -42,15 +42,42 @@ const reviews = [
     rating: 5,
     text: "The costume selection is amazing! I rented for a themed party and everyone thought I had spent a fortune. The shipping was fast and the return process couldn't be easier.",
     date: "1 week ago"
+  },
+  {
+    id: 6,
+    name: "Tara Sutaria",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=688&q=80",
+    rating: 4,
+    text: "The costume selection is amazing! I rented for a themed party and everyone thought I had spent a fortune. The shipping was fast and the return process couldn't be easier.",
+    date: "1 week ago"
   }
 ];
 
 const CustomerReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-  const itemsPerView = isMobile ? 1 : 3;
+  const [itemsPerView, setItemsPerView] = useState(1);
   const totalSlides = Math.ceil(reviews.length / itemsPerView);
+
+  // Update items per view based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
@@ -67,25 +94,43 @@ const CustomerReviews = () => {
   useEffect(() => {
     const interval = setInterval(goToNext, 5000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, totalSlides]);
 
   // Calculate transform for carousel effect
   const transformValue = `translateX(-${currentIndex * 100}%)`;
 
   return (
-    <section className="py-7 lg:py-10 px-4 sm:px-6 bg-gray-50">
-      <div className="mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-rose-900 mb-2">
-            Customer Reviews
+    <section className="py-3 md:py-4 lg:py-6 px-4 sm:px-6 bg-gradient-to-b from-white to-gray-50">
+      <div className=" mx-auto">
+        <div className="text-center mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-rose-900 mb-3">
+            What Our Customers Say
           </h2>
-          <p className="text-gray-600 max-w-md mx-auto">
-            See what our customers have to say about their rental experience
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-md lg:text-lg">
+            Hear from people who've experienced our fashion rental service
           </p>
         </div>
 
-        <div className="relative overflow-hidden">
-          <div className="relative h-full">
+        <div className="relative group">
+          {/* Navigation buttons */}
+          <button 
+            onClick={goToPrev}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 items-center justify-center rounded-full bg-white shadow-lg text-rose-900 hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Previous reviews"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <button 
+            onClick={goToNext}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 items-center justify-center rounded-full bg-white shadow-lg text-rose-900 hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Next reviews"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Carousel container */}
+          <div className="relative overflow-hidden">
             <div
               ref={carouselRef}
               className="flex transition-transform duration-500 ease-in-out"
@@ -94,15 +139,19 @@ const CustomerReviews = () => {
               {Array(totalSlides).fill(0).map((_, slideIndex) => (
                 <div 
                   key={slideIndex} 
-                  className="w-full flex-shrink-0"
+                  className="w-full flex-shrink-0 px-2"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 h-[100%] w-[100%]">
+                  <div className={`grid gap-6 h-full ${
+                    itemsPerView === 1 ? 'grid-cols-1' : 
+                    itemsPerView === 2 ? 'grid-cols-2' : 
+                    'grid-cols-3'
+                  }`}>
                     {reviews
                       .slice(slideIndex * itemsPerView, slideIndex * itemsPerView + itemsPerView)
                       .map((review) => (
                         <div
                           key={review.id}
-                          className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow h-full"
+                          className="bg-white p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col"
                         >
                           <div className="flex items-center mb-4">
                             <img
@@ -111,19 +160,21 @@ const CustomerReviews = () => {
                               className="w-12 h-12 rounded-full object-cover mr-4"
                             />
                             <div>
-                              <h3 className="font-medium text-gray-900">{review.name}</h3>
+                              <h3 className="font-semibold text-gray-900">{review.name}</h3>
                               <p className="text-sm text-gray-500">{review.date}</p>
                             </div>
                           </div>
-                          <div className="flex mb-3">
+                          <div className="flex mb-4">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
-                                className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                                className={`w-5 h-5 ${i < review.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-300'}`}
                               />
                             ))}
                           </div>
-                          <p className="text-gray-700 text-sm md:text-base">{review.text}</p>
+                          <p className="text-gray-700 text-base md:text-lg flex-grow">
+                            "{review.text}"
+                          </p>
                         </div>
                       ))}
                   </div>
@@ -132,19 +183,17 @@ const CustomerReviews = () => {
             </div>
           </div>
 
-          
-        </div>
-
-        {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 space-x-2">
-          {Array(totalSlides).fill(0).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-rose-900' : 'bg-gray-300'}`}
-              aria-label={`Go to review set ${index + 1}`}
-            />
-          ))}
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array(totalSlides).fill(0).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-rose-900 w-6' : 'bg-gray-300'}`}
+                aria-label={`Go to review set ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -47,9 +47,9 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section className="py-5 sm:py-8 px-4 sm:px-6 bg-[#F4E3B2]">
+    <section className="py-2 md:py-4 lg:py-5 px-4 sm:px-6 bg-[#F4E3B2]">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 sm:mb-12">
+        <div className="text-center mb-4 md:mb-12 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl font-semibold text-rose-900 mb-3 sm:mb-4">How Lent-It Works</h2>
           <p className="text-foreground/70 max-w-xl mx-auto text-sm sm:text-base">
             Renting premium fashion has never been easier. Our simple three-step process ensures a seamless experience.
@@ -64,12 +64,12 @@ const HowItWorks = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Mobile layout - side by side */}
-              <div className="sm:hidden flex items-start gap-4 mb-4">
+              <div className=" md:hidden lg:hidden flex items-start gap-4 mb-4">
                 <div className="bg-rose-900 p-3 rounded-full relative shrink-0">
                   <div className="absolute inset-0 bg-pink-200/50 rounded-full transform scale-110 animate-pulse-subtle" />
                   {step.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-slate-800 mt-1">{step.title}</h3>
+                <h3 className="text-sm font-semibold text-slate-800 mt-1">{step.title}</h3>
               </div>
 
               {/* Desktop layout - stacked */}
@@ -78,16 +78,16 @@ const HowItWorks = () => {
                   <div className="absolute inset-0 bg-pink-200/50 rounded-full transform scale-110 animate-pulse-subtle" />
                   {step.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-3">{step.title}</h3>
+                <h3 className="md:text-lg lg:text-xl font-semibold text-slate-800 mb-3">{step.title}</h3>
               </div>
 
               {/* Description (same for both) */}
               <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-                <p className="text-foreground/70 text-sm sm:text-base">{step.description}</p>
+                <p className="text-foreground/70 text-sm sm:text-base md:h-[110px] lg:h-auto">{step.description}</p>
               </div>
 
               {index < steps.length - 1 && (
-                <div className="hidden sm:block absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/3">
+                <div className="hidden md:block lg:block absolute right-0 md:top-1/2 lg:top-3/4 transform translate-x-1/2 -translate-y-1/3">
                   <ArrowRight className="w-8 h-8 text-rose-900" />
                 </div>
               )}

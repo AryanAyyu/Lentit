@@ -32,7 +32,7 @@ const WhyRent = () => {
   }, []);
 
   return (
-    <section className="w-full py-12 sm:py-16 bg-gradient-to-r bg-[#F4E3B2] overflow-x-hidden">
+    <section className="w-full py-2 md:py-8 md:py-12 bg-gradient-to-r bg-[#F4E3B2] overflow-x-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
         <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Text Content */}
@@ -42,16 +42,16 @@ const WhyRent = () => {
               <span className="text-yellow-600">rent and thrift</span>{" "}
               for a fraction of the price?
             </h2>
-            <p className="text-stone-600 text-base sm:text-lg mb-6 sm:mb-8">
+            <p className="text-stone-600 text-base sm:text-lg mb-4 md:mb-6 lg:mb-8">
               Join thousands of fashion-forward customers who choose sustainability without compromising on style. 
               Rent premium, wear luxury, save money.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-              <Button className="bg-[#74070E] hover:bg-[#5a050b] text-white gap-2 py-2 sm:py-2 w-full sm:w-auto">
+            <div className="flex flex-row gap-3 md:gap-10 lg:gap-12 w-full sm:w-auto justify-center">
+              <Button className="bg-[#74070E] hover:bg-[#5a050b] text-white gap-2 py-1  w-full sm:w-auto">
                 <ShoppingBag size={16} />
                 Rent your Own
               </Button>
-              <Button variant="outline" className="border-rose-500 text-rose-900 hover:bg-rose-200 gap-2 py-2 sm:py-2 w-full sm:w-auto">
+              <Button variant="outline" className="border-rose-500 text-rose-900 hover:bg-rose-200 gap-2 py-1 sm:py-2 w-full sm:w-auto">
                 <Package size={16} />
                 Thrift your Own
               </Button>
