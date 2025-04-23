@@ -38,8 +38,8 @@ const DealOfTheDayThrift = () => {
   }, []);
 
   return (
-    <section className="py-2 sm:py-12 bg-gradient-to-r from-accent1-light to-accent1">
-      <div className="container mx-auto px-4">
+    <section className="bg-gradient-to-r from-accent1-light to-accent1">
+      <div className=" mx-auto px-6 bg-[#F4E3B2]">
         <Card className="overflow-hidden">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-0">
             {/* Image Section */}
