@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import ProductDetails from "./pages/ProductDetails";
 import NotFound from "./pages/NotFound";
 import CategoryPage from "./pages/CategoryPage";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
@@ -26,6 +26,9 @@ import SellYourProduct from "./pages/SellYourProduct";
 import NewArrivalsPageThrift from "./components/NewArrivalsPageThrift";
 import OnlyForYouPageThrift from "./components/OnlyForYouPageThrift";
 import Wishlist from "./components/Wishlist";
+import Loader from "./components/Loader";
+import Settings from "./components/Settings";
+import SettingsPage from "./components/Settings";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +59,8 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/test" element={<Loader />} />
+                <Route path="/settings" element={<SettingsPage />} />
                 <Route
                   path="/thrift/individual-products"
                   element={<IndividualProducts />}
@@ -73,9 +78,14 @@ const App = () => (
                   element={<ProductDetailsThrift />}
                 />
                 <Route path="/thrift/sell" element={<SellYourProduct />} />
-                <Route path="/only-for-you" element={<OnlyForYouPageThrift />} />
-                <Route path="/new-arrivals" element={<NewArrivalsPageThrift/>} />
-
+                <Route
+                  path="/only-for-you"
+                  element={<OnlyForYouPageThrift />}
+                />
+                <Route
+                  path="/new-arrivals"
+                  element={<NewArrivalsPageThrift />}
+                />
                 {/* Remove the /special/:category route as it's redundant with /category/:category */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
