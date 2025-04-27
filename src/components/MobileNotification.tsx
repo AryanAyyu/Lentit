@@ -1,5 +1,6 @@
-import { X, Bell } from "lucide-react";
+import { X, Bell, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 type Notification = {
   id: number;
@@ -36,18 +37,30 @@ const MobileNotifications = ({
             <X size={24} className="text-[#74070E]" />
           </button>
           <h2 className="text-lg font-bold text-[#74070E]">Notifications</h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={markAllAsRead}
-            className="text-xs text-[#74070E]"
-          >
-            Mark all as read
-          </Button>
+          <Link to="/settings">
+            <Settings className="text-rose-900" />
+          </Link>
         </div>
 
         {/* Notifications List */}
         <div className="flex-1 overflow-y-auto bg-white">
+          <div className="flex justify-end">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={markAllAsRead}
+              className="text-sm text-black underline"
+            >
+              Mark all as read
+            </Button>
+            {/* <Button
+              variant="ghost"
+              //  onClick={clearAll}
+              className="text-black"
+            >
+              Clear All
+            </Button> */}
+          </div>
           {notifications.map((notification) => (
             <div
               key={notification.id}
@@ -57,14 +70,19 @@ const MobileNotifications = ({
               onClick={() => markAsRead(notification.id)}
             >
               <div className="flex justify-between">
-                <p className="text-sm">{notification.text}</p>
-                {!notification.read && (
-                  <span className="h-2 w-2 bg-red-400 rounded-full"></span>
-                )}
-                <p className="text-xs text-gray-500 mt-1">
-                  {notification.time}
+                <p className="text-sm w-auto font-bold text-rose-900">
+                  {notification.text}
                 </p>
+                {!notification.read && (
+                  <span className="relative flex items-center justify-center">
+                    <span className="absolute h-3 w-3 rounded-full bg-red-600 opacity-75 animate-ping"></span>
+                    <span className="h-2 w-2 rounded-full bg-red-800"></span>
+                  </span>
+                )}
               </div>
+              <p className="text-xs text-gray-500 md:mt-1 flex flex-row-reverse">
+                {notification.time}
+              </p>
             </div>
           ))}
         </div>

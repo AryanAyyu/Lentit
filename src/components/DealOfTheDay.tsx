@@ -52,7 +52,7 @@ const DealOfTheDay = () => {
   const formatTime = (t: number) => (t < 10 ? `0${t}` : t);
 
   return (
-    <section className="py-1 pb-10 px-2 sm:px-2 bg-[#F4E3B2]">
+    <section className="py-1 pb-10 px-2 sm:px-2 bg-[#F4E3B2] sm:pb-4">
       <div className="mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center justify-evenly md:mr-10">
           {/* Text & Countdown */}
@@ -80,12 +80,12 @@ const DealOfTheDay = () => {
                 ₹2500
               </span>
             </p>
-            <p className="text-foreground/70 text-sm md:text-lg sm:text-base mb-3 md:mb-8 max-w-md">
+            <p className="text-foreground/70 text-sm md:text-lg sm:text-base mb-3 md:mb-8">
               This stunning designer evening gown is perfect for special
               occasions. Rent it now for a fraction of the retail price!
             </p>
 
-            <div className="flex gap-4 sm:gap-6 mb-3 md:mb-8 justify-center md:justify-start md:ml-24">
+            <div className="flex gap-4 sm:gap-6 mb-3 md:mb-8 justify-center md:justify-center">
               {["hours", "minutes", "seconds"].map((unit) => (
                 <div key={unit} className="flex flex-col items-center">
                   <div className="bg-muted w-12 h-12 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center text-stone-900 text-xl sm:text-2xl font-bold">
@@ -98,7 +98,7 @@ const DealOfTheDay = () => {
               ))}
             </div>
 
-            <div className="flex flex-row gap-4 sm:gap-4 justify-center md:justify-start lg-justify-center md:ml-24">
+            <div className="flex flex-row gap-4 sm:gap-4 justify-center md:justify-center lg-justify-center">
               <Button className="bg-[#74070E] text-[#F4E3B2] hover:text-white text-sm sm:text-base py-2 sm:py-2.5">
                 Rent Now
               </Button>

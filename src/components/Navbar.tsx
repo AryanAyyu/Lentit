@@ -292,8 +292,8 @@ const Navbar = () => {
 
   const handleServiceChange = (value: ServiceType) => {
     navigate(serviceRoutes[value]);
-    if(value === "renting") {
-      window.scrollTo(0,0);
+    if (value === "renting") {
+      window.scrollTo(0, 0);
     }
     if (isMobile) {
       setMobileMenuOpen(false);
@@ -327,7 +327,10 @@ const Navbar = () => {
             <div className="flex justify-between">
               <p className="text-sm">{notification.text}</p>
               {!notification.read && (
-                <span className="h-2 w-2 bg-red-400 rounded-full"></span>
+                <span className="relative flex items-center justify-center">
+                  <span className="absolute h-3 w-3 rounded-full bg-red-600 opacity-75 animate-ping"></span>
+                  <span className="h-2 w-2 rounded-full bg-red-800"></span>
+                </span>
               )}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
@@ -563,10 +566,7 @@ const Navbar = () => {
       <div className="md:block lg:hidden">
         <div className="container mx-auto px-4 flex items-center justify-between">
           {/* Left side - Menu button */}
-          <button 
-            onClick={() => setMobileMenuOpen(true)} 
-            className="z-10"
-          >
+          <button onClick={() => setMobileMenuOpen(true)} className="z-10">
             <Menu
               size={24}
               className={isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}
@@ -617,7 +617,9 @@ const Navbar = () => {
             <Link to="/login">
               <User
                 size={20}
-                className={ `ml-[5px] ${isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"}`}
+                className={`ml-[5px] ${
+                  isScrolled ? "text-[#74070E]" : "text-[#F4E3B2]"
+                }`}
               />
             </Link>
             <Cart />
