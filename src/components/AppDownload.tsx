@@ -33,9 +33,9 @@ const AppDownload = () => {
   }, []);
 
   return (
-    <section className="app-section py-1 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-stone-900 to-stone-700 text-white">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+    <section className="app-section py-1 md:py-6 lg:py-8 px-2 md:px-4 lg:px-6 bg-gradient-to-r from-stone-900 to-stone-700 text-white">
+      <div className="mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-4 lg:gap-12 items-center">
           {/* Content Section */}
           <div ref={appRef} className="order-2 lg:order-1">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">

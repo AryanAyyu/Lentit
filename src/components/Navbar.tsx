@@ -206,11 +206,11 @@ const Navbar = () => {
       title: "Sell",
       path: "/sell",
       submenu: [
-        { title: "List an Item", path: "/sell/list" },
-        { title: "My Listings", path: "/sell/listings" },
-        { title: "Pricing", path: "/sell/pricing" },
-        { title: "Shipping Guide", path: "/sell/shipping" },
-        { title: "Seller Dashboard", path: "/sell/dashboard" },
+        { title: "List an Item", path: "/thrift/sell" },
+        { title: "My Listings", path: "/thrift/my-listings" },
+        { title: "Pricing", path: "/thrift/pricing" },
+        { title: "Shipping Guide", path: "/thrift/shipping-guide" },
+        { title: "Seller Dashboard", path: "/thrift/seller-dashboard" },
       ],
     },
   ];

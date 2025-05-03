@@ -25,7 +25,7 @@ const features = [
 
 const Features = () => {
   return (
-    <div className="py-8 px-4 bg-gradient-to-r from-zinc-900 to-zinc-600">
+    <div className="py-8 px-4 bg-gradient-to-r from-slate-800 to-rose-400">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-2xl font-semibold text-center mb-6 text-white">
           Our Services
