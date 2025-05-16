@@ -103,12 +103,12 @@ export default function HomePage() {
             <div className="relative bg-[#F4E3B2] rounded-lg shadow-xl w-11/12 max-w-lg p-8 transform transition-all">
               <button
                 onClick={handleClose}
-                className="absolute top-0 right-3 text-2xl text-[#74070E] hover:text-gray-700 focus:outline-none"
+                className="absolute top-1 right-3 text-2xl text-[#74070E] hover:text-gray-700 focus:outline-none"
               >
                 &times;
               </button>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#74070E] leading-tight text-center my-7 shadow-md bg-white p-2 rounded-lg tracking-tight drop-shadow-md">
-                Try Before You Buy – On Our App
+              <h2 className="text-2xl font-extrabold text-[#74070E] leading-tight text-center my-8 shadow-md border border-rose-900 p-2 rounded-lg tracking-tight drop-shadow-md">
+                Try Before You Buy – <br></br> On Our App
               </h2>
 
               <div className="flex flex-col">
