@@ -197,7 +197,7 @@ const Index = () => {
         
         {/* Featured Products */}
         {/* Featured Products - Horizontal Scroll */}
-        <section className="py-2 px-2 sm:px-6 lg:px-8 bg-white">
+        <section className="py-2 px-1 md:px-2 lg:px-4 bg-white">
           <div className="mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-rose-900 mb-3">Featured Products</h2>

@@ -29,6 +29,11 @@ import Wishlist from "./components/Wishlist";
 import Loader from "./components/Loader";
 import Settings from "./components/Settings";
 import SettingsPage from "./components/Settings";
+import MyListings from "./components/MyListings";
+import PricingPage from "./components/PricingPage";
+import ShippingGuidePage from "./components/ShippingGuidePage";
+import SellerDashboardPage from "./components/SellerDashboardPage";
+import SizeGuidePage from "./components/SizeGuidePage";
 
 const queryClient = new QueryClient();
 
@@ -86,6 +91,13 @@ const App = () => (
                   path="/new-arrivals"
                   element={<NewArrivalsPageThrift />}
                 />
+
+              <Route path="/thrift/my-listings" element={<MyListings />} />
+              <Route path="/thrift/pricing" element={<PricingPage />} />
+              <Route path="/thrift/shipping-guide" element={<ShippingGuidePage />} />
+              <Route path="/thrift/seller-dashboard" element={<SellerDashboardPage />} />
+              <Route path="/size-guide" element={<SizeGuidePage />} />
+
                 {/* Remove the /special/:category route as it's redundant with /category/:category */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
