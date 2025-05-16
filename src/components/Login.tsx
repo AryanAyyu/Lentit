@@ -28,7 +28,7 @@ const Login = () => {
       <Navbar />
 
       {/* Modal Backdrop with Blur */}
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="fixed inset-0  bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
         {/* Modal Content */}
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 bg-[#F4E3B2] md:bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-5xl mx-4 md:mx-0">
           {/* Close Button */}
