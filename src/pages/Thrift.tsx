@@ -229,7 +229,7 @@ const Thrift = () => {
         <HomePage />
 
         {/* Category Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-[#F4E3B2]">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-thrift-800">
               How Would You Like to Shop?
@@ -288,10 +288,9 @@ const Thrift = () => {
             </div>
           </div>
         </section>
-        
 
         {/* Partnered Thrift Stores Section */}
-        <section className="py-16 bg-gray-50">
+        <section className=" bg-[#F4E3B2]">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-10">
               <h2 className="text-3xl font-bold text-thrift-800">
@@ -354,15 +353,12 @@ const Thrift = () => {
             </div>
           </div>
         </section>
-        <NewArrivalsThrift/>
-        <DealOfTheDayThrift/>
-        <OnlyForYouThrift/>
-        <ThriftingQuote/>
-        
-        
+        <NewArrivalsThrift />
+        <DealOfTheDayThrift />
+        <OnlyForYouThrift />
+        <ThriftingQuote />
 
-        
-        <section className="py-4 bg-white">
+        <section className="py-4 bg-[#F4E3B2]">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-10 text-thrift-800">
               Featured Products
@@ -409,7 +405,10 @@ const Thrift = () => {
             {/* Desktop grid - shows exactly 4 products */}
             <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.slice(0, 4).map((product) => (
-                <Link to={`/thrift/productthrift/${product.id}`} key={product.id}>
+                <Link
+                  to={`/thrift/productthrift/${product.id}`}
+                  key={product.id}
+                >
                   <Card className="product-card-thrift h-full">
                     <div className="h-56 bg-gray-200 overflow-hidden">
                       <img
@@ -443,7 +442,7 @@ const Thrift = () => {
             {/* View All button - hidden on mobile */}
             <div className="hidden md:block text-center mt-10">
               <Link to="/thrift/individual-products">
-                <Button className="bg-teal-600 hover:bg-teal-700 text-white">
+                <Button className="bg-rose-900 hover:bg-rose-800 text-white">
                   View All Products
                 </Button>
               </Link>

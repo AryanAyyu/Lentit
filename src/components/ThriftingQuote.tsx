@@ -1,10 +1,9 @@
-
-import React from 'react';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { cn } from "@/lib/utils";
 
 const ThriftingQuote = () => {
   return (
-    <section className="py-3 bg-white">
+    <section className="py-3 bg-[#F4E3B2]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-3">
@@ -12,12 +11,13 @@ const ThriftingQuote = () => {
               Sustainable Fashion Through Thrifting
             </h2>
             <blockquote className="text-sm italic text-thrift-600 border-l-4 border-thrift-500 pl-4">
-              "Thrifting isn't just shopping; it's treasure hunting with a purpose. 
-              Every pre-loved item has a story, and by choosing second-hand, 
-              we're writing a new chapter in sustainable fashion."
+              "Thrifting isn't just shopping; it's treasure hunting with a
+              purpose. Every pre-loved item has a story, and by choosing
+              second-hand, we're writing a new chapter in sustainable fashion."
             </blockquote>
             <p className="text-yellow-700">
-              Join us in making fashion more sustainable, one thrifted item at a time.
+              Join us in making fashion more sustainable, one thrifted item at a
+              time.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">

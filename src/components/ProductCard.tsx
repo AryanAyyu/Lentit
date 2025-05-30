@@ -18,20 +18,20 @@ interface ProductCardProps {
   reviews?: number;
 }
 
-const ProductCard = ({ 
-  id, 
-  name, 
-  price, 
-  imageUrl, 
-  hoverImageUrl, 
-  index, 
+const ProductCard = ({
+  id,
+  name,
+  price,
+  imageUrl,
+  hoverImageUrl,
+  index,
   category,
   subcategory,
   description,
   sizes,
   colors,
   rating,
-  reviews
+  reviews,
 }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false);
@@ -49,7 +49,7 @@ const ProductCard = ({
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.1
+        threshold: 0.1,
       }
     );
 
@@ -72,8 +72,8 @@ const ProductCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link 
-        to={`/product/${category}/${subcategory}/${id}`} 
+      <Link
+        to={`/product/${category}/${subcategory}/${id}`}
         className="block h-[70%] sm:h-[80%] w-full relative"
       >
         <div className="absolute top-4 right-4 z-20">
@@ -86,7 +86,9 @@ const ProductCard = ({
           >
             <Heart
               size={20}
-              className={isWishlist ? "fill-vanilla text-vanilla" : "text-foreground"}
+              className={
+                isWishlist ? "fill-red-700 text-red-800" : "text-foreground"
+              }
             />
           </button>
         </div>

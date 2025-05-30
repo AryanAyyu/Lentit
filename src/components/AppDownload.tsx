@@ -8,6 +8,7 @@ import {
   Clock,
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import DownloadButtons from "./DownloadButtons";
 
 const AppDownload = () => {
   const appRef = useRef<HTMLDivElement>(null);
@@ -86,16 +87,7 @@ const AppDownload = () => {
             </div>
 
             {/* Download Buttons */}
-            <div className="flex flex-row gap-3 sm:gap-4 max-w-xs mx-auto sm:mx-0 sm:max-w-none mb-10 md:mb-4">
-              <Button className="bg-[#F4E3B2] hover:bg-[#E8D49E] text-[#74070E] gap-2 py-2 sm:py-2 flex-1">
-                <Download size={16} className="shrink-0" />
-                <span>App Store</span>
-              </Button>
-              <Button className="bg-[#F4E3B2] hover:bg-[#E8D49E] text-[#74070E] gap-2 py-2 sm:py-2 flex-1">
-                <Download size={16} className="shrink-0" />
-                <span>Google Play</span>
-              </Button>
-            </div>
+            <DownloadButtons className="!bg-[#F4E3B2] !text-rose-900" />
           </div>
 
           {/* Image Section */}
