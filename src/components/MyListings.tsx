@@ -84,21 +84,25 @@ const ListingsTable = ({ listings }: { listings: any[] }) => {
         {listings.map((listing) => (
           <Card key={listing.id} className="overflow-hidden">
             <div className="flex">
-              <div className="w-24 h-24">
+              <div className="w-28 h-28 min-w-[7rem] flex-shrink-0"> {/* Fixed image size */}
                 <img 
                   src={listing.image} 
                   alt={listing.name} 
                   className="w-full h-full object-cover" 
                 />
               </div>
-              <CardContent className="p-4 flex-1">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-base mb-1 truncate">{listing.name}</h3>
-                  <StatusBadge status={listing.status} />
-                </div>
-                <div className="flex items-center text-sm text-gray-500 mb-2">
-                  <Eye className="h-3.5 w-3.5 mr-1" />
-                  <span>{listing.views} views</span>
+              <CardContent className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start gap-2">
+                    <h3 className="font-medium text-base line-clamp-2 break-words"> {/* Multi-line name */}
+                      {listing.name}
+                    </h3>
+                    <StatusBadge status={listing.status} />
+                  </div>
+                  <div className="flex items-center text-sm text-gray-500 mb-2 mt-1">
+                    <Eye className="h-3.5 w-3.5 mr-1" />
+                    <span>{listing.views} views</span>
+                  </div>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-thrift-700 flex items-center">
@@ -106,11 +110,11 @@ const ListingsTable = ({ listings }: { listings: any[] }) => {
                     {listing.price.toFixed(2)}
                   </span>
                   <div className="flex gap-2">
-                    <Button size="icon" variant="outline">
-                      <Edit className="h-4 w-4" />
+                    <Button size="icon" variant="outline" className="h-8 w-8">
+                      <Edit className="h-3.5 w-3.5" />
                     </Button>
-                    <Button size="icon" variant="outline" className="text-red-500 hover:text-red-700">
-                      <Trash className="h-4 w-4" />
+                    <Button size="icon" variant="outline" className="h-8 w-8 text-red-500 hover:text-red-700">
+                      <Trash className="h-3.5 w-3.5" />
                     </Button>
                   </div>
                 </div>
@@ -184,6 +188,7 @@ const ListingsTable = ({ listings }: { listings: any[] }) => {
     </div>
   );
 };
+
 // Badge component for listing status
 const StatusBadge = ({ status }: { status: string }) => {
   if (status === 'active') {

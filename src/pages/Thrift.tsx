@@ -290,69 +290,133 @@ const Thrift = () => {
         </section>
 
         {/* Partnered Thrift Stores Section */}
-        <section className=" bg-[#F4E3B2]">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-3xl font-bold text-thrift-800">
-                Partnered Thrift Stores
-              </h2>
-              <Link to="/thrift/thrift-stores">
-                <Button
-                  variant="outline"
-                  className="border-thrift-500 text-thrift-600"
-                >
-                  View All Stores
-                </Button>
-              </Link>
-            </div>
+        <section className="bg-[#F4E3B2]">
+  <div className="container mx-auto px-4">
+    {/* Header - different layout for mobile vs desktop */}
+    <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-10">
+      <h2 className="text-2xl md:text-3xl font-bold text-thrift-800 mb-4 md:mb-0">
+        Partnered Thrift Stores
+      </h2>
+      {/* Desktop View All Button (hidden on mobile) */}
+      <div className="hidden md:block">
+        <Link to="/thrift/thrift-stores">
+          <Button variant="outline" className="border-thrift-500 text-thrift-600">
+            View All Stores
+          </Button>
+        </Link>
+      </div>
+    </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {partneredStores.map((store) => (
-                <Link to={`/thrift/thrift-stores/${store.id}`} key={store.id}>
-                  <Card className="h-full store-card-thrift hover:border-thrift-300">
-                    <div className="h-48 bg-gray-200 relative">
-                      <img
-                        src={store.image}
-                        alt={store.name}
-                        className="w-full h-full object-cover"
-                      />
-                      {store.isVerified && (
-                        <Badge className="absolute top-2 right-2 bg-thrift-600 text-white flex items-center gap-1">
-                          <CheckCircle2 className="h-3 w-3" /> Verified
-                        </Badge>
-                      )}
-                    </div>
-                    <CardContent className="pt-4">
-                      <h3 className="font-bold text-lg mb-1">{store.name}</h3>
-                      <p className="text-gray-500 text-sm mb-2">
-                        {store.location}
-                      </p>
-                      <div className="flex items-center">
-                        <div className="flex text-yellow-400">
-                          {[...Array(5)].map((_, i) => (
-                            <span
-                              key={i}
-                              className={
-                                i < Math.floor(store.rating)
-                                  ? "text-yellow-400"
-                                  : "text-gray-300"
-                              }
-                            >
-                              ★
-                            </span>
-                          ))}
-                        </div>
-                        <span className="ml-2 text-sm text-gray-600">
-                          {store.rating.toFixed(1)}
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+    {/* Mobile Horizontal Scroll Container */}
+    <div className="md:hidden overflow-x-auto pb-4 -mx-4 px-4">
+      <div className="flex space-x-4 w-max">
+        {partneredStores.map((store) => (
+          <Link 
+            to={`/thrift/thrift-stores/${store.id}`} 
+            key={store.id}
+            className="w-64 flex-shrink-0"
+          >
+            <Card className="h-full store-card-thrift hover:border-thrift-300">
+              <div className="h-40 bg-gray-200 relative">
+                <img
+                  src={store.image}
+                  alt={store.name}
+                  className="w-full h-full object-cover"
+                />
+                {store.isVerified && (
+                  <Badge className="absolute top-2 right-2 bg-thrift-600 text-white flex items-center gap-1">
+                    <CheckCircle2 className="h-3 w-3" /> Verified
+                  </Badge>
+                )}
+              </div>
+              <CardContent className="pt-3">
+                <h3 className="font-bold text-md mb-1">{store.name}</h3>
+                <p className="text-gray-500 text-xs mb-2">
+                  {store.location}
+                </p>
+                <div className="flex items-center">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={
+                          i < Math.floor(store.rating)
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <span className="ml-2 text-xs text-gray-600">
+                    {store.rating.toFixed(1)}
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
+
+    {/* Desktop Grid Layout (hidden on mobile) */}
+    <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {partneredStores.map((store) => (
+        <Link to={`/thrift/thrift-stores/${store.id}`} key={store.id}>
+          <Card className="h-full store-card-thrift hover:border-thrift-300">
+            <div className="h-48 bg-gray-200 relative">
+              <img
+                src={store.image}
+                alt={store.name}
+                className="w-full h-full object-cover"
+              />
+              {store.isVerified && (
+                <Badge className="absolute top-2 right-2 bg-thrift-600 text-white flex items-center gap-1">
+                  <CheckCircle2 className="h-3 w-3" /> Verified
+                </Badge>
+              )}
             </div>
-          </div>
-        </section>
+            <CardContent className="pt-4">
+              <h3 className="font-bold text-lg mb-1">{store.name}</h3>
+              <p className="text-gray-500 text-sm mb-2">
+                {store.location}
+              </p>
+              <div className="flex items-center">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <span
+                      key={i}
+                      className={
+                        i < Math.floor(store.rating)
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <span className="ml-2 text-sm text-gray-600">
+                  {store.rating.toFixed(1)}
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      ))}
+    </div>
+
+    {/* Mobile View All Button (centered, only shows on mobile) */}
+    <div className="md:hidden flex justify-center mt-6">
+      <Link to="/thrift/thrift-stores">
+        <Button variant="outline" className="border-thrift-500 text-thrift-600">
+          View All Stores
+        </Button>
+      </Link>
+    </div>
+  </div>
+</section>
         <NewArrivalsThrift />
         <DealOfTheDayThrift />
         <OnlyForYouThrift />

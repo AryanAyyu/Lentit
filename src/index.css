@@ -6,31 +6,22 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 20 14% 20%;
-
     --card: 0 0% 100%;
     --card-foreground: 20 14% 20%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 20 14% 20%;
-
     --primary: 350 71% 70%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 341 90% 30%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 0 0% 96%;
     --muted-foreground: 20 14% 45%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 20 5% 90%;
     --input: 20 5% 90%;
     --ring: 350 71% 70%;
-
     --radius: 0.75rem;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -46,13 +37,11 @@
   * {
     @apply border-border;
   }
-
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -60,72 +49,60 @@
 }
 
 @layer components {
+  /* Compact Components */
+  .btn-compact {
+    @apply px-4 py-2 text-sm rounded-lg font-medium transition-all duration-300;
+  }
+  .card-compact {
+    @apply p-4 rounded-lg shadow transition-all duration-300;
+  }
+  .input-compact {
+    @apply px-3 py-1.5 text-sm rounded-md border border-border;
+  }
+  
+  /* Original Components (Updated for Compact) */
   .nav-dropdown {
     @apply opacity-0 invisible absolute transition-all duration-300 ease-in-out transform -translate-y-2 
            group-hover:opacity-100 group-hover:visible group-hover:translate-y-0;
   }
-
   .nav-link {
-    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
+    @apply relative inline-block text-sm after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
            after:bottom-0 after:left-0 after:bg-pink-500 after:origin-bottom-right after:transition-transform 
            after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
-
-  .feature-icon-wrapper {
-    @apply flex flex-col items-center justify-center space-y-3 p-4 transition-all duration-300
-           hover:transform hover:scale-105;
-  }
-
-  .feature-icon {
-    @apply relative flex items-center justify-center w-14 h-14 rounded-full 
-           bg-white shadow-lg mb-2 transition-all duration-300;
-  }
-
-  .slide-show-container {
-    @apply relative overflow-hidden rounded-lg;
-  }
-
-  .reveal-on-scroll {
-    @apply opacity-0 translate-x-16 transition-all duration-700 ease-out;
-  }
-
-  .reveal-on-scroll.is-revealed {
-    @apply opacity-100 translate-x-0;
-  }
-
-  .glass-effect {
-    @apply backdrop-blur-md bg-white/50 border border-white/20 shadow-lg;
-  }
-
-  .product-card {
-    @apply rounded-2xl overflow-hidden transition-all duration-300 ease-out
-           hover:shadow-xl hover:transform hover:scale-[1.02];
-  }
-
-  .category-card {
-    @apply rounded-2xl overflow-hidden transition-all duration-300 ease-out
-           hover:shadow-xl hover:transform hover:scale-[1.02];
-  }
-
   .btn-primary {
-    @apply bg-pink-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300
-           hover:bg-pink-600 hover:shadow-md active:transform active:scale-95;
+    @apply btn-compact bg-pink-500 text-white hover:bg-pink-600 hover:shadow-md active:scale-95;
   }
-
   .btn-secondary {
-    @apply bg-rose-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300
-           hover:bg-rose-700 hover:shadow-md active:transform active:scale-95;
+    @apply btn-compact bg-rose-600 text-white hover:bg-rose-700 hover:shadow-md active:scale-95;
+  }
+  .product-card {
+    @apply card-compact bg-white hover:shadow-lg hover:scale-[1.02] overflow-hidden;
+  }
+  .category-card {
+    @apply card-compact bg-white hover:shadow-lg hover:scale-[1.02] overflow-hidden;
+  }
+  .product-card-thrift {
+    @apply card-compact bg-white hover:shadow-md flex flex-col overflow-hidden;
+  }
+  .store-card-thrift {
+    @apply card-compact bg-white hover:shadow-md flex flex-col overflow-hidden;
   }
 }
 
+@layer utilities {
+  .compact-text {
+    @apply text-sm;
+  }
+}
+
+/* Animations and Responsive */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 6s infinite ease-in-out;
 }
 @media (min-width: 1024px) {
   .responsive-margin {
@@ -133,10 +110,7 @@
   }
 }
 
-.animate-float {
-  animation: float 6s infinite ease-in-out;
-}
-
+/* Base Layout */
 #root {
   margin: 0 auto;
   text-align: center;
@@ -147,20 +121,7 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-.category-card-thrift {
-  @apply flex flex-col items-center justify-center text-center gap-4 p-6 rounded-lg transition-all duration-300 hover:shadow-lg;
-}
-
-.product-card-thrift {
-  @apply bg-white rounded-lg overflow-hidden shadow transition-all duration-300 hover:shadow-md flex flex-col;
-}
-
-.store-card-thrift {
-  @apply bg-white rounded-lg overflow-hidden shadow transition-all duration-300 hover:shadow-md flex flex-col;
 }

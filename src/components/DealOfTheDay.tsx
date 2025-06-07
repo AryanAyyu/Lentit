@@ -52,7 +52,7 @@ const DealOfTheDay = () => {
   const formatTime = (t: number) => (t < 10 ? `0${t}` : t);
 
   return (
-    <section className="py-1 pb-10 px-2 sm:px-2 bg-[#F4E3B2] sm:pb-4">
+    <section className="py-1 pb-10 px-2 sm:px-[50px] bg-[#F4E3B2] sm:pb-4">
       <div className="mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center justify-evenly md:mr-10">
           {/* Text & Countdown */}
